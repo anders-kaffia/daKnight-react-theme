@@ -1,0 +1,9 @@
+{
+  "name": "daKnight",
+  "version": "0.1",
+  "description": "A new theme for daKnight.se based on React",
+  "main": "index.js",
+  "repository": "https://anders_daknight@bitbucket.org/anders_daknight/daknight-react.git",
+  "author": "Anders Söderström <anders@godrowsy.com>",
+  "license": "MIT"
+}
