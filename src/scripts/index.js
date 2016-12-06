@@ -8,10 +8,17 @@ import "../styles/index.scss";
 // jQuery
 import $ from "jquery";
 
+// Data from REST API
+import getData from './data';
+
 // Components
 import App from './components/App';
 
 class Root extends React.Component {
+	componentWillMount() {
+		getData('pages');
+		getData('posts');
+	}
 	render() {
 		return (
 			<App/>

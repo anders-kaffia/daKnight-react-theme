@@ -62,6 +62,10 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
+	var _data = __webpack_require__(188);
+	
+	var _data2 = _interopRequireDefault(_data);
+	
 	var _App = __webpack_require__(183);
 	
 	var _App2 = _interopRequireDefault(_App);
@@ -81,6 +85,9 @@
 	// jQuery
 	
 	
+	// Data from REST API
+	
+	
 	// Components
 	
 	
@@ -94,6 +101,12 @@
 		}
 	
 		_createClass(Root, [{
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				(0, _data2.default)('pages');
+				(0, _data2.default)('posts');
+			}
+		}, {
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(_App2.default, null);
@@ -31773,6 +31786,8 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
+	var _helpers = __webpack_require__(189);
+	
 	var _Header = __webpack_require__(184);
 	
 	var _Header2 = _interopRequireDefault(_Header);
@@ -31806,12 +31821,15 @@
 		function App() {
 			_classCallCheck(this, App);
 	
-			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).apply(this, arguments));
+			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+			// Enables the use of 'this'
 		}
 	
 		_createClass(App, [{
 			key: 'render',
 			value: function render() {
+				var about = (0, _helpers.pageContent)('om-oss');
+				console.log(about.acf.bakgrund);
 				return _react2.default.createElement(
 					'div',
 					null,
@@ -31821,7 +31839,11 @@
 						'This is the App section'
 					),
 					_react2.default.createElement(_Header2.default, null),
-					_react2.default.createElement(_About2.default, null),
+					_react2.default.createElement(
+						_About2.default,
+						null,
+						about.acf.bakgrund
+					),
 					_react2.default.createElement(_Services2.default, null),
 					_react2.default.createElement(_Contact2.default, null)
 				);
@@ -31927,9 +31949,13 @@
 			key: 'render',
 			value: function render() {
 				return _react2.default.createElement(
-					'h2',
+					'div',
 					null,
-					'This is the About section'
+					_react2.default.createElement(
+						'h2',
+						null,
+						'This is the About section'
+					)
 				);
 			}
 		}]);
@@ -32046,6 +32072,66 @@
 	exports.default = Contact;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Contact.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 188 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _jquery = __webpack_require__(182);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function getData(type) {
+	
+		// Call to APIs
+		_jquery2.default.ajax({
+			url: '/wp-json/wp/v2/' + type + '/',
+			type: 'GET',
+			success: function success(data) {
+				var jsonData = JSON.stringify(data);
+				localStorage.setItem(type + '-data', jsonData);
+				return jsonData;
+			},
+			error: function error(data, errorThrown) {
+				alert('Error:' + errorThrown);
+			}
+		});
+	} // jQuery
+	exports.default = getData;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "data.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 189 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	exports.pageContent = pageContent;
+	function pageContent(slug) {
+		var pages = JSON.parse(localStorage.getItem('pages-data')).filter(function (page) {
+			return page.slug === slug;
+		});
+		var desiredPage = pages[0];
+		return desiredPage;
+	}
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "helpers.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);
