@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack --optimize-minimize",
+    "dev": "webpack",
     "dmc": "webpack-dev-server --progress --inline --hot"
   },
   "repository": "https://anders_daknight@bitbucket.org/anders_daknight/daknight-react.git",
