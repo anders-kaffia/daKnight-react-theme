@@ -1,9 +1,8 @@
 // jQuery
 import $ from "jquery";
 
-function getData(type) {
-
-	// Call to APIs
+export function getData(type) {
+	// Call to API
 	$.ajax( {
 		url: '/wp-json/wp/v2/' + type + '/',
 		type: 'GET',
@@ -18,4 +17,28 @@ function getData(type) {
 	} );
 }
 
-export default getData;
+
+export function pageContent(slug) {
+	getData('pages');
+	getData('posts');
+	const pages = JSON.parse(localStorage.getItem('pages-data')).filter(page => page.slug === slug);
+	const desiredPage = pages[0];
+	return desiredPage;
+}
+
+function arrayToObject(array) {
+  var obj = {};
+  for (var i = 0; i < array.length; ++i)
+    if (array[i] !== undefined) obj[i] = array[i];
+  return obj;
+}
+
+// Array containing all pages as objects
+const pagesArr = JSON.parse(localStorage.getItem('pages-data'));
+
+module.exports = {
+	allPages: arrayToObject(pagesArr),
+	about: pageContent('om-oss'),
+	services: pageContent('tjanster'),
+	contact: pageContent('kontakt')
+}

@@ -1,5 +1,9 @@
 import React from 'react';
-import { pageContent } from '../helpers';
+
+import { getData, pageContent } from '../data';
+import pagesData from '../data';
+console.log(pagesData);
+
 
 // Components
 import Header from './Header';
@@ -11,19 +15,44 @@ class App extends React.Component {
 	constructor() {
 		super();
 		// Enables the use of 'this'
+		this.loadPages = this.loadPages.bind(this);
+
+		// Initial state
+		this.state = {
+			pages: {},
+			posts: {},
+			about: {},
+			services: {},
+			contact: {},
+			titles: {}
+		}
 	}
+
+	loadPages() {
+
+		this.setState({
+			pages: pagesData,
+			about: pagesData.about,
+			services: pagesData.services,
+			contact: pagesData.contact,
+			// titles: pagesData.pages.map(key =>)
+		});
+	}
+	
+	componentWillMount() {
+		// This runs right before the <App> is rendered
+		this.loadPages();
+	}
+
 	
 
 	render() {
-		const about = pageContent('om-oss');
-		console.log(about.acf.bakgrund);
 		return (
-			<div>
-				<h2>This is the App section</h2>
+			<div className="flex-column">
 				<Header />
-				<About>{ about.acf.bakgrund }</About>
-				<Services />
-				<Contact />
+				<About details={ this.state.about } />
+				<Services details={ this.state.services } />
+				<Contact details={ this.state.contact } />
 			</div>
 		)
 	}

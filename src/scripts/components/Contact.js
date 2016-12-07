@@ -2,8 +2,11 @@ import React from 'react';
 
 class Contact extends React.Component {
 	render() {
+		const details = this.props.details;
 		return (
-			<h2>This is the contact section</h2>
+			<div className="flex-row">
+				<section dangerouslySetInnerHTML={ {__html: details.content.rendered} } />
+			</div>
 		)
 	}
 }

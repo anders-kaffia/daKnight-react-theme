@@ -16,8 +16,7 @@ import App from './components/App';
 
 class Root extends React.Component {
 	componentWillMount() {
-		getData('pages');
-		getData('posts');
+
 	}
 	render() {
 		return (

@@ -102,10 +102,7 @@
 	
 		_createClass(Root, [{
 			key: 'componentWillMount',
-			value: function componentWillMount() {
-				(0, _data2.default)('pages');
-				(0, _data2.default)('posts');
-			}
+			value: function componentWillMount() {}
 		}, {
 			key: 'render',
 			value: function render() {
@@ -31786,7 +31783,9 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _helpers = __webpack_require__(189);
+	var _data = __webpack_require__(188);
+	
+	var _data2 = _interopRequireDefault(_data);
 	
 	var _Header = __webpack_require__(184);
 	
@@ -31812,8 +31811,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
-	// Components
+	console.log(_data2.default);
 	
+	// Components
 	
 	var App = function (_React$Component) {
 		_inherits(App, _React$Component);
@@ -31821,31 +31821,50 @@
 		function App() {
 			_classCallCheck(this, App);
 	
-			return _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
 			// Enables the use of 'this'
+			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+	
+			_this.loadPages = _this.loadPages.bind(_this);
+	
+			// Initial state
+			_this.state = {
+				pages: {},
+				posts: {},
+				about: {},
+				services: {},
+				contact: {},
+				titles: {}
+			};
+			return _this;
 		}
 	
 		_createClass(App, [{
+			key: 'loadPages',
+			value: function loadPages() {
+	
+				this.setState({
+					pages: _data2.default,
+					about: _data2.default.about,
+					services: _data2.default.services,
+					contact: _data2.default.contact
+				});
+			}
+		}, {
+			key: 'componentWillMount',
+			value: function componentWillMount() {
+				// This runs right before the <App> is rendered
+				this.loadPages();
+			}
+		}, {
 			key: 'render',
 			value: function render() {
-				var about = (0, _helpers.pageContent)('om-oss');
-				console.log(about.acf.bakgrund);
 				return _react2.default.createElement(
 					'div',
-					null,
-					_react2.default.createElement(
-						'h2',
-						null,
-						'This is the App section'
-					),
+					{ className: 'flex-column' },
 					_react2.default.createElement(_Header2.default, null),
-					_react2.default.createElement(
-						_About2.default,
-						null,
-						about.acf.bakgrund
-					),
-					_react2.default.createElement(_Services2.default, null),
-					_react2.default.createElement(_Contact2.default, null)
+					_react2.default.createElement(_About2.default, { details: this.state.about }),
+					_react2.default.createElement(_Services2.default, { details: this.state.services }),
+					_react2.default.createElement(_Contact2.default, { details: this.state.contact })
 				);
 			}
 		}]);
@@ -31916,7 +31935,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -31946,16 +31965,22 @@
 		}
 	
 		_createClass(About, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
+				var details = this.props.details;
 				return _react2.default.createElement(
-					'div',
-					null,
+					"div",
+					{ className: "flex-column" },
 					_react2.default.createElement(
-						'h2',
-						null,
-						'This is the About section'
-					)
+						"section",
+						{ id: "blank-slate" },
+						_react2.default.createElement("div", null),
+						_react2.default.createElement("div", null),
+						_react2.default.createElement("div", null)
+					),
+					_react2.default.createElement("section", { id: "about-1", dangerouslySetInnerHTML: { __html: details.acf.om_oss } }),
+					_react2.default.createElement("section", { id: "about-2", dangerouslySetInnerHTML: { __html: details.acf.bakgrund } }),
+					_react2.default.createElement("section", { id: "about-3", dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
 				);
 			}
 		}]);
@@ -31973,7 +31998,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -32003,12 +32028,18 @@
 		}
 	
 		_createClass(Services, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
+				var details = this.props.details;
 				return _react2.default.createElement(
-					'h2',
+					"div",
 					null,
-					'This is the Services section'
+					_react2.default.createElement(
+						"div",
+						{ id: "service-menu", className: "flex-row" },
+						_react2.default.createElement("img", { src: details.acf.logos[0].logo_aktiv, alt: "" })
+					),
+					_react2.default.createElement("section", { dangerouslySetInnerHTML: { __html: details.acf.tjanster[0].tjanst } })
 				);
 			}
 		}]);
@@ -32026,7 +32057,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -32056,12 +32087,13 @@
 		}
 	
 		_createClass(Contact, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
+				var details = this.props.details;
 				return _react2.default.createElement(
-					'h2',
-					null,
-					'This is the contact section'
+					"div",
+					{ className: "flex-row" },
+					_react2.default.createElement("section", { dangerouslySetInnerHTML: { __html: details.content.rendered } })
 				);
 			}
 		}]);
@@ -32084,6 +32116,8 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.getData = getData;
+	exports.pageContent = pageContent;
 	
 	var _jquery = __webpack_require__(182);
 	
@@ -32092,8 +32126,7 @@
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function getData(type) {
-	
-		// Call to APIs
+		// Call to API
 		_jquery2.default.ajax({
 			url: '/wp-json/wp/v2/' + type + '/',
 			type: 'GET',
@@ -32107,23 +32140,9 @@
 			}
 		});
 	} // jQuery
-	exports.default = getData;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "data.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 189 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.pageContent = pageContent;
 	function pageContent(slug) {
+		getData('pages');
+		getData('posts');
 		var pages = JSON.parse(localStorage.getItem('pages-data')).filter(function (page) {
 			return page.slug === slug;
 		});
@@ -32131,7 +32150,24 @@
 		return desiredPage;
 	}
 	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "helpers.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	function arrayToObject(array) {
+		var obj = {};
+		for (var i = 0; i < array.length; ++i) {
+			if (array[i] !== undefined) obj[i] = array[i];
+		}return obj;
+	}
+	
+	// Array containing all pages as objects
+	var pagesArr = JSON.parse(localStorage.getItem('pages-data'));
+	
+	module.exports = {
+		allPages: arrayToObject(pagesArr),
+		about: pageContent('om-oss'),
+		services: pageContent('tjanster'),
+		contact: pageContent('kontakt')
+	};
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "data.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);
