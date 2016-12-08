@@ -1,9 +1,7 @@
+// Libs
 import React from 'react';
 
-import { getData, pageContent } from '../data';
-import pagesData from '../data';
-console.log(pagesData);
-
+import model from '../data';
 
 // Components
 import Header from './Header';
@@ -11,11 +9,16 @@ import About from './About';
 import Services from './Services';
 import Contact from './Contact';
 
+// Sets local storage from the JSON response from the REST API
+model.dataInit();
+
+const pages = model.getPages();
+console.log(pages);
+
 class App extends React.Component {
 	constructor() {
 		super();
 		// Enables the use of 'this'
-		this.loadPages = this.loadPages.bind(this);
 
 		// Initial state
 		this.state = {
@@ -28,31 +31,12 @@ class App extends React.Component {
 		}
 	}
 
-	loadPages() {
-
-		this.setState({
-			pages: pagesData,
-			about: pagesData.about,
-			services: pagesData.services,
-			contact: pagesData.contact,
-			// titles: pagesData.pages.map(key =>)
-		});
-	}
-	
-	componentWillMount() {
-		// This runs right before the <App> is rendered
-		this.loadPages();
-	}
-
 	
 
 	render() {
 		return (
 			<div  id="main-wrapper" className="flex-column">
-				<Header />
-				<About details={ this.state.about } />
-				<Services details={ this.state.services } />
-				<Contact details={ this.state.contact } />
+
 			</div>
 		)
 	}

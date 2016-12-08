@@ -62,10 +62,6 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _data = __webpack_require__(183);
-	
-	var _data2 = _interopRequireDefault(_data);
-	
 	var _App = __webpack_require__(184);
 	
 	var _App2 = _interopRequireDefault(_App);
@@ -86,7 +82,7 @@
 	
 	
 	// Data from REST API
-	
+	// import getData from './data';
 	
 	// Components
 	
@@ -31774,10 +31770,8 @@
 	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
-		value: true
+	  value: true
 	});
-	exports.getData = getData;
-	exports.pageContent = pageContent;
 	
 	var _jquery = __webpack_require__(182);
 	
@@ -31785,47 +31779,155 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function getData(type) {
-		// Call to API
-		_jquery2.default.ajax({
-			url: '/wp-json/wp/v2/' + type + '/',
-			type: 'GET',
-			success: function success(data) {
-				var jsonData = JSON.stringify(data);
-				localStorage.setItem(type + '-data', jsonData);
-				return jsonData;
-			},
-			error: function error(data, errorThrown) {
-				alert('Error:' + errorThrown);
-			}
-		});
-	} // jQuery
-	function pageContent(slug) {
-		getData('pages');
-		getData('posts');
-		var pages = JSON.parse(localStorage.getItem('pages-data')).filter(function (page) {
-			return page.slug === slug;
-		});
-		var desiredPage = pages[0];
-		return desiredPage;
-	}
+	var model = {};
 	
-	function arrayToObject(array) {
-		var obj = {};
-		for (var i = 0; i < array.length; ++i) {
-			if (array[i] !== undefined) obj[i] = array[i];
-		}return obj;
-	}
+	/**
+	 * Check local storage
+	 *
+	 */
+	// jQuery
+	model.dataInit = function () {
+	
+	  if (false === model.checkLocalStore()) {
+	    model.setLocalStore('pages');
+	    model.setLocalStore('posts');
+	  }
+	};
+	
+	model.setLocalStore = function (type) {
+	  // Call to API
+	  _jquery2.default.ajax({
+	    url: '/wp-json/wp/v2/' + type + '/',
+	    type: 'GET',
+	    success: function success(data) {
+	      var jsonData = JSON.stringify(data);
+	      localStorage.setItem(type + '-daknight', jsonData);
+	      return jsonData;
+	    },
+	    error: function error(data, errorThrown) {
+	      alert('Error:' + errorThrown);
+	    }
+	  });
+	};
+	
+	// function arrayToObject(array) {
+	//   var obj = {};
+	//   for (var i = 0; i < array.length; ++i)
+	//     if (array[i] !== undefined) obj[i] = array[i];
+	//   return obj;
+	// }
 	
 	// Array containing all pages as objects
-	var pagesArr = JSON.parse(localStorage.getItem('pages-data'));
+	// const pagesArr = JSON.parse(localStorage.getItem('pages-data'));
 	
-	module.exports = {
-		allPages: arrayToObject(pagesArr),
-		about: pageContent('om-oss'),
-		services: pageContent('tjanster'),
-		contact: pageContent('kontakt')
+	
+	/**
+	 * Gets pages from local store
+	 *
+	 * @return {Object[]} pages Array of page objects
+	 */
+	model.getPages = function () {
+	
+	  var pages = model.getLocalStore('pages');
+	  return pages;
 	};
+	
+	/**
+	 * Get a single page based on url slug
+	 *
+	 * @param {string} slug The slug for the page
+	 * @return {Object} page  Single page object
+	 *
+	 */
+	model.getPage = function (slug) {
+	
+	  var pages = model.getLocalStore().pages;
+	
+	  if (null === slug) slug = 'home';
+	
+	  // Get the page from store based on the slug
+	  for (i = 0, max = pages.length; i < max; i++) {
+	
+	    if (slug === pages[i].slug) {
+	      return pages[i];
+	    }
+	  }
+	
+	  return null;
+	};
+	
+	/**
+	 * Updates post or page in local store
+	 *
+	 * @param {Object} contentObj Content object to update
+	 */
+	model.updateContent = function (contentObj) {
+	
+	  var store = model.getLocalStore(),
+	      date = new Date();
+	
+	  if ('post' === contentObj.type) {
+	    store.posts.forEach(function (post) {
+	      if (contentObj.id === post.id) {
+	        post.title = contentObj.title;
+	        post.content = contentObj.content;
+	        post.modified = date.toISOString();
+	      }
+	    });
+	  }
+	
+	  if ('page' === contentObj.type) {
+	    store.pages.forEach(function (page) {
+	      if (contentObj.id === page.id) {
+	        page.title = contentObj.title;
+	        page.content = contentObj.content;
+	        page.modified = date.toISOString();
+	      }
+	    });
+	  }
+	
+	  model.updateLocalStore(store);
+	};
+	
+	/**
+	 * Checks if local store already exists
+	 *
+	 * @return {Boolean} Boolean value for if local store already exists
+	 */
+	model.checkLocalStore = function () {
+	
+	  var store = model.getLocalStore();
+	
+	  if (null === store) {
+	    return false;
+	  } else {
+	    return true;
+	  }
+	};
+	
+	/**
+	 * Gets content from local store
+	 *
+	 * @return {Object} store Native JavaScript object from local store
+	 */
+	model.getLocalStore = function (type) {
+	
+	  var store = JSON.parse(localStorage.getItem(type + '-daknight'));
+	
+	  return store;
+	};
+	
+	/**
+	 * Saves temporary store to local storage.
+	 *
+	 * @param {Object} store Native JavaScript object with site data
+	 */
+	model.updateLocalStore = function (store) {
+	
+	  localStorage.setItem('daknight', JSON.stringify(store));
+	};
+	
+	exports.default = model;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "data.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
@@ -31873,11 +31975,17 @@
 	
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Libs
 	
-	console.log(_data2.default);
 	
 	// Components
+	
+	
+	// Sets local storage from the JSON response from the REST API
+	_data2.default.dataInit();
+	
+	var pages = _data2.default.getPages();
+	console.log(pages);
 	
 	var App = function (_React$Component) {
 		_inherits(App, _React$Component);
@@ -31886,11 +31994,10 @@
 			_classCallCheck(this, App);
 	
 			// Enables the use of 'this'
-			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
-	
-			_this.loadPages = _this.loadPages.bind(_this);
 	
 			// Initial state
+			var _this = _possibleConstructorReturn(this, (App.__proto__ || Object.getPrototypeOf(App)).call(this));
+	
 			_this.state = {
 				pages: {},
 				posts: {},
@@ -31903,33 +32010,9 @@
 		}
 	
 		_createClass(App, [{
-			key: 'loadPages',
-			value: function loadPages() {
-	
-				this.setState({
-					pages: _data2.default,
-					about: _data2.default.about,
-					services: _data2.default.services,
-					contact: _data2.default.contact
-				});
-			}
-		}, {
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				// This runs right before the <App> is rendered
-				this.loadPages();
-			}
-		}, {
 			key: 'render',
 			value: function render() {
-				return _react2.default.createElement(
-					'div',
-					{ id: 'main-wrapper', className: 'flex-column' },
-					_react2.default.createElement(_Header2.default, null),
-					_react2.default.createElement(_About2.default, { details: this.state.about }),
-					_react2.default.createElement(_Services2.default, { details: this.state.services }),
-					_react2.default.createElement(_Contact2.default, { details: this.state.contact })
-				);
+				return _react2.default.createElement('div', { id: 'main-wrapper', className: 'flex-column' });
 			}
 		}]);
 	

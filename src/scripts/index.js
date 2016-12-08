@@ -9,7 +9,7 @@ import "../styles/index.scss";
 import $ from "jquery";
 
 // Data from REST API
-import getData from './data';
+// import getData from './data';
 
 // Components
 import App from './components/App';
