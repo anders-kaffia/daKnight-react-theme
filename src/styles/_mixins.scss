@@ -1,0 +1,79 @@
+/* 
+*				Mixins
+========================================================================== */
+
+/*
+*			MQ Breakpoints
+----------------------------------------------------------------*/
+
+@mixin breakpoint($class) {
+  @if $class == xs {
+    @media (max-width: 767px) { @content; }
+  }
+ 
+  @else if $class == sm {
+    @media (min-width: 768px) { @content; }
+  }
+ 
+  @else if $class == md {
+    @media (min-width: 992px) { @content; }
+  }
+ 
+  @else if $class == lg {
+    @media (min-width: 1200px) { @content; }
+  }
+ 
+  @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg";
+  }
+}
+
+/*
+*			Main spacing (white lines between elements)
+----------------------------------------------------------------*/
+
+@mixin main-spacing($property) {
+  	@include breakpoint(xs) { 
+		#{$property}: .4em;
+	 }
+ 
+  	@include breakpoint(sm) {
+		#{$property}: .6em;
+	 }
+ 
+  	@include breakpoint(md) {
+		#{$property}: .8em;
+	}
+ 
+	@include breakpoint(lg) {
+		#{$property}: 1em;
+	}
+}
+
+/*
+*			 Change size with media queries. Mainly for font-size
+----------------------------------------------------------------*/
+
+@mixin mq-size($property, $default, $unit) {
+  	@include breakpoint(xs) { 
+		#{$property}: #{($default * .7)}$unit;
+	 }
+ 
+  	@include breakpoint(sm) {
+		#{$property}: #{($default * .9)}$unit;
+	 }
+ 
+  	@include breakpoint(md) {
+		#{$property}: #{$default}$unit;
+	}
+ 
+	@include breakpoint(lg) {
+		#{$property}: #{($default * 1.2)}$unit;
+	}
+}
+
+
+
+
+
+

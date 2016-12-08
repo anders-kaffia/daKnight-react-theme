@@ -31946,7 +31946,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -31976,12 +31976,17 @@
 		}
 	
 		_createClass(Header, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
 				return _react2.default.createElement(
-					'h2',
-					null,
-					'This is the Header section'
+					"div",
+					{ id: "header", className: "flex-row" },
+					_react2.default.createElement(
+						"nav",
+						{ id: "top-nav" },
+						_react2.default.createElement("ul", null)
+					),
+					_react2.default.createElement("img", { src: "", alt: "" })
 				);
 			}
 		}]);
@@ -32086,6 +32091,9 @@
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
 	
+	// State should control what content is displayed.
+	// There need to be a state for content, and a state for Active/!Active
+	
 	var Services = function (_React$Component) {
 		_inherits(Services, _React$Component);
 	
@@ -32103,9 +32111,17 @@
 					"div",
 					null,
 					_react2.default.createElement(
-						"div",
+						"nav",
 						{ id: "service-menu", className: "flex-row" },
-						_react2.default.createElement("img", { src: details.acf.logos[0].logo_aktiv, alt: "" })
+						_react2.default.createElement(
+							"ul",
+							null,
+							_react2.default.createElement(
+								"li",
+								null,
+								_react2.default.createElement("img", { src: details.acf.logos[0].logo_aktiv, alt: "" })
+							)
+						)
 					),
 					_react2.default.createElement("section", { dangerouslySetInnerHTML: { __html: details.acf.tjanster[0].tjanst } })
 				);

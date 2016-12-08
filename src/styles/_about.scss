@@ -7,19 +7,21 @@
 	flex-wrap: wrap;
 	#blank-slate1 {
 		background: $color-1;
-		width: 40%;
+		flex: 1;
 		height: 100%;
+		@include main-spacing(margin-right);
 	}
 	#blank-slate-inside-wrapper {
-		width: 60%;
+		flex: 1;
 		height: 100%;
 		#blank-slate2 {
 			background: $color-2;
-			height: 50%;
+			height: 35%;
+			@include main-spacing(margin-bottom);
 		}
 		#blank-slate3 {
 			background: $color-3;
-			height: 50%;
+			height: 65%;
 		}
 	}
 }
@@ -34,6 +36,9 @@
 
 #about-1 {
 	background: $color-1;
+	h2 {
+		@include mq-size(font-size, 3, em);
+	}
 }
 #about-2 {
 	background: $color-2;

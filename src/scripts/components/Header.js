@@ -3,7 +3,12 @@ import React from 'react';
 class Header extends React.Component {
 	render() {
 		return (
-			<h2>This is the Header section</h2>
+			<div id="header" className="flex-row">
+				<nav id="top-nav">
+					<ul></ul>
+				</nav>
+				<img src="" alt=""/>
+			</div>
 		)
 	}
 }

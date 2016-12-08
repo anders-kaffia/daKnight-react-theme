@@ -1,4 +1,6 @@
 @import '_normalize';
+@import '_mixins';
+@import '_variables';
 @import '_base';
 @import '_header';
 @import '_about';
@@ -6,5 +8,5 @@
 @import '_contact';
 
 #main-wrapper {
-	padding: 1%;
+	@include main-spacing(padding);
 }
