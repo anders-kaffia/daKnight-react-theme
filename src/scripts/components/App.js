@@ -48,7 +48,7 @@ class App extends React.Component {
 
 	render() {
 		return (
-			<div className="flex-column">
+			<div  id="main-wrapper" className="flex-column">
 				<Header />
 				<About details={ this.state.about } />
 				<Services details={ this.state.services } />

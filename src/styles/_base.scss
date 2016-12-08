@@ -1,3 +1,26 @@
+/* 
+*				Generall Styling
+========================================================================== */
+
+body {
+	h1, h2, h3, h4, h5, h6 {
+		font-family: 'Rozha One', serif;
+	}
+	p {
+		font-family: 'Raleway', sans-serif;
+	}
+}
+
+/* 
+*			Variables
+------------------------------------ */
+$color-1: #41d6b6;
+$color-2: #e4dbd0;
+$color-3: #d1c7b9;
+$color-darkgrey: #6d6e71;
+$color-black: #000;
+$color-white: #fff;
+
 
 /* 
 *				Flex Box

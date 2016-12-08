@@ -403,6 +403,18 @@ template {
   display: none; }
 
 /* 
+*				Generall Styling
+========================================================================== */
+body h1, body h2, body h3, body h4, body h5, body h6 {
+  font-family: 'Rozha One', serif; }
+
+body p {
+  font-family: 'Raleway', sans-serif; }
+
+/* 
+*			Variables
+------------------------------------ */
+/* 
 *				Flex Box
 ========================================================================== */
 .flex-row {
@@ -423,7 +435,48 @@ template {
       -ms-flex-direction: column;
           flex-direction: column; }
 
-body {
-  background: tomato; }
+/* 
+*				About Section Styling
+========================================================================== */
+#blank-slate {
+  height: 90vh;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
+  #blank-slate #blank-slate1 {
+    background: #41d6b6;
+    width: 40%;
+    height: 100%; }
+  #blank-slate #blank-slate-inside-wrapper {
+    width: 60%;
+    height: 100%; }
+    #blank-slate #blank-slate-inside-wrapper #blank-slate2 {
+      background: #e4dbd0;
+      height: 50%; }
+    #blank-slate #blank-slate-inside-wrapper #blank-slate3 {
+      background: #d1c7b9;
+      height: 50%; }
+
+#about-1, #about-2, #about-3 {
+  text-align: center;
+  margin: 1% 0;
+  height: 90vh;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+#about-1 {
+  background: #41d6b6; }
+
+#about-2 {
+  background: #e4dbd0; }
+
+#about-3 {
+  background: #d1c7b9; }
+
+#main-wrapper {
+  padding: 1%; }
 
 /*# sourceMappingURL=style.css.map*/

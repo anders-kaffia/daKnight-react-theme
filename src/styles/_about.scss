@@ -1,0 +1,43 @@
+/* 
+*				About Section Styling
+========================================================================== */
+
+#blank-slate {
+	height: 90vh;
+	flex-wrap: wrap;
+	#blank-slate1 {
+		background: $color-1;
+		width: 40%;
+		height: 100%;
+	}
+	#blank-slate-inside-wrapper {
+		width: 60%;
+		height: 100%;
+		#blank-slate2 {
+			background: $color-2;
+			height: 50%;
+		}
+		#blank-slate3 {
+			background: $color-3;
+			height: 50%;
+		}
+	}
+}
+
+#about-1, #about-2, #about-3 {
+	text-align: center;
+	margin: 1% 0;
+	height: 90vh;
+	align-items: center;
+	justify-content: center;
+}
+
+#about-1 {
+	background: $color-1;
+}
+#about-2 {
+	background: $color-2;
+}
+#about-3 {
+	background: $color-3;
+}

@@ -62,11 +62,11 @@
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _data = __webpack_require__(188);
+	var _data = __webpack_require__(183);
 	
 	var _data2 = _interopRequireDefault(_data);
 	
-	var _App = __webpack_require__(183);
+	var _App = __webpack_require__(184);
 	
 	var _App2 = _interopRequireDefault(_App);
 	
@@ -31776,6 +31776,70 @@
 	Object.defineProperty(exports, "__esModule", {
 		value: true
 	});
+	exports.getData = getData;
+	exports.pageContent = pageContent;
+	
+	var _jquery = __webpack_require__(182);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function getData(type) {
+		// Call to API
+		_jquery2.default.ajax({
+			url: '/wp-json/wp/v2/' + type + '/',
+			type: 'GET',
+			success: function success(data) {
+				var jsonData = JSON.stringify(data);
+				localStorage.setItem(type + '-data', jsonData);
+				return jsonData;
+			},
+			error: function error(data, errorThrown) {
+				alert('Error:' + errorThrown);
+			}
+		});
+	} // jQuery
+	function pageContent(slug) {
+		getData('pages');
+		getData('posts');
+		var pages = JSON.parse(localStorage.getItem('pages-data')).filter(function (page) {
+			return page.slug === slug;
+		});
+		var desiredPage = pages[0];
+		return desiredPage;
+	}
+	
+	function arrayToObject(array) {
+		var obj = {};
+		for (var i = 0; i < array.length; ++i) {
+			if (array[i] !== undefined) obj[i] = array[i];
+		}return obj;
+	}
+	
+	// Array containing all pages as objects
+	var pagesArr = JSON.parse(localStorage.getItem('pages-data'));
+	
+	module.exports = {
+		allPages: arrayToObject(pagesArr),
+		about: pageContent('om-oss'),
+		services: pageContent('tjanster'),
+		contact: pageContent('kontakt')
+	};
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "data.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 184 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
 	
 	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
 	
@@ -31783,23 +31847,23 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _data = __webpack_require__(188);
+	var _data = __webpack_require__(183);
 	
 	var _data2 = _interopRequireDefault(_data);
 	
-	var _Header = __webpack_require__(184);
+	var _Header = __webpack_require__(185);
 	
 	var _Header2 = _interopRequireDefault(_Header);
 	
-	var _About = __webpack_require__(185);
+	var _About = __webpack_require__(186);
 	
 	var _About2 = _interopRequireDefault(_About);
 	
-	var _Services = __webpack_require__(186);
+	var _Services = __webpack_require__(187);
 	
 	var _Services2 = _interopRequireDefault(_Services);
 	
-	var _Contact = __webpack_require__(187);
+	var _Contact = __webpack_require__(188);
 	
 	var _Contact2 = _interopRequireDefault(_Contact);
 	
@@ -31860,7 +31924,7 @@
 			value: function render() {
 				return _react2.default.createElement(
 					'div',
-					{ className: 'flex-column' },
+					{ id: 'main-wrapper', className: 'flex-column' },
 					_react2.default.createElement(_Header2.default, null),
 					_react2.default.createElement(_About2.default, { details: this.state.about }),
 					_react2.default.createElement(_Services2.default, { details: this.state.services }),
@@ -31877,7 +31941,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "App.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 184 */
+/* 185 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31930,7 +31994,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Header.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 185 */
+/* 186 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -31973,14 +32037,18 @@
 					{ className: "flex-column" },
 					_react2.default.createElement(
 						"section",
-						{ id: "blank-slate" },
-						_react2.default.createElement("div", null),
-						_react2.default.createElement("div", null),
-						_react2.default.createElement("div", null)
+						{ id: "blank-slate", className: "flex-row" },
+						_react2.default.createElement("div", { id: "blank-slate1" }),
+						_react2.default.createElement(
+							"div",
+							{ id: "blank-slate-inside-wrapper", className: "flex-column" },
+							_react2.default.createElement("div", { id: "blank-slate2" }),
+							_react2.default.createElement("div", { id: "blank-slate3" })
+						)
 					),
-					_react2.default.createElement("section", { id: "about-1", dangerouslySetInnerHTML: { __html: details.acf.om_oss } }),
-					_react2.default.createElement("section", { id: "about-2", dangerouslySetInnerHTML: { __html: details.acf.bakgrund } }),
-					_react2.default.createElement("section", { id: "about-3", dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
+					_react2.default.createElement("section", { id: "about-1", className: "flex-column", dangerouslySetInnerHTML: { __html: details.acf.om_oss } }),
+					_react2.default.createElement("section", { id: "about-2", className: "flex-column", dangerouslySetInnerHTML: { __html: details.acf.bakgrund } }),
+					_react2.default.createElement("section", { id: "about-3", className: "flex-column", dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
 				);
 			}
 		}]);
@@ -31993,7 +32061,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "About.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 186 */
+/* 187 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32052,7 +32120,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Services.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 187 */
+/* 188 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -32104,70 +32172,6 @@
 	exports.default = Contact;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Contact.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 188 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	exports.getData = getData;
-	exports.pageContent = pageContent;
-	
-	var _jquery = __webpack_require__(182);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function getData(type) {
-		// Call to API
-		_jquery2.default.ajax({
-			url: '/wp-json/wp/v2/' + type + '/',
-			type: 'GET',
-			success: function success(data) {
-				var jsonData = JSON.stringify(data);
-				localStorage.setItem(type + '-data', jsonData);
-				return jsonData;
-			},
-			error: function error(data, errorThrown) {
-				alert('Error:' + errorThrown);
-			}
-		});
-	} // jQuery
-	function pageContent(slug) {
-		getData('pages');
-		getData('posts');
-		var pages = JSON.parse(localStorage.getItem('pages-data')).filter(function (page) {
-			return page.slug === slug;
-		});
-		var desiredPage = pages[0];
-		return desiredPage;
-	}
-	
-	function arrayToObject(array) {
-		var obj = {};
-		for (var i = 0; i < array.length; ++i) {
-			if (array[i] !== undefined) obj[i] = array[i];
-		}return obj;
-	}
-	
-	// Array containing all pages as objects
-	var pagesArr = JSON.parse(localStorage.getItem('pages-data'));
-	
-	module.exports = {
-		allPages: arrayToObject(pagesArr),
-		about: pageContent('om-oss'),
-		services: pageContent('tjanster'),
-		contact: pageContent('kontakt')
-	};
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "data.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ]);
