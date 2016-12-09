@@ -37,15 +37,6 @@ model.setLocalStore = function (type) {
 	});
 
 }
-// function arrayToObject(array) {
-//   var obj = {};
-//   for (var i = 0; i < array.length; ++i)
-//     if (array[i] !== undefined) obj[i] = array[i];
-//   return obj;
-// }
-
-// Array containing all pages as objects
-// const pagesArr = JSON.parse(localStorage.getItem('pages-data'));
 
 /**
  * Gets pages from local store
