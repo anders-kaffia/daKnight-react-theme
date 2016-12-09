@@ -1,6 +1,7 @@
 // Libs
 import React from 'react';
 
+
 import model from '../data';
 
 // Components
@@ -9,11 +10,8 @@ import About from './About';
 import Services from './Services';
 import Contact from './Contact';
 
-// Sets local storage from the JSON response from the REST API
+// Stores data from WP REST API in local storage
 model.dataInit();
-
-const pages = model.getPages();
-console.log(pages);
 
 class App extends React.Component {
 	constructor() {
@@ -31,7 +29,21 @@ class App extends React.Component {
 		}
 	}
 
-	
+	componentWillMount() {
+		const 	pages = model.getPages(),
+				about = model.getPage('om-oss'),
+				services = model.getPage('tjanster'),
+				contact = model.getPage('kontakt'),
+				titles = model.getPageTitles();
+
+		this.setState({
+			pages: pages,
+			about: about,
+			services: services,
+			contact: contact,
+			titles: titles
+		})
+	}
 
 	render() {
 		return (

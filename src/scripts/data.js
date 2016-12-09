@@ -1,38 +1,42 @@
 // jQuery
 import $ from "jquery";
 
-var model = {};
+const model = {};
 
 /**
+ * Model init function
  * Check local storage
  *
  */
-model.dataInit = function() {
+model.dataInit = function () {
 
-  if( false === model.checkLocalStore() ) {
-      model.setLocalStore( 'pages' );
-      model.setLocalStore( 'posts' );
-  }
+	if (false === model.checkLocalStore()) {
+		model.setLocalStore('pages');
+		model.setLocalStore('posts');
+	}
 
 }
 
-model.setLocalStore = function( type ) {
-	// Call to API
-	$.ajax( {
+/**
+ * Set local storage from WP REST API
+ *
+ * @param {string} type of content, posts or pages
+ */
+model.setLocalStore = function (type) {
+
+	$.ajax({
 		url: '/wp-json/wp/v2/' + type + '/',
 		type: 'GET',
-		success : function (data) {
-		const jsonData = JSON.stringify(data);
-		localStorage.setItem(type + '-daknight', jsonData);
-		return jsonData;
+		success: function (data) {
+			const jsonData = JSON.stringify(data);
+			localStorage.setItem(type + '-daknight', jsonData);
 		},
-		error : function (data, errorThrown) {
-		alert('Error:' + errorThrown);
+		error: function (data, errorThrown) {
+			alert('Error:' + errorThrown);
 		}
 	});
+
 }
-
-
 // function arrayToObject(array) {
 //   var obj = {};
 //   for (var i = 0; i < array.length; ++i)
@@ -43,81 +47,58 @@ model.setLocalStore = function( type ) {
 // Array containing all pages as objects
 // const pagesArr = JSON.parse(localStorage.getItem('pages-data'));
 
-
 /**
  * Gets pages from local store
  *
  * @return {Object[]} pages Array of page objects
  */
-model.getPages = function() {
+model.getPages = function () {
 
-  var pages = model.getLocalStore('pages');
-  return pages;
+	const pages = model.getLocalStore('pages');
+	return pages;
 
 }
+
 
 /**
  * Get a single page based on url slug
  *
  * @param {string} slug The slug for the page
  * @return {Object} page  Single page object
- *
  */
-model.getPage = function( slug ) {
+model.getPage = function ( slug ) {
 
-  var pages = model.getLocalStore().pages;
+	const pages = model.getPages();
 
-  if( null === slug ) slug = 'home';
-
-  // Get the page from store based on the slug
-  for( i = 0, max = pages.length; i < max; i++  ) {
-
-   if( slug === pages[i].slug ) {
-     return pages[i];
-   }
-
-  }
-
-  return null;
-
+	// Get the page from store based on the slug
+	for (let i = 0, max = pages.length; i < max; i++) {
+		if (slug === pages[i].slug) {
+			console.log(pages[i]);
+			return pages[i];
+		}
+	}
+	return null;
 }
 
-
 /**
- * Updates post or page in local store
+ * Creates an array with all page titles
  *
- * @param {Object} contentObj Content object to update
+ * @return {array} array containing all page titles
  */
-model.updateContent = function( contentObj ) {
+model.getPageTitles = function () {
 
-  var store = model.getLocalStore(),
-      date = new Date();
+	const pages = model.getPages();
+	let titles = [];
 
-  if( 'post' === contentObj.type ) {
-    store.posts.forEach( function( post ) {
-      if( contentObj.id === post.id ) {
-        post.title = contentObj.title;
-        post.content = contentObj.content;
-        post.modified = date.toISOString();
-      }
-    });
-  }
+	// Store page titles in array
+	for (let i = 0, max = pages.length; i < max; i++) {
+		titles.push(pages[i].title.rendered);
+		console.log(titles);
+	}
 
-  if ( 'page' === contentObj.type ) {
-    store.pages.forEach( function( page ) {
-      if( contentObj.id === page.id ) {
-        page.title = contentObj.title;
-        page.content = contentObj.content;
-        page.modified = date.toISOString();
-      }
-    });
-  }
+	return titles;
 
-
-  model.updateLocalStore( store );
-
-};
-
+}
 
 /**
  * Checks if local store already exists
@@ -126,27 +107,26 @@ model.updateContent = function( contentObj ) {
  */
 model.checkLocalStore = function() {
 
-  var store = model.getLocalStore();
+	const store = model.getLocalStore();
 
-  if ( null === store ) {
-    return false;
-  } else {
-    return true;
-  }
+	if (null === store) {
+		return false;
+	} else {
+		return true;
+	}
 
 }
 
-
 /**
  * Gets content from local store
- *
+ * 
+ * @param {string} type of content, pages or posts
  * @return {Object} store Native JavaScript object from local store
  */
-model.getLocalStore = function( type ) {
+model.getLocalStore = function ( type ) {
 
-  var store = JSON.parse( localStorage.getItem( type + '-daknight' ) );
-
-  return store;
+	const store = JSON.parse(localStorage.getItem(type + '-daknight'));
+	return store;
 
 }
 
@@ -155,9 +135,9 @@ model.getLocalStore = function( type ) {
  *
  * @param {Object} store Native JavaScript object with site data
  */
-model.updateLocalStore = function( store ) {
+model.updateLocalStore = function ( store ) {
 
-  localStorage.setItem( 'daknight', JSON.stringify( store ) );
+	localStorage.setItem('daknight', JSON.stringify(store));
 
 }
 
