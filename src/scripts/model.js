@@ -4,21 +4,25 @@ import $ from "jquery";
 const model = {};
 
 /**
- * Model init function
- * Check local storage
+ * @desc Model init function
  *
  */
-model.dataInit = function () {
-
-	if (false === model.checkLocalStore()) {
+model.modelInit = function () {
+	
+	model.setLocalStore('pages');
+	// Sets local storage if possible
+	if (true === model.localStoreIsSupported()) {
 		model.setLocalStore('pages');
 		model.setLocalStore('posts');
+	} else {
+		// Get data directly from WP REST API
+
 	}
 
 }
 
 /**
- * Set local storage from WP REST API
+ * @desc Set local storage from WP REST API
  *
  * @param {string} type of content, posts or pages
  */
@@ -36,10 +40,33 @@ model.setLocalStore = function (type) {
 		}
 	});
 
+	
 }
 
 /**
- * Gets pages from local store
+ * @desc Retrieve data from WP REST API
+ *
+ * @param {string} type of content, posts or pages
+ */
+
+model.localStoreUnavailable = function (type) {
+
+	$.ajax({
+		url: '/wp-json/wp/v2/' + type + '/',
+		type: 'GET',
+		success: function (data) {
+			console.table(data);
+			// Pick up data here!
+		},
+		error: function (data, errorThrown) {
+			alert('Error:' + errorThrown);
+		}
+	});
+
+}
+
+/**
+ * @desc Gets pages from local store
  *
  * @return {Object[]} pages Array of page objects
  */
@@ -50,21 +77,19 @@ model.getPages = function () {
 
 }
 
-
 /**
- * Get a single page based on url slug
+ * @desc Get a single page based on url slug
  *
  * @param {string} slug The slug for the page
  * @return {Object} page  Single page object
  */
-model.getPage = function ( slug ) {
+model.getPage = function (slug) {
 
 	const pages = model.getPages();
 
 	// Get the page from store based on the slug
 	for (let i = 0, max = pages.length; i < max; i++) {
 		if (slug === pages[i].slug) {
-			console.log(pages[i]);
 			return pages[i];
 		}
 	}
@@ -72,7 +97,7 @@ model.getPage = function ( slug ) {
 }
 
 /**
- * Creates an array with all page titles
+ * @desc Creates an array with all page titles
  *
  * @return {array} array containing all page titles
  */
@@ -84,7 +109,6 @@ model.getPageTitles = function () {
 	// Store page titles in array
 	for (let i = 0, max = pages.length; i < max; i++) {
 		titles.push(pages[i].title.rendered);
-		console.log(titles);
 	}
 
 	return titles;
@@ -92,29 +116,33 @@ model.getPageTitles = function () {
 }
 
 /**
- * Checks if local store already exists
+ * @desc Checks if local store is supported
  *
- * @return {Boolean} Boolean value for if local store already exists
+ * @return {Boolean} Boolean value for if local store is supported
  */
-model.checkLocalStore = function() {
+model.localStoreIsSupported = function () {
 
 	const store = model.getLocalStore();
 
-	if (null === store) {
+	if (window.localStorage.length === 0 ||
+		'localStorage' in window && window['localStorage'] === null ||
+		model.getLocalStore === null) {
+		console.log('Local Storage is not supported!');
 		return false;
 	} else {
+		console.log('Local Storage is supported');
 		return true;
 	}
 
 }
 
 /**
- * Gets content from local store
+ * @desc Gets content from local store
  * 
  * @param {string} type of content, pages or posts
  * @return {Object} store Native JavaScript object from local store
  */
-model.getLocalStore = function ( type ) {
+model.getLocalStore = function (type) {
 
 	const store = JSON.parse(localStorage.getItem(type + '-daknight'));
 	return store;
@@ -122,11 +150,11 @@ model.getLocalStore = function ( type ) {
 }
 
 /**
- * Saves temporary store to local storage.
+ * @desc Saves temporary store to local storage.
  *
  * @param {Object} store Native JavaScript object with site data
  */
-model.updateLocalStore = function ( store ) {
+model.updateLocalStore = function (store) {
 
 	localStorage.setItem('daknight', JSON.stringify(store));
 

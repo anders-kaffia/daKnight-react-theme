@@ -1,6 +1,7 @@
 'use strict';
 
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
+const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
 	entry: './src/scripts/index.js',
@@ -35,7 +36,14 @@ module.exports = {
 		]
 	},
 	plugins: [
-		new ExtractTextPlugin('../styles/style.css')
+		new ExtractTextPlugin('../styles/style.css'),
+		new CompressionPlugin({
+			asset: "[path].gz[query]",
+			algorithm: "gzip",
+			test: /\.js$|\.css$|\.html$/,
+			threshold: 10240,
+			minRatio: 0.8
+		})
 	],
 	watch: true,
 	devtool: '#source-map'

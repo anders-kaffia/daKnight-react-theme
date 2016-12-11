@@ -1,8 +1,7 @@
 // Libs
 import React from 'react';
 
-
-import model from '../data';
+import model from '../model';
 
 // Components
 import Header from './Header';
@@ -11,7 +10,11 @@ import Services from './Services';
 import Contact from './Contact';
 
 // Stores data from WP REST API in local storage
-model.dataInit();
+model.modelInit();
+
+
+model.localStoreUnavailable('pages');
+
 
 class App extends React.Component {
 	constructor() {
@@ -48,7 +51,10 @@ class App extends React.Component {
 	render() {
 		return (
 			<div  id="main-wrapper" className="flex-column">
-
+				{ /*<Header details={this.state.about} /> */ }
+				<About details={this.state.about} />
+				<Services details={this.state.services} />
+				<Contact details={this.state.contact} />
 			</div>
 		)
 	}
