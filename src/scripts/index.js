@@ -5,30 +5,18 @@ import { render } from 'react-dom';
 // CSS
 import "../styles/index.scss";
 
-// jQuery
-import $ from "jquery";
-
-// Data from REST API
-// import getData from './data';
-
 // Components
 import App from './components/App';
 
-class Root extends React.Component {
-	componentWillMount() {
+// Redux & Router deps
+import { Router, Route, browserHistory } from 'react-router';
+import { Provider } from 'react-redux';
+import store, { history } from './store';
 
-	}
-	render() {
-		return (
-			<App/>
-		)
-	}
-}
-
-// const Root = () => {
-// 	return (
-// 		<App />
-// 	)
-// }
-
-render(<Root/>, document.getElementById('app'));
+render((
+	<Provider store={store}>
+		<Router history={ history }>
+			<Route path="/" component={App} />
+		</Router>
+	</Provider>
+	), document.getElementById('app'));

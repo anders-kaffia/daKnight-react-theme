@@ -1,19 +1,38 @@
 // jQuery
-import $ from "jquery";
+// import $ from 'jquery';
+
+// Axios
+import Axios from 'axios';
 
 const model = {};
+
+model.getPagesFromApi = function (){
+  return Axios.get('/wp-json/wp/v2/pages/');
+}
+const helpers = {
+  getPagesFromApi: function(){
+    return axios.all(getPagesFromApi())
+      .then(function(arr){
+        return {
+          pages: arr[0].data
+        }
+      })
+  }
+}
+console.log(helpers);
 
 /**
  * @desc Model init function
  *
  */
 model.modelInit = function () {
-	
-	model.setLocalStore('pages');
+
+	model.ajax();
+	console.log(model.ajax());
 	// Sets local storage if possible
 	if (true === model.localStoreIsSupported()) {
-		model.setLocalStore('pages');
-		model.setLocalStore('posts');
+		model.ajax();
+		model.ajax();
 	} else {
 		// Get data directly from WP REST API
 
@@ -21,26 +40,33 @@ model.modelInit = function () {
 
 }
 
+
 /**
  * @desc Set local storage from WP REST API
  *
  * @param {string} type of content, posts or pages
  */
-model.setLocalStore = function (type) {
 
-	$.ajax({
-		url: '/wp-json/wp/v2/' + type + '/',
-		type: 'GET',
-		success: function (data) {
-			const jsonData = JSON.stringify(data);
-			localStorage.setItem(type + '-daknight', jsonData);
-		},
-		error: function (data, errorThrown) {
-			alert('Error:' + errorThrown);
-		}
-	});
+model.ajax = function () {
+	let arr;
+	const ajax = new XMLHttpRequest();
+    /* Forces the filetype to .json */
+    // ajax.overrideMimeType('application/json');
+    ajax.open('GET', '/wp-json/wp/v2/pages/', true);
+    ajax.onreadystatechange = function() {
+        if (ajax.readyState == 4 && ajax.status == 200) {
+            console.log(ajax.response);
+            arr = ajax.responseText;
+        }
+    };
+    ajax.send();
+    return arr;
 
-	
+}
+model.handleAjaxResult = function (result) {
+	const data = result;
+	console.log(result);
+	return data;
 }
 
 /**
@@ -48,7 +74,6 @@ model.setLocalStore = function (type) {
  *
  * @param {string} type of content, posts or pages
  */
-
 model.localStoreUnavailable = function (type) {
 
 	$.ajax({
@@ -57,12 +82,13 @@ model.localStoreUnavailable = function (type) {
 		success: function (data) {
 			console.table(data);
 			// Pick up data here!
+			apiResult = data;
 		},
 		error: function (data, errorThrown) {
 			alert('Error:' + errorThrown);
 		}
 	});
-
+	return apiResult;
 }
 
 /**
