@@ -29504,6 +29504,13 @@
 	var store = (0, _redux.createStore)(_index2.default, defaultState, middleware, enhancers);
 	var history = exports.history = (0, _reactRouterRedux.syncHistoryWithStore)(_reactRouter.browserHistory, store);
 	
+	var payload = function payload() {
+		_axios2.default.get('/wp-json/wp/v2/pages/').then(function (response) {
+			console.table(response.data);
+		});
+	};
+	payload();
+	
 	store.dispatch(function (dispatch) {
 		dispatch({
 			type: 'FETCH_DATA_START'

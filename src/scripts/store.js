@@ -24,6 +24,14 @@ const enhancers = compose(
 const store = createStore(rootReducer, defaultState, middleware, enhancers);
 export const history = syncHistoryWithStore(browserHistory, store);
 
+const payload = function () {
+	axios.get('/wp-json/wp/v2/pages/')
+		.then((response) => {
+			console.table(response.data);
+		})
+}
+payload();
+
 store.dispatch((dispatch) => {
 	dispatch({
 		type: 'FETCH_DATA_START'
