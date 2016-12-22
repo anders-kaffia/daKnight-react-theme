@@ -1,0 +1,21 @@
+#header {
+	width: 100%;
+	justify-content: space-between;
+	@include main-spacing(margin-bottom);
+}
+
+#top-nav {
+	align-self: center;
+	text-align: right;
+	a {
+		text-decoration: none;
+		font-family: 'Rozha One', serif;
+		font-size: 1.3em;
+		color: $color-darkgrey;
+	}
+}
+#dk-logo {
+	max-height: 120px;
+	width: auto;
+	align-self: center;
+}

@@ -1,5 +1,6 @@
 'use strict';
 
+const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
@@ -9,7 +10,13 @@ module.exports = {
 		path: './build/scripts/',
 		filename: 'bundle.js'
 	},
+	resolve: {
+		alias: {
+			webworkify: 'webworkify-webpack'
+		},
+	},
 	module: {
+		noParse: /node_modules\/mapbox-gl\/dist\/mapbox-gl.js/,
 		// JavaScript linter
 		preloaders: [
 			{
@@ -25,6 +32,13 @@ module.exports = {
 				exclude: /node_modules/,
 				loaders: ["react-hot", "babel-loader"]
 			},
+			{
+				test: /\.json$/,
+				loader: 'json-loader'
+			}, {
+				test: /use_program\.js$/,
+				loader: 'transform/cacheable?brfs'
+			},
 			// Sass, CSS
 			{
 				test: /\.scss$/,
@@ -32,6 +46,13 @@ module.exports = {
 					'style',
 					'css?sourceMap!postcss!sass?sourceMap'
 				)
+			}
+		],
+		postLoaders: [
+			{
+				include: /node_modules\/mapbox-gl/,
+				loader: 'transform',
+				query: 'brfs'
 			}
 		]
 	},

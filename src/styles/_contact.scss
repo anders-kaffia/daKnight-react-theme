@@ -1,0 +1,80 @@
+
+#map-container {
+	flex: 1;
+	height: 80vh;
+}
+
+#map {
+	width: 100%;
+	height: 100%;
+	overflow: hidden;
+	justify-content: center;
+	align-items: center;
+	position: relative;
+	>div {
+		position: absolute !important;
+   		top:-100%;
+		bottom:-100%;
+		margin: auto;
+	}
+}
+
+#contact-text {
+	background: $color-1;
+	text-align: center;
+	flex: 1;
+	@include main-spacing(margin-left);
+	>div {
+		padding: 6% 4%;
+	}
+	#open-contact-form {
+		text-transform: uppercase;
+		background: $color-1;
+		font-family: $main-font;
+		color: $color-darkgrey;
+		text-align: center;
+		padding: 2% 4%;
+		border: 2px solid $color-darkgrey;
+	}
+}
+
+#contact-form-container {
+	position: fixed;
+	z-index: 10;
+	left: 0;
+	top: 0;
+	width: 100%;
+	height: 100%;
+	justify-content: center;
+	align-items: center;
+	background: $color-2;
+	#contact-form {
+		color: $color-darkgrey;
+		text-align: center;
+		margin: auto;
+		padding: 5% 0;
+		.button-close {
+			background: $color-2;
+			margin-left: auto;
+			vertical-align: middle;
+			font-size: 1.2em;
+		}
+		h2 {
+			margin-top: 0;
+		}
+		input, textarea {
+			background: $color-2;
+			margin: 2%;
+			padding: 4%;
+			border: 2px solid $color-darkgrey;
+			vertical-align: middle;
+		}
+		button[type=submit], button {
+			background: $color-2;
+			border: 2px solid $color-darkgrey;
+			font-family: $main-font;
+			color: $color-darkgrey;
+			vertical-align: middle;
+		}
+	}
+}

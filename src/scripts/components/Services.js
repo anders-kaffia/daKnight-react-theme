@@ -1,19 +1,47 @@
 import React from 'react';
 
-// State should control what content is displayed.
-// There need to be a state for content, and a state for Active/!Active
+// Components
+import Loading from './Loading';
+import ServiceMenuItem from './ServiceMenuItem';
+import ServiceFeatImage from './ServiceFeatImage';
+import ServiceText from './ServiceText';
 
 class Services extends React.Component {
+	constructor(props) {
+		super(props);
+		this.handleClick = this.handleClick.bind(this);
+
+	}
+	handleClick(itemId) {
+		
+		console.log(itemId);
+	}
+
 	render() {
-		const details = this.props.details;
+		// Props
+		const childPages = this.props.childPages;
+		const isLoading = this.props.loading;
+		const services = this.props.page;
+
 		return (
 			<div>
-				<nav id="service-menu" className="flex-row">
-					<ul>
-						<li><img src={ details.acf.logos[0].logo_aktiv } alt=""/></li>
-					</ul>
-				</nav>
-				<section dangerouslySetInnerHTML={ {__html: details.acf.tjanster[0].tjanst} } />
+				{ isLoading ? (
+					<Loading />
+				) : (
+					<div id={ '#' + services.slug } >
+						<nav id="service-menu" className="flex-row">
+							<ul className="flex-row">
+								{ childPages.map((page) => (
+									<ServiceMenuItem key={ page.id } index={ page.id } page={ page } activeItem={ this.props.activeItem } setActive={ this.props.setActive.bind(null, page.id) } />
+								))}
+							</ul>
+						</nav>
+						<div className="services-content flex-row">
+							<ServiceFeatImage page={ childPages } activeItem={ this.props.activeItem } />
+							<ServiceText page={ childPages } activeItem={ this.props.activeItem } />
+						</div>
+					</div>
+				)}
 			</div>
 		)
 	}

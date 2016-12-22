@@ -1,10 +1,23 @@
 <?php
-//Register WP Menu
+
+// Adds featured image endpoint to the WP REST API
+function page_fetured_image_json( $data, $page, $context ) {
+	$featured_image_id = $data->data['featured_media']; // get featured image id
+	$featured_image_url = wp_get_attachment_image_src( $featured_image_id, 'original' ); // get url of the original size
+	if( $featured_image_url ) {
+		$data->data['featured_image_url'] = $featured_image_url[0];
+	}
+		
+	return $data;
+}
+add_filter( 'rest_prepare_page', 'page_fetured_image_json', 10, 3 );
+
+// Register WP Menu
 register_nav_menus( array(
 	'top_menu' => "Main Top Menu",
 ));
 
-//Enable thumbnails
+// Enable thumbnails
 add_theme_support( 'post-thumbnails' ); 
 
 // Adds theme styles and scripts

@@ -1,189 +1,106 @@
-// jQuery
-// import $ from 'jquery';
-
-// Axios
-import Axios from 'axios';
+// Libs
+import axios from 'axios';
 
 const model = {};
 
-model.getPagesFromApi = function (){
-  return Axios.get('/wp-json/wp/v2/pages/');
-}
-const helpers = {
-  getPagesFromApi: function(){
-    return axios.all(getPagesFromApi())
-      .then(function(arr){
-        return {
-          pages: arr[0].data
-        }
-      })
-  }
-}
-console.log(helpers);
-
 /**
- * @desc Model init function
- *
- */
-model.modelInit = function () {
-
-	model.ajax();
-	console.log(model.ajax());
-	// Sets local storage if possible
-	if (true === model.localStoreIsSupported()) {
-		model.ajax();
-		model.ajax();
-	} else {
-		// Get data directly from WP REST API
-
-	}
-
-}
-
-
-/**
- * @desc Set local storage from WP REST API
+ * @desc Get type specific content from WP REST API
  *
  * @param {string} type of content, posts or pages
  */
+model.getContent = (type) =>
+	axios.get(`/wp-json/wp/v2/${type}/?per_page=50`
+	);
 
-model.ajax = function () {
-	let arr;
-	const ajax = new XMLHttpRequest();
-    /* Forces the filetype to .json */
-    // ajax.overrideMimeType('application/json');
-    ajax.open('GET', '/wp-json/wp/v2/pages/', true);
-    ajax.onreadystatechange = function() {
-        if (ajax.readyState == 4 && ajax.status == 200) {
-            console.log(ajax.response);
-            arr = ajax.responseText;
-        }
-    };
-    ajax.send();
-    return arr;
-
-}
-model.handleAjaxResult = function (result) {
-	const data = result;
-	console.log(result);
-	return data;
-}
 
 /**
- * @desc Retrieve data from WP REST API
+ * @desc Get all content from WP REST API
  *
- * @param {string} type of content, posts or pages
+ * @param {string, string} two types of content, posts and pages
  */
-model.localStoreUnavailable = function (type) {
-
-	$.ajax({
-		url: '/wp-json/wp/v2/' + type + '/',
-		type: 'GET',
-		success: function (data) {
-			console.table(data);
-			// Pick up data here!
-			apiResult = data;
-		},
-		error: function (data, errorThrown) {
-			alert('Error:' + errorThrown);
-		}
-	});
-	return apiResult;
-}
-
-/**
- * @desc Gets pages from local store
- *
- * @return {Object[]} pages Array of page objects
- */
-model.getPages = function () {
-
-	const pages = model.getLocalStore('pages');
-	return pages;
-
-}
-
-/**
- * @desc Get a single page based on url slug
- *
- * @param {string} slug The slug for the page
- * @return {Object} page  Single page object
- */
-model.getPage = function (slug) {
-
-	const pages = model.getPages();
-
-	// Get the page from store based on the slug
-	for (let i = 0, max = pages.length; i < max; i++) {
-		if (slug === pages[i].slug) {
-			return pages[i];
-		}
-	}
-	return null;
-}
-
-/**
- * @desc Creates an array with all page titles
- *
- * @return {array} array containing all page titles
- */
-model.getPageTitles = function () {
-
-	const pages = model.getPages();
-	let titles = [];
-
-	// Store page titles in array
-	for (let i = 0, max = pages.length; i < max; i++) {
-		titles.push(pages[i].title.rendered);
+model.apiCall = {
+	getAllContent: (type1, type2, type3) => axios.all([model.getContent(type1), model.getContent(type2), model.getContent(type3)])
+		.then(function (arr) {
+				return {
+					pages: arr[0].data,
+					logo: arr[2].data.filter(page => page.title.rendered === 'DKN_Logotyp')[0],
+					about: arr[0].data.filter(page => page.slug === 'om-oss')[0],
+					services: arr[0].data.filter(page => page.slug === 'tjanster')[0],
+					contact: arr[0].data.filter(page => page.slug === 'kontakt')[0],
+					allPageTitles: arr[0].data.map(page => page.title),
+					mainPageTitles: arr[0].data.filter(page => page.parent === 0).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0),
+					serviceChildPages: arr[0].data.filter(page => page.parent === 5).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0),
+					serviceChildPageTitles: arr[0].data.filter(page => page.parent === 5).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0).map(page => page.title),
+					posts: arr[1].data,
+					activeItem: arr[0].data.filter(page => page.parent === 5).filter(page => page.slug === 'webbutveckling')[0].id
+				};
+			})
 	}
 
-	return titles;
 
-}
+// /**
+//  * @desc Get a single page based on url slug
+//  *
+//  * @param {string} slug The slug for the page
+//  * @return {Object} page  Single page object
+//  */
+// model.getPage = function (slug) {
 
-/**
- * @desc Checks if local store is supported
- *
- * @return {Boolean} Boolean value for if local store is supported
- */
-model.localStoreIsSupported = function () {
+// 	const pages = model.getPages();
 
-	const store = model.getLocalStore();
+// 	// Get the page from store based on the slug
+// 	for (let i = 0, max = pages.length; i < max; i++) {
+// 		if (slug === pages[i].slug) {
+// 			return pages[i];
+// 		}
+// 	}
+// 	return null;
+// }
 
-	if (window.localStorage.length === 0 ||
-		'localStorage' in window && window['localStorage'] === null ||
-		model.getLocalStore === null) {
-		console.log('Local Storage is not supported!');
-		return false;
-	} else {
-		console.log('Local Storage is supported');
-		return true;
-	}
 
-}
+// /**
+//  * @desc Checks if local store is supported
+//  *
+//  * @return {Boolean} Boolean value for if local store is supported
+//  */
+// model.localStoreIsSupported = function () {
 
-/**
- * @desc Gets content from local store
- * 
- * @param {string} type of content, pages or posts
- * @return {Object} store Native JavaScript object from local store
- */
-model.getLocalStore = function (type) {
+// 	const store = model.getLocalStore();
 
-	const store = JSON.parse(localStorage.getItem(type + '-daknight'));
-	return store;
+// 	if (window.localStorage.length === 0 ||
+// 		'localStorage' in window && window['localStorage'] === null ||
+// 		model.getLocalStore === null) {
+// 		console.log('Local Storage is not supported!');
+// 		return false;
+// 	} else {
+// 		console.log('Local Storage is supported');
+// 		return true;
+// 	}
 
-}
+// }
 
-/**
- * @desc Saves temporary store to local storage.
- *
- * @param {Object} store Native JavaScript object with site data
- */
-model.updateLocalStore = function (store) {
+// /**
+//  * @desc Gets content from local store
+//  * 
+//  * @param {string} type of content, pages or posts
+//  * @return {Object} store Native JavaScript object from local store
+//  */
+// model.getLocalStore = function (type) {
 
-	localStorage.setItem('daknight', JSON.stringify(store));
+// 	const store = JSON.parse(localStorage.getItem(type + '-daknight'));
+// 	return store;
 
-}
+// }
+
+// /**
+//  * @desc Saves temporary store to local storage.
+//  *
+//  * @param {Object} store Native JavaScript object with site data
+//  */
+// model.updateLocalStore = function (store) {
+
+// 	localStorage.setItem('daknight', JSON.stringify(store));
+
+// }
 
 export default model;
