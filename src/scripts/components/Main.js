@@ -7,10 +7,7 @@ import Header from './Header';
 import About from './About';
 import Services from './Services';
 import Contact from './Contact';
-
 import model from '../model';
-import helpers from '../helpers';
-
 
 class Main extends React.Component {
 

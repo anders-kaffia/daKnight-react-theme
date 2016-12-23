@@ -5,15 +5,12 @@ import Loading from './Loading';
 
 class Header extends React.Component {
 	render() {
-
 		// Props
-		const details = this.props.details;
-		const isLoading = this.props.loading;
-		const logo = this.props.logo;
+		const { details, loading, logo } = this.props;
 
 		return (
 			<div >
-				{ isLoading ? (
+				{ loading ? (
 					<Loading />
 				) : (
 					<div id="header" className="flex-row">
