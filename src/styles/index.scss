@@ -6,7 +6,3 @@
 @import '_about';
 @import '_services';
 @import '_contact';
-
-#main-wrapper {
-	@include main-spacing(padding);
-}

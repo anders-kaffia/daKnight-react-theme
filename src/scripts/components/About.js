@@ -27,7 +27,7 @@ class About extends React.Component {
 				{ isLoading ? (
 					<Loading />
 				) : (
-					<div id={ '#' + details.slug } >
+					<div id={ details.slug } >
 						<section id="about-1" className="flex-column">
 							<div dangerouslySetInnerHTML={ {__html: details.acf.om_oss } } />
 						</section>

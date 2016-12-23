@@ -21082,6 +21082,10 @@
 	
 	var _model2 = _interopRequireDefault(_model);
 	
+	var _scripts = __webpack_require__(279);
+	
+	var _scripts2 = _interopRequireDefault(_scripts);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -21102,6 +21106,7 @@
 	
 			var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 	
+			_this.handleScroll = _this.handleScroll.bind(_this);
 			_this.setActive = _this.setActive.bind(_this);
 			_this.toggleContactForm = _this.toggleContactForm.bind(_this);
 	
@@ -21116,7 +21121,8 @@
 				posts: {},
 				isLoading: true,
 				activeItem: null,
-				showContactForm: false
+				showContactForm: false,
+				scrollPosition: 0
 			};
 			return _this;
 		}
@@ -21141,7 +21147,31 @@
 						isLoading: false,
 						activeItem: data.activeItem
 					});
+					var header = document.getElementById('header-wrapper');
+					var services = document.getElementById('tjanster');
+					var contact = document.getElementById('kontakt');
+	
+					var topOfHeader = header.offsetTop;
+					var topOfServices = services.offsetTop;
+					console.log(topOfServices);
+					var topOfContact = contact.offsetTop;
+					console.log(window.scrollY);
+					if (window.scrollY >= 1805) {
+						console.log('remove class here');
+					}
+					!_this2.state.isLoading ? _scripts2.default.init() : null;
 				});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+	
+				window.addEventListener('scroll', this.handleScroll);
+			}
+		}, {
+			key: 'handleScroll',
+			value: function handleScroll() {
+				console.log(window.scrollY);
 			}
 		}, {
 			key: 'setActive',
@@ -22736,7 +22766,7 @@
 	
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ id: 'header-wrapper', className: 'flex-row' },
 					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
 						'div',
 						{ id: 'header', className: 'flex-row' },
@@ -22881,7 +22911,7 @@
 					blankSlate,
 					isLoading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
 						'div',
-						{ id: '#' + details.slug },
+						{ id: details.slug },
 						_react2.default.createElement(
 							'section',
 							{ id: 'about-1', className: 'flex-column' },
@@ -22990,7 +23020,7 @@
 					null,
 					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
 						'div',
-						{ id: '#' + page.slug },
+						{ id: page.slug },
 						_react2.default.createElement(
 							'nav',
 							{ id: 'service-menu', className: 'flex-row' },
@@ -23295,7 +23325,7 @@
 					null,
 					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
 						'div',
-						{ id: '#' + details.slug, className: 'flex-row' },
+						{ id: details.slug, className: 'flex-row' },
 						_react2.default.createElement(_LocationMap2.default, null),
 						_react2.default.createElement(
 							'section',
@@ -29653,6 +29683,52 @@
 	
 	module.exports = PooledClass;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
+
+/***/ },
+/* 279 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var scripts = {};
+	
+	scripts.init = function () {
+		var header = document.getElementById('header-wrapper');
+		var services = document.getElementById('tjanster');
+		var contact = document.getElementById('kontakt');
+	
+		var topOfHeader = header.offsetTop;
+		var topOfServices = services.offsetTop;
+		var topOfContact = contact.offsetTop;
+		if (window.scrollY >= topOfServices) {
+			console.log('remove class here');
+		}
+	
+		// scripts.fixedHeader();
+		window.addEventListener('scroll', console.log(window.scrollY));
+	};
+	
+	/**
+	 * @desc Targets different sections of the page to enable toggle of the header at the right places
+	 * 
+	 * 
+	 * */
+	
+	// scripts.fixedHeader = () => {
+	// 	if (window.scrollY >= topOfServices) {
+	// 		console.log('remove class here');
+	// 	}
+	// }
+	
+	
+	exports.default = scripts;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ])));

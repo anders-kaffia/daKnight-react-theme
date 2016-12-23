@@ -26,7 +26,7 @@ class Services extends React.Component {
 				{ loading ? (
 					<Loading />
 				) : (
-					<div id={ '#' + page.slug } >
+					<div id={ page.slug } >
 						<nav id="service-menu" className="flex-row">
 							<ul className="flex-row">
 								{ childPages.map((page) => (

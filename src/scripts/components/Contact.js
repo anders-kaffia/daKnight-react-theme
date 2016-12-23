@@ -15,7 +15,7 @@ class Contact extends React.Component {
 				{ loading ? (
 					<Loading />
 				) : (
-					<div id={ '#' + details.slug } className="flex-row">
+					<div id={ details.slug } className="flex-row">
 						<LocationMap />
 						<section id="contact-text">
 							<div dangerouslySetInnerHTML={ {__html: details.content.rendered} } />

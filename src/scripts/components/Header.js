@@ -9,21 +9,21 @@ class Header extends React.Component {
 		const { details, loading, logo } = this.props;
 
 		return (
-			<div >
-				{ loading ? (
+			<div id="header-wrapper" className="flex-row">
+				{loading ? (
 					<Loading />
 				) : (
-					<div id="header" className="flex-row">
-						<img src={ logo.source_url } alt="daKnight logo" id="dk-logo" />
-						<nav id="top-nav">
-							<ul>
-								{ details.map((page) => (
-									<a key={ page.id } href={ '#' + page.slug }><li key={ page.id }>{ page.title.rendered }</li></a>
-								))}
-							</ul>
-						</nav>
-					</div>
-				)}
+						<div id="header" className="flex-row">
+							<img src={logo.source_url} alt="daKnight logo" id="dk-logo" />
+							<nav id="top-nav">
+								<ul>
+									{details.map((page) => (
+										<a key={page.id} href={'#' + page.slug}><li key={page.id}>{page.title.rendered}</li></a>
+									))}
+								</ul>
+							</nav>
+						</div>
+					)}
 			</div>
 		)
 	}
