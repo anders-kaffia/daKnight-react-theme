@@ -21082,7 +21082,7 @@
 	
 	var _model2 = _interopRequireDefault(_model);
 	
-	var _scripts = __webpack_require__(279);
+	var _scripts = __webpack_require__(222);
 	
 	var _scripts2 = _interopRequireDefault(_scripts);
 	
@@ -21147,31 +21147,23 @@
 						isLoading: false,
 						activeItem: data.activeItem
 					});
-					var header = document.getElementById('header-wrapper');
-					var services = document.getElementById('tjanster');
-					var contact = document.getElementById('kontakt');
 	
-					var topOfHeader = header.offsetTop;
-					var topOfServices = services.offsetTop;
-					console.log(topOfServices);
-					var topOfContact = contact.offsetTop;
-					console.log(window.scrollY);
-					if (window.scrollY >= 1805) {
-						console.log('remove class here');
-					}
-					!_this2.state.isLoading ? _scripts2.default.init() : null;
+					window.addEventListener('scroll', _this2.handleScroll);
 				});
 			}
 		}, {
 			key: 'componentDidMount',
-			value: function componentDidMount() {
-	
-				window.addEventListener('scroll', this.handleScroll);
-			}
+			value: function componentDidMount() {}
 		}, {
 			key: 'handleScroll',
 			value: function handleScroll() {
-				console.log(window.scrollY);
+				var services = document.getElementById('tjanster');
+				var contact = document.getElementById('kontakt');
+				var topOfServices = services.offsetTop;
+				var topOfContact = contact.offsetTop;
+				window.scrollY >= topOfServices && window.scrollY <= topOfContact ? document.body.classList.remove('fixed-nav') : null;
+				window.scrollY >= topOfContact ? document.body.classList.add('fixed-nav') : null;
+				window.scrollY <= topOfServices ? document.body.classList.add('fixed-nav') : null;
 			}
 		}, {
 			key: 'setActive',
@@ -24650,7 +24642,53 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "model.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 222 */,
+/* 222 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	var scripts = {};
+	
+	scripts.init = function () {}
+	
+	// scripts.header = document.getElementById('header-wrapper');
+	// scripts.services = document.getElementById('tjanster');
+	// scripts.contact = document.getElementById('kontakt');
+	
+	// scripts.topOfHeader = header.offsetTop;
+	// scripts.topOfServices = services.offsetTop;
+	// scripts.topOfContact = contact.offsetTop;
+	// if (window.scrollY >= topOfServices) {
+	// 	console.log('remove class here');
+	// }
+	
+	// // scripts.fixedHeader();
+	// window.addEventListener('scroll', console.log(window.scrollY));
+	
+	
+	/**
+	 * @desc Targets different sections of the page to enable toggle of the header at the right places
+	 * 
+	 * 
+	 * */
+	
+	// scripts.fixedHeader = () => {
+	// 	if (window.scrollY >= topOfServices) {
+	// 		console.log('remove class here');
+	// 	}
+	// }
+	
+	
+	;exports.default = scripts;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
 /* 223 */
 /***/ function(module, exports, __webpack_require__) {
 
@@ -29683,52 +29721,6 @@
 	
 	module.exports = PooledClass;
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(3)))
-
-/***/ },
-/* 279 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	var scripts = {};
-	
-	scripts.init = function () {
-		var header = document.getElementById('header-wrapper');
-		var services = document.getElementById('tjanster');
-		var contact = document.getElementById('kontakt');
-	
-		var topOfHeader = header.offsetTop;
-		var topOfServices = services.offsetTop;
-		var topOfContact = contact.offsetTop;
-		if (window.scrollY >= topOfServices) {
-			console.log('remove class here');
-		}
-	
-		// scripts.fixedHeader();
-		window.addEventListener('scroll', console.log(window.scrollY));
-	};
-	
-	/**
-	 * @desc Targets different sections of the page to enable toggle of the header at the right places
-	 * 
-	 * 
-	 * */
-	
-	// scripts.fixedHeader = () => {
-	// 	if (window.scrollY >= topOfServices) {
-	// 		console.log('remove class here');
-	// 	}
-	// }
-	
-	
-	exports.default = scripts;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ }
 /******/ ])));

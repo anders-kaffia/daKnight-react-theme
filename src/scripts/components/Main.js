@@ -52,29 +52,24 @@ class Main extends React.Component {
 					isLoading: false,
 					activeItem: data.activeItem
 				});
-				const header = document.getElementById('header-wrapper');
-				const services = document.getElementById('tjanster');
-				const contact = document.getElementById('kontakt');
-
-				const topOfHeader = header.offsetTop;
-				const topOfServices = services.offsetTop;
-				console.log(topOfServices);
-				const topOfContact = contact.offsetTop;
-				console.log(window.scrollY);
-				if (window.scrollY >= 1805) {
-					console.log('remove class here');
-				}
-				!this.state.isLoading ? scripts.init() : null;
+				
+				window.addEventListener('scroll', this.handleScroll);
 			});
 	}
 
 	componentDidMount() {
 
-		window.addEventListener('scroll', this.handleScroll);
+
 	}
 
 	handleScroll() {
-		console.log(window.scrollY);
+		const services = document.getElementById('tjanster');
+		const contact = document.getElementById('kontakt');
+		const topOfServices = services.offsetTop;
+		const topOfContact = contact.offsetTop;
+		window.scrollY >= topOfServices && window.scrollY <= topOfContact ? document.body.classList.remove('fixed-nav') : null;
+		window.scrollY >= topOfContact ? document.body.classList.add('fixed-nav') : null;
+		window.scrollY <= topOfServices ? document.body.classList.add('fixed-nav') : null;
 	}
 
 	setActive(itemId) {

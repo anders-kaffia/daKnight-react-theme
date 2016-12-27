@@ -906,11 +906,14 @@ body {
   .services-content #service-text > div {
     padding: 6% 4%; }
 
+#kontakt {
+  height: 100vh; }
+
 #map-container {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
-  height: 80vh; }
+  height: 100%; }
 
 #map {
   width: 100%;
