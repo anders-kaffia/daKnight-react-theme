@@ -26,8 +26,11 @@ class Services extends React.Component {
 				{ loading ? (
 					<Loading />
 				) : (
-					<div id={ page.slug } >
+					<div id={ page.slug } className="flex-column">
 						<nav id="service-menu" className="flex-row">
+							<div className="hamburger-menu">
+								<div className="bar"></div>
+							</div>
 							<ul className="flex-row">
 								{ childPages.map((page) => (
 									<ServiceMenuItem key={ page.id } index={ page.id } page={ page } activeItem={ this.props.activeItem } setActive={ this.props.setActive.bind(null, page.id) } />

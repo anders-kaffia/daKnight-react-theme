@@ -6,10 +6,10 @@ import Loading from './Loading';
 class Header extends React.Component {
 	render() {
 		// Props
-		const { details, loading, logo } = this.props;
+		const { details, loading, logo, id } = this.props;
 
 		return (
-			<div id="header-wrapper" className="flex-row">
+			<div id={id}  className="flex-row">
 				{loading ? (
 					<Loading />
 				) : (

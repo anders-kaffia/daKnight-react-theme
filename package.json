@@ -21,6 +21,7 @@
     "pigeon-marker": "^0.2.2",
     "react": "^15.4.1",
     "react-dom": "^15.4.1",
+    "react-media": "^1.4.0",
     "redux-logger": "^2.7.4"
   },
   "devDependencies": {

@@ -12,11 +12,11 @@
   }
  
   @else if $class == sm {
-    @media (min-width: 768px) { @content; }
+	@media (min-width: 768px) and (max-width: 991px) { @content; }
   }
  
   @else if $class == md {
-    @media (min-width: 992px) { @content; }
+	@media (min-width: 992px) and (max-width: 1199px) { @content; }
   }
  
   @else if $class == lg {
@@ -81,24 +81,28 @@
       color: $color;
 	  font-family: $font-family;
 	  font-size: $font-size;
+	  font-weight: 600;
 	  padding: 1%;
   }
   &:-moz-placeholder { 
       color: $color;
 	  font-family: $font-family;
 	  font-size: $font-size;
+	  font-weight: 600;
 	  padding: 1%;
   }
   &::-moz-placeholder { 
       color: $color;
 	  font-family: $font-family;
 	  font-size: $font-size;
+	  font-weight: 600;
 	  padding: 1%;
   }
   &:-ms-input-placeholder { 
       color: $color;
 	  font-family: $font-family;
 	  font-size: $font-size;
+	  font-weight: 600;
 	  padding: 1%;
   }
 }

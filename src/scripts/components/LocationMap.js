@@ -1,5 +1,6 @@
 import React from 'react';
 import Map from 'pigeon-maps';
+import Media from 'react-media';
 
 class LocationMap extends React.Component {
 	render() {
@@ -13,16 +14,19 @@ class LocationMap extends React.Component {
 
 		const mapboxProvider = mapbox('citmr9xdx004h2hp2svgnxq30', MAPBOX_ACCESS_TOKEN);
 
+		const { width, height } = this.props;
+
 		return (
 			<div id="map-container" >
 				<div id="map" className="flex-row">
-					<Map
-						center={[59.335561, 18.049955]}
-						width={800}
-						height={800}
-						zoom={14}
-						provider={mapboxProvider}
-						/>
+					<div className="disableScroll" />
+						<Map
+							center={[59.335561, 18.049955]}
+							width={width}
+							height={ height < 666 ? height * .36 : height * .8}
+							zoom={14}
+							provider={mapboxProvider}
+							/>
 				</div>
 			</div>
 		)

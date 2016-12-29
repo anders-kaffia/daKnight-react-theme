@@ -28,6 +28,10 @@ body {
 	@include main-spacing(padding);
 }
 
+.no-padd {
+	padding: 0 !important;
+}
+
 
 /* 
 *				Flex Box

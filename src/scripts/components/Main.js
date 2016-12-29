@@ -7,8 +7,9 @@ import Header from './Header';
 import About from './About';
 import Services from './Services';
 import Contact from './Contact';
+import Footer from './Footer';
+
 import model from '../model';
-import scripts from '../scripts';
 
 class Main extends React.Component {
 
@@ -16,6 +17,8 @@ class Main extends React.Component {
 		super();
 
 		this.handleScroll = this.handleScroll.bind(this);
+		this.mediaQuery = this.mediaQuery.bind(this);
+		this.toggleServicesMenu = this.toggleServicesMenu.bind(this);
 		this.setActive = this.setActive.bind(this);
 		this.toggleContactForm = this.toggleContactForm.bind(this);
 
@@ -31,7 +34,9 @@ class Main extends React.Component {
 			isLoading: true,
 			activeItem: null,
 			showContactForm: false,
-			scrollPosition: 0
+			scrollPosition: 0,
+			width: 600,
+			height: 400
 		};
 	}
 
@@ -44,6 +49,7 @@ class Main extends React.Component {
 					about: data.about,
 					contact: data.contact,
 					services: data.services,
+					footer: data.footer,
 					allPageTitles: data.allPageTitles,
 					mainPageTitles: data.mainPageTitles,
 					serviceChildPages: data.serviceChildPages,
@@ -52,24 +58,51 @@ class Main extends React.Component {
 					isLoading: false,
 					activeItem: data.activeItem
 				});
-				
+
+				const header = document.getElementById('header-wrapper');
+
+				document.body.style.paddingTop = header.offsetHeight + 'px'
 				window.addEventListener('scroll', this.handleScroll);
+
+				this.toggleServicesMenu();
 			});
 	}
 
 	componentDidMount() {
-
-
+		this.mediaQuery();
+		window.addEventListener('resize', this.mediaQuery)
 	}
 
 	handleScroll() {
 		const services = document.getElementById('tjanster');
-		const contact = document.getElementById('kontakt');
+		const header = document.getElementById('header-wrapper');
+		const headerHeight = header.offsetHeight;
 		const topOfServices = services.offsetTop;
-		const topOfContact = contact.offsetTop;
-		window.scrollY >= topOfServices && window.scrollY <= topOfContact ? document.body.classList.remove('fixed-nav') : null;
-		window.scrollY >= topOfContact ? document.body.classList.add('fixed-nav') : null;
-		window.scrollY <= topOfServices ? document.body.classList.add('fixed-nav') : null;
+		const absPosition = 'position: absolute; top: ' + (topOfServices - (headerHeight / 2) - 32) + 'px';
+
+		window.scrollY >= (topOfServices - (headerHeight / 2) - 32) ? header.style.cssText += absPosition : null;
+		window.scrollY <= (topOfServices - (headerHeight / 2) - 32) ? header.style.cssText = window.getComputedStyle(header,null) - absPosition : null;
+	}
+
+	mediaQuery() {
+		let updateWidth = window.innerWidth;
+		let updateHeight = window.innerHeight;
+
+		this.setState({
+			width: updateWidth,
+			height: updateHeight
+		});
+	}
+
+	toggleServicesMenu() {
+		const burgerBtn = document.querySelector('.hamburger-menu');
+		const bar = document.querySelector('.bar');
+		const nav = document.getElementById('service-menu');
+
+		burgerBtn.addEventListener('click', () => {
+			bar.classList.toggle('animate');
+			nav.classList.toggle('service-menu-open');
+		})
 	}
 
 	setActive(itemId) {
@@ -78,6 +111,9 @@ class Main extends React.Component {
 
 	toggleContactForm() {
 		this.setState({ showContactForm: !this.state.showContactForm });
+
+		const mainWrap = document.getElementById('main-wrapper');
+		mainWrap.classList.toggle('no-padd');
 	}
 
 	render() {
@@ -88,6 +124,7 @@ class Main extends React.Component {
 					loading={this.state.isLoading}
 					details={this.state.mainPageTitles}
 					logo={this.state.logo}
+					id="header-wrapper"
 					/>
 				<About
 					loading={this.state.isLoading}
@@ -105,6 +142,15 @@ class Main extends React.Component {
 					details={this.state.contact}
 					showForm={this.state.showContactForm}
 					toggleForm={this.toggleContactForm}
+					footer={this.state.footer}
+					menu={this.state.mainPageTitles}
+					width={this.state.width}
+					height={this.state.height}
+					/>
+				<Footer
+					loading={this.state.isLoading}
+					details={this.state.footer}
+					menu={this.state.mainPageTitles}
 					/>
 			</div>
 		)

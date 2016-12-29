@@ -1,0 +1,22 @@
+/* 
+*				Footer Styling
+========================================================================== */
+
+#footer {
+	background: $color-2;
+	color: $color-darkgrey;
+	padding: 3%;
+	@include main-spacing(margin-top);
+}
+#footer-nav {
+	align-self: center;
+	text-align: center;
+	a {
+		display: inline-block;
+		margin: 0 1em 1em;
+		text-decoration: none;
+		font-family: 'Rozha One', serif;
+		font-size: 1.3em;
+		color: $color-darkgrey;
+	}
+}
