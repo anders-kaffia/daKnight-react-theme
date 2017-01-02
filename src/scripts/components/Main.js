@@ -1,9 +1,11 @@
 // Libs
 import React from 'react';
+import ReactCSSTransisionGroup from 'react-addons-css-transition-group';
 import axios from 'axios';
 
 // Components
 import Header from './Header';
+import BlankSlate from './BlankSlate';
 import About from './About';
 import Services from './Services';
 import Contact from './Contact';
@@ -18,11 +20,12 @@ class Main extends React.Component {
 
 		this.handleScroll = this.handleScroll.bind(this);
 		this.mediaQuery = this.mediaQuery.bind(this);
-		this.toggleServicesMenu = this.toggleServicesMenu.bind(this);
 		this.setActive = this.setActive.bind(this);
+		this.burgerMenu = this.burgerMenu.bind(this);
 		this.toggleContactForm = this.toggleContactForm.bind(this);
 
 		this.state = {
+			renderBlankSlate: true,
 			pages: {},
 			about: {},
 			contact: {},
@@ -33,11 +36,16 @@ class Main extends React.Component {
 			posts: {},
 			isLoading: true,
 			activeItem: null,
+			burgerMenuActive: false,
 			showContactForm: false,
 			scrollPosition: 0,
 			width: 600,
 			height: 400
 		};
+
+		this.interval = null;
+		this.interval2 = null;
+
 	}
 
 	componentWillMount() {
@@ -61,16 +69,17 @@ class Main extends React.Component {
 
 				const header = document.getElementById('header-wrapper');
 
-				document.body.style.paddingTop = header.offsetHeight + 'px'
+				document.body.style.paddingTop = header.offsetHeight + 'px';
 				window.addEventListener('scroll', this.handleScroll);
-
-				this.toggleServicesMenu();
 			});
 	}
 
 	componentDidMount() {
+
 		this.mediaQuery();
-		window.addEventListener('resize', this.mediaQuery)
+		window.addEventListener('resize', this.mediaQuery);
+
+		this.interval = setTimeout(() => this.setState({renderBlankSlate: false}), 10000);
 	}
 
 	handleScroll() {
@@ -94,19 +103,13 @@ class Main extends React.Component {
 		});
 	}
 
-	toggleServicesMenu() {
-		const burgerBtn = document.querySelector('.hamburger-menu');
-		const bar = document.querySelector('.bar');
-		const nav = document.getElementById('service-menu');
-
-		burgerBtn.addEventListener('click', () => {
-			bar.classList.toggle('animate');
-			nav.classList.toggle('service-menu-open');
-		})
-	}
-
 	setActive(itemId) {
 		this.setState({ activeItem: itemId });
+	}
+
+	burgerMenu() {
+		let action = !this.state.burgerMenuActive;
+		this.setState({ burgerMenuActive: action });
 	}
 
 	toggleContactForm() {
@@ -126,6 +129,16 @@ class Main extends React.Component {
 					logo={this.state.logo}
 					id="header-wrapper"
 					/>
+				<ReactCSSTransisionGroup 
+					component="div"
+					transitionName="slide"
+					transitionEnterTimeout={ 500 } 
+					transitionAppear={ true }
+					transitionAppearTimeout={ 500 }
+					transitionLeaveTimeout={ 500 }
+				>
+				{ this.state.renderBlankSlate ? <BlankSlate /> : null }
+				</ReactCSSTransisionGroup>
 				<About
 					loading={this.state.isLoading}
 					details={this.state.about}
@@ -136,6 +149,9 @@ class Main extends React.Component {
 					page={this.state.services}
 					activeItem={this.state.activeItem}
 					setActive={this.setActive}
+					burgerMenu={this.burgerMenu}
+					burgerMenuActive={this.state.burgerMenuActive}
+					width={this.state.width}
 					/>
 				<Contact
 					loading={this.state.isLoading}

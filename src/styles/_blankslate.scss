@@ -1,0 +1,27 @@
+/* 
+*				Blank Slate Section Styling
+========================================================================== */
+
+/*
+*			React CSSTransitionGroup Classes
+----------------------------------------------------------------*/
+
+// .slide-appear {
+// 	transform: translateX(110%);
+// 	height: 0;
+// 	opacity: 0;
+// }
+// .slide-appear.slide-appear-active {
+// 	transform: translateX(0);
+// 	height: 100%;
+// 	opacity: 1;
+// 	transition: all 50s ease-in;
+// }
+
+.slide-leave {
+	transform: translateX(0);
+}
+.slide-leave.slide-leave-active {
+	transform: translateX(110%);
+	transition: .5s ease-in;
+}

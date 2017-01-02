@@ -8,23 +8,11 @@ class About extends React.Component {
 
 	render() {
 		// Props
-		const details = this.props.details;
-		const isLoading = this.props.loading;
-
-		// "Blank slate"
-		const blankSlate = 
-				<section id="blank-slate" className="flex-row">
-					<div id="blank-slate1"></div>
-					<div id="blank-slate-inside-wrapper" className="flex-column">
-						<div id="blank-slate2"></div>
-						<div id="blank-slate3"></div>
-					</div>
-				</section>;
+		const { details, loading } = this.props.details;
 
 		return (
 			<div className="flex-column">
-				{ blankSlate }
-				{ isLoading ? (
+				{ loading ? (
 					<Loading />
 				) : (
 					<div id={ details.slug } >

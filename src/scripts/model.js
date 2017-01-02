@@ -12,7 +12,6 @@ model.getContent = (type) =>
 	axios.get(`/wp-json/wp/v2/${type}/?per_page=50`
 	);
 
-
 /**
  * @desc Get all content from WP REST API
  *
@@ -37,71 +36,5 @@ model.apiCall = {
 			};
 		})
 }
-
-
-// /**
-//  * @desc Get a single page based on url slug
-//  *
-//  * @param {string} slug The slug for the page
-//  * @return {Object} page  Single page object
-//  */
-// model.getPage = function (slug) {
-
-// 	const pages = model.getPages();
-
-// 	// Get the page from store based on the slug
-// 	for (let i = 0, max = pages.length; i < max; i++) {
-// 		if (slug === pages[i].slug) {
-// 			return pages[i];
-// 		}
-// 	}
-// 	return null;
-// }
-
-
-// /**
-//  * @desc Checks if local store is supported
-//  *
-//  * @return {Boolean} Boolean value for if local store is supported
-//  */
-// model.localStoreIsSupported = function () {
-
-// 	const store = model.getLocalStore();
-
-// 	if (window.localStorage.length === 0 ||
-// 		'localStorage' in window && window['localStorage'] === null ||
-// 		model.getLocalStore === null) {
-// 		console.log('Local Storage is not supported!');
-// 		return false;
-// 	} else {
-// 		console.log('Local Storage is supported');
-// 		return true;
-// 	}
-
-// }
-
-// /**
-//  * @desc Gets content from local store
-//  * 
-//  * @param {string} type of content, pages or posts
-//  * @return {Object} store Native JavaScript object from local store
-//  */
-// model.getLocalStore = function (type) {
-
-// 	const store = JSON.parse(localStorage.getItem(type + '-daknight'));
-// 	return store;
-
-// }
-
-// /**
-//  * @desc Saves temporary store to local storage.
-//  *
-//  * @param {Object} store Native JavaScript object with site data
-//  */
-// model.updateLocalStore = function (store) {
-
-// 	localStorage.setItem('daknight', JSON.stringify(store));
-
-// }
 
 export default model;

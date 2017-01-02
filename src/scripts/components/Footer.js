@@ -10,11 +10,11 @@ class Footer extends React.Component {
 		const { details, loading, menu } = this.props;
 
 		return (
-			<div  id="footer">
+			<div className="flex-column">
 			{ loading ? (
 				<Loading />
 			) : (
-				<div>
+				<div  id="footer">
 					<nav id="footer-nav">
 						<ul>
 							{menu.map((page) => (
@@ -27,7 +27,6 @@ class Footer extends React.Component {
 				)}
 			</div>
 		)
-
 	}
 }
 
