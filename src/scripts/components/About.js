@@ -5,7 +5,7 @@ class About extends React.Component {
 
 	render() {
 		// Props
-		const { details, loading } = this.props;
+		const { details, loading, arrow } = this.props;
 
 		return (
 			<div className="flex-column">
@@ -14,6 +14,9 @@ class About extends React.Component {
 				) : (
 					<div id={ details.slug } >
 						<section id="about-1" className="flex-column">
+							<div id="arrow">
+								<img src={ arrow.source_url } alt="Down pointing arrow"/>
+							</div>
 							<div dangerouslySetInnerHTML={ {__html: details.acf.om_oss } } />
 						</section>
 						<section id="about-2" className="flex-column">

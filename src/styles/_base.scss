@@ -2,11 +2,7 @@
 *				General Styling
 ========================================================================== */
 
-// div {
-// 	border: 1px solid deeppink;
-// }
-
-*, html, body {
+*, html, body, div, section {
 		box-sizing: border-box;
 }
 
@@ -17,9 +13,22 @@ html {
 body {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
+	a {
+		color: $color-black;
+	}
 	h1, h2, h3, h4, h5, h6 {
 		font-family: $heading-font;
 		color: $color-darkgrey;
+	}
+	h1 {
+		@include breakpoint(xs) {
+			font-size: 1.6em;
+			// font-size: 2.7vh;
+		}
+		@include breakpoint(lg) {
+			font-size: 2em;
+			font-size: 3vh;
+		}
 	}
 	p {
 		font-family: $main-font;
@@ -34,13 +43,13 @@ body {
 @include placeholder-align(center);
 
 #main-wrapper {
-	@include main-spacing(padding);
+	padding: $largeSpacing;
+	padding-top: 0;
 }
 
 .no-padd {
 	padding: 0 !important;
 }
-
 
 /* 
 *				Flex Box
@@ -53,74 +62,6 @@ body {
 .flex-column {
 	display: flex;
 	flex-direction: column;
-}
-
-/* 
-*				Loading animation
-========================================================================== */
-.loading {
-	position: fixed;
-	left: 0;
-	top: 0;
-	height: 100%;
-	height: 100vh;
-	width: 100%;
-	width: 100vw;
-	z-index: 9999;
-	background: $color-white;
-	justify-content: center;
-	align-items: center;
-	h2 {
-		margin-bottom: 4em;
-	}
-	.loading-span-container {
-		position: absolute;
-		top: 50%;
-		span {
-			width: 3em;
-			height: 3em;
-			border-radius: 50%;
-			display: inline-block;
-			position: absolute;
-			left: 50%;
-			margin-left: -1em;
-			animation: 3s infinite linear;
-			&:nth-child(1) {
-				background: $color-2;
-				animation: left 1s infinite linear;
-				}
-			&:nth-child(2) {
-				background: $color-1;
-				z-index: 100;
-			}
-			&:nth-child(3) {
-				background: $color-3;
-				animation: right 1s infinite linear;
-			}
-		}
-	}
-}
-
-@keyframes right {
-    0% {transform:translateX(3em);
-    }
-   
-	50%{transform:translateX(-3em);
-	}
-	
-	100%{transform:translateX(3em);
-	z-index:200;
-	}
-}
-
-@keyframes left {
-     0% {transform:translateX(-3em);
-	z-index:200;
-    }
-	50%{transform:translateX(3em);
-	}
-	100%{transform:translateX(-3em);
-	}
 }
 
 /* 

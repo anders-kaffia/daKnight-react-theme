@@ -1,5 +1,4 @@
 import React from 'react';
-import ReactCSSTransisionGroup from 'react-addons-css-transition-group';
 
 class BlankSlate extends React.Component {
 

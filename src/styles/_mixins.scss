@@ -56,7 +56,7 @@
 
 @mixin mq-size($property, $default, $unit) {
   	@include breakpoint(xs) { 
-		#{$property}: #{($default * .7)}$unit;
+		#{$property}: #{($default * .6)}$unit;
 	 }
  
   	@include breakpoint(sm) {

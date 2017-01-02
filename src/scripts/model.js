@@ -15,7 +15,7 @@ model.getContent = (type) =>
 /**
  * @desc Get all content from WP REST API
  *
- * @param {string, string} two types of content, posts and pages
+ * @param {string, string, string} three types of content (pages, posts, media)
  */
 model.apiCall = {
 	getAllContent: (type1, type2, type3) => axios.all([model.getContent(type1), model.getContent(type2), model.getContent(type3)])
@@ -23,6 +23,7 @@ model.apiCall = {
 			return {
 				pages: arr[0].data,
 				logo: arr[2].data.filter(page => page.title.rendered === 'DKN_Logotyp')[0],
+				arrow: arr[2].data.filter(page => page.slug === 'arrow')[0],
 				about: arr[0].data.filter(page => page.slug === 'om-oss')[0],
 				services: arr[0].data.filter(page => page.slug === 'tjanster')[0],
 				contact: arr[0].data.filter(page => page.slug === 'kontakt')[0],

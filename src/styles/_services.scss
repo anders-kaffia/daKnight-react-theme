@@ -3,8 +3,8 @@
 ========================================================================== */
 
 #tjanster {
-	height: 100vh;
-	@include main-spacing(margin-bottom);
+	min-height: 98vh;
+	margin-bottom: $largeSpacing;
 }
 
 #service-menu {
@@ -21,6 +21,8 @@
 	}
 	ul {
 		max-width: 100%;
+		margin-top: 0;
+		@include main-spacing(margin-bottom);
 		flex: 1;
 		flex-wrap: wrap;
 		justify-content: space-around;
@@ -141,12 +143,6 @@
 		background: $color-1;
 		color: $color-darkgrey;
 		justify-content: center;
-		@include breakpoint(xs) { 
-			@include main-spacing(margin-bottom);
-		}
-		@include breakpoint(sm) {
-			@include main-spacing(margin-bottom);
-		}
 		@include breakpoint(md) {
 			@include main-spacing(margin-left);
 		}
@@ -169,7 +165,8 @@ $bar-spacing: 1.2em;
 #service-burger-container {
 	position: relative;
 	flex: 1;
-    max-height: 5em;
+    min-height: 5em;
+	max-height: 2em;
 	background: $color-2;
 	@include main-spacing(margin-bottom);
 	@include breakpoint(sm) { 
@@ -184,7 +181,6 @@ $bar-spacing: 1.2em;
 	.hamburger-menu {
 		position: absolute;
 		top: 0;
-		left: 0;
 		right: 0;
 		bottom: 0;
 		margin: 1em;

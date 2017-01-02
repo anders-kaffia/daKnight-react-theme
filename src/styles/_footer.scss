@@ -6,11 +6,15 @@
 	background: $color-2;
 	color: $color-darkgrey;
 	padding: 3%;
-	@include main-spacing(margin-top);
+	padding-top: 0;
 }
 #footer-nav {
 	align-self: center;
 	text-align: center;
+	ul {
+		padding: 0;
+		margin-bottom: 0;
+	}
 	a {
 		display: inline-block;
 		margin: 0 1em 1em;

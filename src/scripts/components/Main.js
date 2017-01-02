@@ -55,6 +55,7 @@ class Main extends React.Component {
 				this.setState({
 					pages: data.pages,
 					logo: data.logo,
+					arrow: data.arrow,
 					about: data.about,
 					contact: data.contact,
 					services: data.services,
@@ -80,7 +81,7 @@ class Main extends React.Component {
 		this.mediaQuery();
 		window.addEventListener('resize', this.mediaQuery);
 
-		this.interval = setTimeout(() => this.setState({renderBlankSlate: false}), 10000);
+		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 4500);
 	}
 
 	handleScroll() {
@@ -88,10 +89,10 @@ class Main extends React.Component {
 		const header = document.getElementById('header-wrapper');
 		const headerHeight = header.offsetHeight;
 		const topOfServices = services.offsetTop;
-		const absPosition = 'position: absolute; top: ' + (topOfServices - (headerHeight / 2) - 32) + 'px';
+		const absPosition = 'position: absolute; top: ' + (topOfServices - headerHeight) + 'px';
 
-		window.scrollY >= (topOfServices - (headerHeight / 2) - 32) ? header.style.cssText += absPosition : null;
-		window.scrollY <= (topOfServices - (headerHeight / 2) - 32) ? header.style.cssText = window.getComputedStyle(header,null) - absPosition : null;
+		window.scrollY >= (topOfServices - headerHeight) ? header.style.cssText += absPosition : null;
+		window.scrollY <= (topOfServices - headerHeight) ? header.style.cssText = window.getComputedStyle(header, null) - absPosition : null;
 	}
 
 	mediaQuery() {
@@ -124,57 +125,57 @@ class Main extends React.Component {
 
 		return (
 			<div>
-				{ this.state.isLoading ? (
+				{this.state.isLoading ? (
 					<Loading />
 				) : (
-					<div id="main-wrapper" className="flex-column">
-						<Header
-							loading={this.state.isLoading}
-							details={this.state.mainPageTitles}
-							logo={this.state.logo}
-							id="header-wrapper"
-							/>
-						<ReactCSSTransisionGroup 
-							component="div"
-							transitionName="slide"
-							transitionEnterTimeout={ 500 } 
-							transitionAppear={ true }
-							transitionAppearTimeout={ 500 }
-							transitionLeaveTimeout={ 500 }
-						>
-						{ this.state.renderBlankSlate ? <BlankSlate /> : null }
-						</ReactCSSTransisionGroup>
-						<About
-							loading={this.state.isLoading}
-							details={this.state.about}
-							/>
-						<Services
-							loading={this.state.isLoading}
-							childPages={this.state.serviceChildPages}
-							page={this.state.services}
-							activeItem={this.state.activeItem}
-							setActive={this.setActive}
-							burgerMenu={this.burgerMenu}
-							burgerMenuActive={this.state.burgerMenuActive}
-							width={this.state.width}
-							/>
-						<Contact
-							loading={this.state.isLoading}
-							details={this.state.contact}
-							showForm={this.state.showContactForm}
-							toggleForm={this.toggleContactForm}
-							footer={this.state.footer}
-							menu={this.state.mainPageTitles}
-							width={this.state.width}
-							height={this.state.height}
-							/>
-						<Footer
-							loading={this.state.isLoading}
-							details={this.state.footer}
-							menu={this.state.mainPageTitles}
-							/>
-					</div>
-				)}
+						<div id="main-wrapper" className="flex-column">
+							<Header
+								loading={this.state.isLoading}
+								details={this.state.mainPageTitles}
+								logo={this.state.logo}
+								id="header-wrapper"
+								/>
+							<ReactCSSTransisionGroup
+								component="div"
+								className="blank-slate-container"
+								transitionName="slide"
+								transitionEnterTimeout={500}
+								transitionLeaveTimeout={800}
+								>
+								{this.state.renderBlankSlate ? <BlankSlate /> : null}
+							</ReactCSSTransisionGroup>
+							<About
+								loading={this.state.isLoading}
+								arrow={this.state.arrow}
+								details={this.state.about}
+								/>
+							<Services
+								loading={this.state.isLoading}
+								childPages={this.state.serviceChildPages}
+								page={this.state.services}
+								activeItem={this.state.activeItem}
+								setActive={this.setActive}
+								burgerMenu={this.burgerMenu}
+								burgerMenuActive={this.state.burgerMenuActive}
+								width={this.state.width}
+								/>
+							<Contact
+								loading={this.state.isLoading}
+								details={this.state.contact}
+								showForm={this.state.showContactForm}
+								toggleForm={this.toggleContactForm}
+								footer={this.state.footer}
+								menu={this.state.mainPageTitles}
+								width={this.state.width}
+								height={this.state.height}
+								/>
+							<Footer
+								loading={this.state.isLoading}
+								details={this.state.footer}
+								menu={this.state.mainPageTitles}
+								/>
+						</div>
+					)}
 			</div>
 		)
 	}

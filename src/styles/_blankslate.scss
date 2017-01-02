@@ -2,26 +2,46 @@
 *				Blank Slate Section Styling
 ========================================================================== */
 
+.blank-slate-container {
+	perspective: 1000px;
+	perspective-origin: bottom;
+}
+
+#blank-slate {
+	height: 81.5vh;
+	flex-wrap: wrap;
+	margin-bottom: $largeSpacing;
+	#blank-slate1 {
+		background: $color-1;
+		flex: 1;
+		height: 100%;
+		@include main-spacing(margin-right);
+	}
+	#blank-slate-inside-wrapper {
+		flex: 1;
+		height: 100%;
+		#blank-slate2 {
+			background: $color-2;
+			height: 35%;
+			@include main-spacing(margin-bottom);
+		}
+		#blank-slate3 {
+			background: $color-3;
+			height: 65%;
+		}
+	}
+}
+
 /*
 *			React CSSTransitionGroup Classes
 ----------------------------------------------------------------*/
 
-// .slide-appear {
-// 	transform: translateX(110%);
-// 	height: 0;
-// 	opacity: 0;
-// }
-// .slide-appear.slide-appear-active {
-// 	transform: translateX(0);
-// 	height: 100%;
-// 	opacity: 1;
-// 	transition: all 50s ease-in;
-// }
-
 .slide-leave {
-	transform: translateX(0);
+	opacity: 1;
 }
 .slide-leave.slide-leave-active {
-	transform: translateX(110%);
-	transition: .5s ease-in;
+	transform: rotateX(88deg);
+	transform-origin: bottom;
+	opacity: 0.5;
+	transition: .8s cubic-bezier(.7,0,.9,1);
 }

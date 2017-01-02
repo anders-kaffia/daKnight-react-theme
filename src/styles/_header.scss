@@ -18,7 +18,9 @@
 #header {
 	flex: 1;
 	justify-content: space-between;
-	@include main-spacing(padding);
+	padding: $largeSpacing;
+	padding-bottom: 0;
+	@include main-spacing(margin-bottom);
 }
 
 #top-nav {
