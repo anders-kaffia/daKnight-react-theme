@@ -9,10 +9,11 @@ class Header extends React.Component {
 		const { details, loading, logo, id } = this.props;
 
 		return (
-			<div id={id}  className="flex-row">
-				{loading ? (
-					<Loading />
+			<div>
+				{ loading ? (
+					null
 				) : (
+					<div id={ id }  className="flex-row">
 						<div id="header" className="flex-row">
 							<img src={logo.source_url} alt="daKnight logo" id="dk-logo" />
 							<nav id="top-nav">
@@ -23,6 +24,7 @@ class Header extends React.Component {
 								</ul>
 							</nav>
 						</div>
+					</div>
 					)}
 			</div>
 		)

@@ -43,13 +43,13 @@
 }
 
 #about-1 {
-	background: $color-1;
+	background: $color-2;
 	h2 {
 		@include mq-size(font-size, 3, em);
 	}
 }
 #about-2 {
-	background: $color-2;
+	background: $color-1;
 	h2 {
 		@include mq-size(font-size, 2.5, em);
 	}

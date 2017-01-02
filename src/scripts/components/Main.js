@@ -4,6 +4,7 @@ import ReactCSSTransisionGroup from 'react-addons-css-transition-group';
 import axios from 'axios';
 
 // Components
+import Loading from './Loading';
 import Header from './Header';
 import BlankSlate from './BlankSlate';
 import About from './About';
@@ -122,52 +123,58 @@ class Main extends React.Component {
 	render() {
 
 		return (
-			<div id="main-wrapper" className="flex-column">
-				<Header
-					loading={this.state.isLoading}
-					details={this.state.mainPageTitles}
-					logo={this.state.logo}
-					id="header-wrapper"
-					/>
-				<ReactCSSTransisionGroup 
-					component="div"
-					transitionName="slide"
-					transitionEnterTimeout={ 500 } 
-					transitionAppear={ true }
-					transitionAppearTimeout={ 500 }
-					transitionLeaveTimeout={ 500 }
-				>
-				{ this.state.renderBlankSlate ? <BlankSlate /> : null }
-				</ReactCSSTransisionGroup>
-				<About
-					loading={this.state.isLoading}
-					details={this.state.about}
-					/>
-				<Services
-					loading={this.state.isLoading}
-					childPages={this.state.serviceChildPages}
-					page={this.state.services}
-					activeItem={this.state.activeItem}
-					setActive={this.setActive}
-					burgerMenu={this.burgerMenu}
-					burgerMenuActive={this.state.burgerMenuActive}
-					width={this.state.width}
-					/>
-				<Contact
-					loading={this.state.isLoading}
-					details={this.state.contact}
-					showForm={this.state.showContactForm}
-					toggleForm={this.toggleContactForm}
-					footer={this.state.footer}
-					menu={this.state.mainPageTitles}
-					width={this.state.width}
-					height={this.state.height}
-					/>
-				<Footer
-					loading={this.state.isLoading}
-					details={this.state.footer}
-					menu={this.state.mainPageTitles}
-					/>
+			<div>
+				{ this.state.isLoading ? (
+					<Loading />
+				) : (
+					<div id="main-wrapper" className="flex-column">
+						<Header
+							loading={this.state.isLoading}
+							details={this.state.mainPageTitles}
+							logo={this.state.logo}
+							id="header-wrapper"
+							/>
+						<ReactCSSTransisionGroup 
+							component="div"
+							transitionName="slide"
+							transitionEnterTimeout={ 500 } 
+							transitionAppear={ true }
+							transitionAppearTimeout={ 500 }
+							transitionLeaveTimeout={ 500 }
+						>
+						{ this.state.renderBlankSlate ? <BlankSlate /> : null }
+						</ReactCSSTransisionGroup>
+						<About
+							loading={this.state.isLoading}
+							details={this.state.about}
+							/>
+						<Services
+							loading={this.state.isLoading}
+							childPages={this.state.serviceChildPages}
+							page={this.state.services}
+							activeItem={this.state.activeItem}
+							setActive={this.setActive}
+							burgerMenu={this.burgerMenu}
+							burgerMenuActive={this.state.burgerMenuActive}
+							width={this.state.width}
+							/>
+						<Contact
+							loading={this.state.isLoading}
+							details={this.state.contact}
+							showForm={this.state.showContactForm}
+							toggleForm={this.toggleContactForm}
+							footer={this.state.footer}
+							menu={this.state.mainPageTitles}
+							width={this.state.width}
+							height={this.state.height}
+							/>
+						<Footer
+							loading={this.state.isLoading}
+							details={this.state.footer}
+							menu={this.state.mainPageTitles}
+							/>
+					</div>
+				)}
 			</div>
 		)
 	}

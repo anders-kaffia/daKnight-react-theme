@@ -1,7 +1,6 @@
 import React from 'react';
 
 // Components
-import Loading from './Loading';
 import Header from './Header';
 import LocationMap from './LocationMap';
 import ContactForm from './ContactForm';
@@ -14,7 +13,7 @@ class Contact extends React.Component {
 		return (
 			<div className="pigeon-drag-block pigeon-click-block">
 				{ loading ? (
-					<Loading />
+					null
 				) : (
 					<div id={ details.slug } className="flex-row pigeon-drag-block pigeon-click-block">
 						<section id="contact-text">

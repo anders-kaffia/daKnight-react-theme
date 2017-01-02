@@ -21066,6 +21066,10 @@
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
+	var _Loading = __webpack_require__(221);
+	
+	var _Loading2 = _interopRequireDefault(_Loading);
+	
 	var _Header = __webpack_require__(222);
 	
 	var _Header2 = _interopRequireDefault(_Header);
@@ -21233,54 +21237,58 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ id: 'main-wrapper', className: 'flex-column' },
-					_react2.default.createElement(_Header2.default, {
-						loading: this.state.isLoading,
-						details: this.state.mainPageTitles,
-						logo: this.state.logo,
-						id: 'header-wrapper'
-					}),
-					_react2.default.createElement(
-						_reactAddonsCssTransitionGroup2.default,
-						{
-							component: 'div',
-							transitionName: 'slide',
-							transitionEnterTimeout: 500,
-							transitionAppear: true,
-							transitionAppearTimeout: 500,
-							transitionLeaveTimeout: 500
-						},
-						this.state.renderBlankSlate ? _react2.default.createElement(_BlankSlate2.default, null) : null
-					),
-					_react2.default.createElement(_About2.default, {
-						loading: this.state.isLoading,
-						details: this.state.about
-					}),
-					_react2.default.createElement(_Services2.default, {
-						loading: this.state.isLoading,
-						childPages: this.state.serviceChildPages,
-						page: this.state.services,
-						activeItem: this.state.activeItem,
-						setActive: this.setActive,
-						burgerMenu: this.burgerMenu,
-						burgerMenuActive: this.state.burgerMenuActive,
-						width: this.state.width
-					}),
-					_react2.default.createElement(_Contact2.default, {
-						loading: this.state.isLoading,
-						details: this.state.contact,
-						showForm: this.state.showContactForm,
-						toggleForm: this.toggleContactForm,
-						footer: this.state.footer,
-						menu: this.state.mainPageTitles,
-						width: this.state.width,
-						height: this.state.height
-					}),
-					_react2.default.createElement(_Footer2.default, {
-						loading: this.state.isLoading,
-						details: this.state.footer,
-						menu: this.state.mainPageTitles
-					})
+					null,
+					this.state.isLoading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
+						'div',
+						{ id: 'main-wrapper', className: 'flex-column' },
+						_react2.default.createElement(_Header2.default, {
+							loading: this.state.isLoading,
+							details: this.state.mainPageTitles,
+							logo: this.state.logo,
+							id: 'header-wrapper'
+						}),
+						_react2.default.createElement(
+							_reactAddonsCssTransitionGroup2.default,
+							{
+								component: 'div',
+								transitionName: 'slide',
+								transitionEnterTimeout: 500,
+								transitionAppear: true,
+								transitionAppearTimeout: 500,
+								transitionLeaveTimeout: 500
+							},
+							this.state.renderBlankSlate ? _react2.default.createElement(_BlankSlate2.default, null) : null
+						),
+						_react2.default.createElement(_About2.default, {
+							loading: this.state.isLoading,
+							details: this.state.about
+						}),
+						_react2.default.createElement(_Services2.default, {
+							loading: this.state.isLoading,
+							childPages: this.state.serviceChildPages,
+							page: this.state.services,
+							activeItem: this.state.activeItem,
+							setActive: this.setActive,
+							burgerMenu: this.burgerMenu,
+							burgerMenuActive: this.state.burgerMenuActive,
+							width: this.state.width
+						}),
+						_react2.default.createElement(_Contact2.default, {
+							loading: this.state.isLoading,
+							details: this.state.contact,
+							showForm: this.state.showContactForm,
+							toggleForm: this.toggleContactForm,
+							footer: this.state.footer,
+							menu: this.state.mainPageTitles,
+							width: this.state.width,
+							height: this.state.height
+						}),
+						_react2.default.createElement(_Footer2.default, {
+							loading: this.state.isLoading,
+							details: this.state.footer,
+							menu: this.state.mainPageTitles
+						})
+					)
 				);
 			}
 		}]);
@@ -25010,28 +25018,32 @@
 	
 				return _react2.default.createElement(
 					'div',
-					{ id: id, className: 'flex-row' },
-					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
+					null,
+					loading ? null : _react2.default.createElement(
 						'div',
-						{ id: 'header', className: 'flex-row' },
-						_react2.default.createElement('img', { src: logo.source_url, alt: 'daKnight logo', id: 'dk-logo' }),
+						{ id: id, className: 'flex-row' },
 						_react2.default.createElement(
-							'nav',
-							{ id: 'top-nav' },
+							'div',
+							{ id: 'header', className: 'flex-row' },
+							_react2.default.createElement('img', { src: logo.source_url, alt: 'daKnight logo', id: 'dk-logo' }),
 							_react2.default.createElement(
-								'ul',
-								null,
-								details.map(function (page) {
-									return _react2.default.createElement(
-										'a',
-										{ key: page.id, href: '#' + page.slug },
-										_react2.default.createElement(
-											'li',
-											{ key: page.id },
-											page.title.rendered
-										)
-									);
-								})
+								'nav',
+								{ id: 'top-nav' },
+								_react2.default.createElement(
+									'ul',
+									null,
+									details.map(function (page) {
+										return _react2.default.createElement(
+											'a',
+											{ key: page.id, href: '#' + page.slug },
+											_react2.default.createElement(
+												'li',
+												{ key: page.id },
+												page.title.rendered
+											)
+										);
+									})
+								)
 							)
 						)
 					)
@@ -25115,7 +25127,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -25127,10 +25139,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Loading = __webpack_require__(221);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25138,9 +25146,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Libs
-	
-	
-	// Components
 	
 	
 	var About = function (_React$Component) {
@@ -25153,34 +25158,34 @@
 		}
 	
 		_createClass(About, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
 				// Props
-				var _props$details = this.props.details,
-				    details = _props$details.details,
-				    loading = _props$details.loading;
+				var _props = this.props,
+				    details = _props.details,
+				    loading = _props.loading;
 	
 	
 				return _react2.default.createElement(
-					'div',
-					{ className: 'flex-column' },
-					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
-						'div',
+					"div",
+					{ className: "flex-column" },
+					loading ? null : _react2.default.createElement(
+						"div",
 						{ id: details.slug },
 						_react2.default.createElement(
-							'section',
-							{ id: 'about-1', className: 'flex-column' },
-							_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.acf.om_oss } })
+							"section",
+							{ id: "about-1", className: "flex-column" },
+							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.om_oss } })
 						),
 						_react2.default.createElement(
-							'section',
-							{ id: 'about-2', className: 'flex-column' },
-							_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.acf.bakgrund } })
+							"section",
+							{ id: "about-2", className: "flex-column" },
+							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.bakgrund } })
 						),
 						_react2.default.createElement(
-							'section',
-							{ id: 'about-3', className: 'flex-column' },
-							_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
+							"section",
+							{ id: "about-3", className: "flex-column" },
+							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
 						)
 					)
 				);
@@ -25211,10 +25216,6 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _Loading = __webpack_require__(221);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
 	
 	var _ServiceMenuItem = __webpack_require__(226);
 	
@@ -25266,7 +25267,7 @@
 				return _react2.default.createElement(
 					'div',
 					null,
-					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
+					loading ? null : _react2.default.createElement(
 						'div',
 						{ id: page.slug, className: 'flex-column' },
 						_react2.default.createElement(
@@ -25421,10 +25422,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Loading = __webpack_require__(221);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25432,9 +25429,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Components
-	
 	
 	var ServiceFeatImage = function (_React$Component) {
 		_inherits(ServiceFeatImage, _React$Component);
@@ -25481,7 +25475,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -25493,10 +25487,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Loading = __webpack_require__(221);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -25504,9 +25494,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Components
-	
 	
 	var ServiceText = function (_React$Component) {
 		_inherits(ServiceText, _React$Component);
@@ -25518,7 +25505,7 @@
 		}
 	
 		_createClass(ServiceText, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
 				// Props
 				var _props = this.props,
@@ -25527,9 +25514,9 @@
 	
 	
 				return _react2.default.createElement(
-					'div',
-					{ id: 'service-text', className: 'flex-row' },
-					_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: page.filter(function (page) {
+					"div",
+					{ id: "service-text", className: "flex-row" },
+					_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: page.filter(function (page) {
 								return page.id === activeItem;
 							})[0].content.rendered } })
 				);
@@ -25560,10 +25547,6 @@
 	var _react = __webpack_require__(1);
 	
 	var _react2 = _interopRequireDefault(_react);
-	
-	var _Loading = __webpack_require__(221);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
 	
 	var _Header = __webpack_require__(222);
 	
@@ -25613,7 +25596,7 @@
 				return _react2.default.createElement(
 					'div',
 					{ className: 'pigeon-drag-block pigeon-click-block' },
-					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
+					loading ? null : _react2.default.createElement(
 						'div',
 						{ id: details.slug, className: 'flex-row pigeon-drag-block pigeon-click-block' },
 						_react2.default.createElement(
@@ -26981,7 +26964,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	'use strict';
+	"use strict";
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -26993,10 +26976,6 @@
 	
 	var _react2 = _interopRequireDefault(_react);
 	
-	var _Loading = __webpack_require__(221);
-	
-	var _Loading2 = _interopRequireDefault(_Loading);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
 	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -27004,9 +26983,6 @@
 	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
 	
 	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; } // Libs
-	
-	
-	// Components
 	
 	
 	var Footer = function (_React$Component) {
@@ -27019,7 +26995,7 @@
 		}
 	
 		_createClass(Footer, [{
-			key: 'render',
+			key: "render",
 			value: function render() {
 				// Props
 				var _props = this.props,
@@ -27029,23 +27005,23 @@
 	
 	
 				return _react2.default.createElement(
-					'div',
-					{ className: 'flex-column' },
-					loading ? _react2.default.createElement(_Loading2.default, null) : _react2.default.createElement(
-						'div',
-						{ id: 'footer' },
+					"div",
+					{ className: "flex-column" },
+					loading ? null : _react2.default.createElement(
+						"div",
+						{ id: "footer" },
 						_react2.default.createElement(
-							'nav',
-							{ id: 'footer-nav' },
+							"nav",
+							{ id: "footer-nav" },
 							_react2.default.createElement(
-								'ul',
+								"ul",
 								null,
 								menu.map(function (page) {
 									return _react2.default.createElement(
-										'a',
+										"a",
 										{ key: page.id, href: '#' + page.slug },
 										_react2.default.createElement(
-											'li',
+											"li",
 											{ key: page.id },
 											page.title.rendered
 										)
@@ -27053,7 +27029,7 @@
 								})
 							)
 						),
-						_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.content.rendered } })
+						_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.content.rendered } })
 					)
 				);
 			}

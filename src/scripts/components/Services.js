@@ -1,7 +1,6 @@
 import React from 'react';
 
 // Components
-import Loading from './Loading';
 import ServiceMenuItem from './ServiceMenuItem';
 import ServiceFeatImage from './ServiceFeatImage';
 import ServiceText from './ServiceText';
@@ -18,7 +17,7 @@ class Services extends React.Component {
 		return (
 			<div>
 				{ loading ? (
-					<Loading />
+					null
 				) : (
 					<div id={ page.slug } className="flex-column">
 						<div id="service-burger-container">

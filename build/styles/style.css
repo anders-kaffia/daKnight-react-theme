@@ -537,9 +537,9 @@ body {
   height: 100%;
   height: 100vh;
   width: 100%;
-  width: 100vh;
+  width: 100vw;
   z-index: 9999;
-  background: rgba(228, 219, 208, 0.2);
+  background: #fff;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -778,7 +778,7 @@ body {
     width: 70%; }
 
 #about-1 {
-  background: #41d6b6; }
+  background: #e4dbd0; }
   @media (max-width: 767px) {
     #about-1 h2 {
       font-size: 2.1em; } }
@@ -793,7 +793,7 @@ body {
       font-size: 3.6em; } }
 
 #about-2 {
-  background: #e4dbd0; }
+  background: #41d6b6; }
   @media (max-width: 767px) {
     #about-2 h2 {
       font-size: 1.75em; } }

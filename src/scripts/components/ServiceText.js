@@ -1,8 +1,5 @@
 import React from 'react';
 
-// Components
-import Loading from './Loading';
-
 class ServiceText extends React.Component {
 	render() {
 		// Props

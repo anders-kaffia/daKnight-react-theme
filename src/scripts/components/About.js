@@ -1,19 +1,16 @@
 // Libs
 import React from 'react';
 
-// Components
-import Loading from './Loading';
-
 class About extends React.Component {
 
 	render() {
 		// Props
-		const { details, loading } = this.props.details;
+		const { details, loading } = this.props;
 
 		return (
 			<div className="flex-column">
 				{ loading ? (
-					<Loading />
+					null
 				) : (
 					<div id={ details.slug } >
 						<section id="about-1" className="flex-column">

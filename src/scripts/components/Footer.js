@@ -1,9 +1,6 @@
 // Libs
 import React from 'react';
 
-// Components
-import Loading from './Loading';
-
 class Footer extends React.Component {
 	render() {
 		// Props
@@ -12,7 +9,7 @@ class Footer extends React.Component {
 		return (
 			<div className="flex-column">
 			{ loading ? (
-				<Loading />
+				null
 			) : (
 				<div  id="footer">
 					<nav id="footer-nav">
