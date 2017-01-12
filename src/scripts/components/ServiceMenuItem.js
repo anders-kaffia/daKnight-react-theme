@@ -4,13 +4,16 @@ class ServiceMenuItem extends React.Component {
 	constructor() {
 		super();
 		this.click = this.click.bind(this);
-	}
+	};
 
+	/**
+	 * @desc Toggle active page. Also toggles the burger menu if window size < 768px
+	 */
 	click() {
 		const { setActive, burgerMenu, width } = this.props;
 		setActive();
 		width < 768 ? burgerMenu() : null;
-	}
+	};
 
 	render() {
 		const { page, activeItem, setActive, burgerMenu, burgerMenuActive } = this.props;
@@ -19,7 +22,7 @@ class ServiceMenuItem extends React.Component {
 				<img src={ activeItem === page.id ? (page.acf.logo_aktiv) : (page.acf.logo_passiv) } alt={ page.title.rendered } />
 				<span>{ page.title.rendered }</span>
 			</li>
-		)
+		);
 	}
 }
 
@@ -30,6 +33,6 @@ ServiceMenuItem.propTypes = {
 	page: React.PropTypes.object.isRequired,
 	activeItem: React.PropTypes.number.isRequired,
 	burgerMenuActive: React.PropTypes.bool.isRequired,
-}
+};
 
 export default ServiceMenuItem;

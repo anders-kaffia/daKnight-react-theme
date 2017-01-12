@@ -8,7 +8,7 @@ import ServiceText from './ServiceText';
 class Services extends React.Component {
 	constructor(props) {
 		super(props);
-	}
+	};
 
 	render() {
 		// Props
@@ -48,7 +48,7 @@ class Services extends React.Component {
 					</div>
 				)}
 			</div>
-		)
+		);
 	}
 }
 
@@ -61,6 +61,6 @@ Services.propTypes = {
 	burgerMenu: React.PropTypes.func.isRequired,
 	burgerMenuActive: React.PropTypes.bool.isRequired,
 	width: React.PropTypes.number.isRequired,
-}
+};
 
 export default Services;

@@ -31,7 +31,7 @@ class Contact extends React.Component {
 					</div>
 				)}
 			</div>
-		)
+		);
 	}
 }
 
@@ -42,6 +42,6 @@ Contact.propTypes = {
 	toggleForm: React.PropTypes.func.isRequired,
 	width: React.PropTypes.number.isRequired,
 	height: React.PropTypes.number.isRequired
-}
+};
 
 export default Contact;

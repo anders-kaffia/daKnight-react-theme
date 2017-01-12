@@ -21,7 +21,9 @@ class Header extends React.Component {
 							<nav id="top-nav">
 								<ul>
 									{details.map((page) => (
-										<a key={page.id} href={'#' + page.slug}><li key={page.id}>{page.title.rendered}</li></a>
+										<a key={page.id} href={'#' + page.slug}>
+											<li key={page.id}>{page.title.rendered}</li>
+										</a>
 									))}
 								</ul>
 							</nav>
@@ -29,7 +31,7 @@ class Header extends React.Component {
 					</div>
 					)}
 			</div>
-		)
+		);
 	}
 }
 
@@ -38,6 +40,6 @@ Header.propTypes = {
 	loading:  React.PropTypes.bool.isRequired,
 	logo:  React.PropTypes.object.isRequired,
 	id:  React.PropTypes.string.isRequired,
-}
+};
 
 export default Header;

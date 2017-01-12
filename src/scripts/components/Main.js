@@ -1,7 +1,6 @@
 // Libs
 import React from 'react';
 import ReactCSSTransisionGroup from 'react-addons-css-transition-group';
-import axios from 'axios';
 
 // Components
 import Loading from './Loading';
@@ -12,7 +11,9 @@ import Services from './Services';
 import Contact from './Contact';
 import Footer from './Footer';
 
+// Other
 import model from '../model';
+import scripts from '../scripts';
 
 class Main extends React.Component {
 
@@ -47,7 +48,7 @@ class Main extends React.Component {
 		this.interval = null;
 		this.interval2 = null;
 
-	}
+	};
 
 	componentWillMount() {
 		model.apiCall.getAllContent('pages', 'posts', 'media')
@@ -71,21 +72,25 @@ class Main extends React.Component {
 
 				const header = document.getElementById('header-wrapper');
 
-				// document.body.style.paddingTop = header.offsetHeight + 'px';
 				window.addEventListener('scroll', this.handleScroll);
 
+				scripts.init();
+
 			});
-	}
+	};
 
 	componentDidMount() {
-
 		this.mediaQuery();
-		
+
 		window.addEventListener('resize', this.mediaQuery);
 
-		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 4500);
-	}
+		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 4000);
+	};
 
+
+	/**
+	 * @desc toggles the header position from fixed to absolute
+	 */
 	handleScroll() {
 		const services = document.getElementById('tjanster');
 		const header = document.getElementById('header-wrapper');
@@ -95,8 +100,11 @@ class Main extends React.Component {
 
 		window.scrollY >= (topOfServices - headerHeight) ? header.style.cssText += absPosition : null;
 		window.scrollY <= (topOfServices - headerHeight) ? header.style.cssText = window.getComputedStyle(header, null) - absPosition : null;
-	}
+	};
 
+	/**
+	 * @desc Enables dynamic width and height for the map
+	 */
 	mediaQuery() {
 		let updateWidth = window.innerWidth;
 		let updateHeight = window.innerHeight;
@@ -105,26 +113,36 @@ class Main extends React.Component {
 			width: updateWidth,
 			height: updateHeight
 		});
-	}
+	};
 
+	/**
+	 * @desc Sets the active page for Services
+	 *
+	 * @param {number} id of active page
+	 */
 	setActive(itemId) {
 		this.setState({ activeItem: itemId });
-	}
+	};
 
+	/**
+	 * @desc Toggles the Services burger menu
+	 */
 	burgerMenu() {
 		let action = !this.state.burgerMenuActive;
 		this.setState({ burgerMenuActive: action });
-	}
+	};
 
+	/**
+	 * @desc Toggles the contact form (open/close)
+	 */
 	toggleContactForm() {
 		this.setState({ showContactForm: !this.state.showContactForm });
 
 		const mainWrap = document.getElementById('main-wrapper');
 		mainWrap.classList.toggle('no-padd');
-	}
+	};
 
 	render() {
-
 		return (
 			<div>
 				{this.state.isLoading ? (
@@ -179,7 +197,7 @@ class Main extends React.Component {
 						</div>
 					)}
 			</div>
-		)
+		);
 	}
 }
 

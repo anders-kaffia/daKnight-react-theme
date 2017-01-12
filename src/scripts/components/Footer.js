@@ -15,7 +15,9 @@ class Footer extends React.Component {
 					<nav id="footer-nav">
 						<ul>
 							{menu.map((page) => (
-								<a key={page.id} href={'#' + page.slug}><li key={page.id}>{page.title.rendered}</li></a>
+								<a key={page.id} href={'#' + page.slug}>
+									<li key={page.id}>{page.title.rendered}</li>
+								</a>
 							))}
 						</ul>
 					</nav>
@@ -23,7 +25,7 @@ class Footer extends React.Component {
 				</div>
 				)}
 			</div>
-		)
+		);
 	}
 }
 
@@ -31,6 +33,6 @@ Footer.propTypes = {
 	details:  React.PropTypes.object.isRequired,
 	loading:  React.PropTypes.bool.isRequired,
 	menu:  React.PropTypes.array.isRequired
-}
+};
 
 export default Footer;

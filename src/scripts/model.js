@@ -35,6 +35,6 @@ model.apiCall = {
 				activeItem: arr[0].data.filter(page => page.parent === 5).filter(page => page.slug === 'webbutveckling')[0].id
 			};
 		})
-}
+};
 
 export default model;

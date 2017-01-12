@@ -11,7 +11,7 @@ class BlankSlate extends React.Component {
 					<div id="blank-slate3"></div>
 				</div>
 			</section>
-		)
+		);
 	}
 }
 

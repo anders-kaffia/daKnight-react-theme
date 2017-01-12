@@ -29,13 +29,13 @@ class LocationMap extends React.Component {
 							/>
 				</div>
 			</div>
-		)
+		);
 	}
 }
 
 LocationMap.propTypes = {
 	width: React.PropTypes.number.isRequired,
 	height: React.PropTypes.number.isRequired
-}
+};
 
 export default LocationMap;

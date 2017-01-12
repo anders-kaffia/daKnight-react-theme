@@ -12,7 +12,7 @@ class About extends React.Component {
 				{ loading ? (
 					null
 				) : (
-					<div id={ details.slug } >
+					<div id={ details.slug }>
 						<section id="about-1" className="flex-column">
 							<div id="arrow">
 								<img src={ arrow.source_url } alt="Down pointing arrow"/>
@@ -28,7 +28,7 @@ class About extends React.Component {
 					</div>
 				)}
 			</div>
-		)
+		);
 	}
 }
 
@@ -36,6 +36,6 @@ About.protoTypes = {
 	details: React.PropTypes.object.isRequired,
 	loading: React.PropTypes.bool.isRequired,
 	arrow: React.PropTypes.string.isRequired
-}
+};
 
 export default About;
