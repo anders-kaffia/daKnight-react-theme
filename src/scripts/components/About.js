@@ -32,5 +32,10 @@ class About extends React.Component {
 	}
 }
 
+About.protoTypes = {
+	details: React.PropTypes.object.isRequired,
+	loading: React.PropTypes.bool.isRequired,
+	arrow: React.PropTypes.string.isRequired
+}
 
 export default About;

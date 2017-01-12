@@ -8,22 +8,33 @@
 }
 
 #blank-slate {
-	height: 81.5vh;
+	@include large-spacing(margin-bottom);
+	@include breakpoint(xs) { 
+		height: calc(100vh - 143.6px);
+	}
+	@include breakpoint(sm) {
+		height: calc(100vh - 167.2px);
+	}
+	@include breakpoint(md) {
+		height: calc(100vh - 186.8px);
+	}
+	@include breakpoint(lg) {
+		height: calc(100vh - 216px);
+	}
 	flex-wrap: wrap;
-	margin-bottom: $largeSpacing;
 	#blank-slate1 {
+		@include small-spacing(margin-right);
 		background: $color-1;
 		flex: 1;
 		height: 100%;
-		@include main-spacing(margin-right);
 	}
 	#blank-slate-inside-wrapper {
 		flex: 1;
 		height: 100%;
 		#blank-slate2 {
+			@include small-spacing(margin-bottom);
 			background: $color-2;
 			height: 35%;
-			@include main-spacing(margin-bottom);
 		}
 		#blank-slate3 {
 			background: $color-3;

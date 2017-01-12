@@ -2,13 +2,10 @@
 *				Header Styling
 ========================================================================== */
 
-.fixed-nav #header-wrapper {
+#header-wrapper {
 	position: fixed;
 	top: 0;
 	left: 0;
-}
-
-#header-wrapper {
 	flex: 1;
 	background: $color-white;
 	width: 100%;
@@ -16,11 +13,10 @@
 }
 
 #header {
+	@include large-spacing(padding);
 	flex: 1;
 	justify-content: space-between;
-	padding: $largeSpacing;
 	padding-bottom: 0;
-	@include main-spacing(margin-bottom);
 }
 
 #top-nav {
@@ -31,15 +27,32 @@
 		font-family: 'Rozha One', serif;
 		font-size: 1.3em;
 		color: $color-darkgrey;
+		@include breakpoint(xs) {
+			font-size: 1em;
+		}
+		@include breakpoint(sm) {
+			font-size: 1.1em;
+		}
+		@include breakpoint(md) {
+			font-size: 1.2em;
+		}
 	}
 }
 
 #dk-logo {
-	max-height: 120px;
+	height: 120px;
 	width: auto;
 	align-self: center;
-}
-
-#contact-header {
-	position: static;
+	@include breakpoint(xs) {
+		height: 80px;
+	}
+	@include breakpoint(sm) {
+		height: 100px;
+	}
+	@include breakpoint(md) {
+		height: 110px;
+	}
+	@include breakpoint(lg) {
+		
+	}
 }

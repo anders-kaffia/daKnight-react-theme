@@ -1,8 +1,5 @@
 import React from 'react';
 
-// Components
-import Loading from './Loading';
-
 class ServiceMenuItem extends React.Component {
 	constructor() {
 		super();
@@ -10,7 +7,7 @@ class ServiceMenuItem extends React.Component {
 	}
 
 	click() {
-		const { setActive, burgerMenu, width, height } = this.props;
+		const { setActive, burgerMenu, width } = this.props;
 		setActive();
 		width < 768 ? burgerMenu() : null;
 	}
@@ -24,6 +21,15 @@ class ServiceMenuItem extends React.Component {
 			</li>
 		)
 	}
+}
+
+ServiceMenuItem.propTypes = {
+	setActive: React.PropTypes.func.isRequired,
+	burgerMenu: React.PropTypes.func.isRequired,
+	width: React.PropTypes.number.isRequired,
+	page: React.PropTypes.object.isRequired,
+	activeItem: React.PropTypes.number.isRequired,
+	burgerMenuActive: React.PropTypes.bool.isRequired,
 }
 
 export default ServiceMenuItem;

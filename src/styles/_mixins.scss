@@ -4,7 +4,7 @@
 
 /*
 *			MQ Breakpoints
-----------------------------------------------------------------*/
+-----------------------------------------------------------------------------------------------*/
 
 @mixin breakpoint($class) {
   @if $class == xs {
@@ -29,11 +29,11 @@
 }
 
 /*
-*			Main spacing (white lines between elements)
-----------------------------------------------------------------*/
+*			Spacing (padding / margin)
+-----------------------------------------------------------------------------------------------*/
 
-@mixin main-spacing($property) {
-  	@include breakpoint(xs) { 
+@mixin small-spacing($property) {
+	@include breakpoint(xs) { 
 		#{$property}: .4em;
 	 }
  
@@ -50,9 +50,45 @@
 	}
 }
 
+@mixin large-spacing($property) {
+	@include breakpoint(xs) { 
+		#{$property}: 1.2em;
+	 }
+ 
+  	@include breakpoint(sm) {
+		#{$property}: 1.4em;
+	 }
+ 
+  	@include breakpoint(md) {
+		#{$property}: 1.6em;
+	}
+ 
+	@include breakpoint(lg) {
+		#{$property}: 2em;
+	}
+}
+
+/*
+*			 Calculates section height minus body padding and section margin
+-----------------------------------------------------------------------------------------------*/
+@mixin section-height {
+	@include breakpoint(xs) { 
+	min-height: calc(100vh - 143.6px);
+	}
+	@include breakpoint(sm) {
+		min-height: calc(100vh - 167.2px);
+	}
+	@include breakpoint(md) {
+		min-height: calc(100vh - 186.8px);
+	}
+	@include breakpoint(lg) {
+		min-height: calc(100vh - 216px);
+	}
+}
+
 /*
 *			 Change size with media queries. Mainly for font-size
-----------------------------------------------------------------*/
+-----------------------------------------------------------------------------------------------*/
 
 @mixin mq-size($property, $default, $unit) {
   	@include breakpoint(xs) { 
@@ -73,8 +109,8 @@
 }
 
 /*
-*			 Placeholder
-----------------------------------------------------------------*/
+*			 Placeholder (for the contact form)
+-----------------------------------------------------------------------------------------------*/
 
 @mixin placeholder-color-font($color, $font-family, $font-size) {
   &::-webkit-input-placeholder { 

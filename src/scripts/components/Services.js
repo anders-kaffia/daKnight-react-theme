@@ -52,4 +52,15 @@ class Services extends React.Component {
 	}
 }
 
+Services.propTypes = {
+	childPages: React.PropTypes.array.isRequired,
+	loading: React.PropTypes.bool.isRequired,
+	page: React.PropTypes.object.isRequired,
+	activeItem: React.PropTypes.number.isRequired,
+	setActive: React.PropTypes.func.isRequired,
+	burgerMenu: React.PropTypes.func.isRequired,
+	burgerMenuActive: React.PropTypes.bool.isRequired,
+	width: React.PropTypes.number.isRequired,
+}
+
 export default Services;

@@ -52,10 +52,9 @@
 }
 
 #about-1, #about-2, #about-3 {
+  	@include section-height;
 	text-align: center;
 	margin: 0;
-	margin-bottom: $largeSpacing;
-	min-height: 81.5vh;
 	align-items: center;
 	justify-content: center;
 	div {
@@ -64,6 +63,7 @@
 }
 
 #about-1 {
+	@include large-spacing(margin-bottom);
 	background: $color-2;
 	position: relative;
 	h2 {
@@ -71,6 +71,7 @@
 	}
 }
 #about-2 {
+	@include large-spacing(margin-bottom);
 	background: $color-1;
 	h2 {
 		@include mq-size(font-size, 2.5, em);

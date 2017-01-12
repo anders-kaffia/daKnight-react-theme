@@ -3,10 +3,36 @@
 ========================================================================== */
 
 #footer {
+	@include large-spacing(padding);
+	@include breakpoint(xs) { 
+		padding-top: 0;
+	 }
+ 
+  	@include breakpoint(sm) {
+		padding-top: 0;
+	 }
+ 
+  	@include breakpoint(md) {
+		padding-top: 0;
+	}
+ 
+	@include breakpoint(lg) {
+		padding-top: 0;
+	}
+	height: 9.2em;
 	background: $color-2;
+	justify-content: center;
+	align-items: center;
 	color: $color-darkgrey;
-	padding: 3%;
-	padding-top: 0;
+	p {
+		@include breakpoint(xs) { 
+			font-size: .7em;
+		}
+	
+		@include breakpoint(sm) {
+			font-size: .9em;
+		}
+	}
 }
 #footer-nav {
 	align-self: center;
@@ -22,5 +48,12 @@
 		font-family: 'Rozha One', serif;
 		font-size: 1.3em;
 		color: $color-darkgrey;
+		@include breakpoint(xs) { 
+			font-size: 1em;
+		}
+	
+		@include breakpoint(sm) {
+			font-size: 1.2em;
+		}
 	}
 }

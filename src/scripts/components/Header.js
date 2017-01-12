@@ -15,7 +15,9 @@ class Header extends React.Component {
 				) : (
 					<div id={ id }  className="flex-row">
 						<div id="header" className="flex-row">
-							<img src={logo.source_url} alt="daKnight logo" id="dk-logo" />
+							<a href="#main-wrapper">
+								<img src={logo.source_url} alt="daKnight logo" id="dk-logo" />
+							</a>
 							<nav id="top-nav">
 								<ul>
 									{details.map((page) => (
@@ -29,6 +31,13 @@ class Header extends React.Component {
 			</div>
 		)
 	}
+}
+
+Header.propTypes = {
+	details:  React.PropTypes.array.isRequired,
+	loading:  React.PropTypes.bool.isRequired,
+	logo:  React.PropTypes.object.isRequired,
+	id:  React.PropTypes.string.isRequired,
 }
 
 export default Header;

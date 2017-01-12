@@ -15,4 +15,9 @@ class ServiceFeatImage extends React.Component {
 	}
 }
 
+ServiceFeatImage.propTypes = {
+	activeItem: React.PropTypes.number.isRequired,
+	page: React.PropTypes.array.isRequired,
+}
+
 export default ServiceFeatImage;

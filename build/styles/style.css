@@ -407,16 +407,19 @@ template {
 ========================================================================== */
 /*
 *			MQ Breakpoints
-----------------------------------------------------------------*/
+-----------------------------------------------------------------------------------------------*/
 /*
-*			Main spacing (white lines between elements)
-----------------------------------------------------------------*/
+*			Spacing (padding / margin)
+-----------------------------------------------------------------------------------------------*/
+/*
+*			 Calculates section height minus body padding and section margin
+-----------------------------------------------------------------------------------------------*/
 /*
 *			 Change size with media queries. Mainly for font-size
-----------------------------------------------------------------*/
+-----------------------------------------------------------------------------------------------*/
 /*
-*			 Placeholder
-----------------------------------------------------------------*/
+*			 Placeholder (for the contact form)
+-----------------------------------------------------------------------------------------------*/
 /* 
 *				Variables
 ========================================================================== */
@@ -455,6 +458,18 @@ body {
     color: #6d6e71; }
   body ul, body li {
     list-style: none; }
+  @media (max-width: 767px) {
+    body {
+      padding-top: 124.4px; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    body {
+      padding-top: 144.8px; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    body {
+      padding-top: 161.2px; } }
+  @media (min-width: 1200px) {
+    body {
+      padding-top: 184px; } }
 
 ::-webkit-input-placeholder {
   color: #6d6e71;
@@ -496,9 +511,37 @@ body {
 :-ms-input-placeholder {
   text-align: center; }
 
-#main-wrapper {
-  padding: 1.85%;
-  padding-top: 0; }
+@media (max-width: 767px) {
+  #main-wrapper {
+    padding: 1.2em; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #main-wrapper {
+    padding: 1.4em; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #main-wrapper {
+    padding: 1.6em; } }
+
+@media (min-width: 1200px) {
+  #main-wrapper {
+    padding: 2em; } }
+
+@media (max-width: 767px) {
+  #main-wrapper {
+    padding-top: 0; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #main-wrapper {
+    padding-top: 0; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #main-wrapper {
+    padding-top: 0; } }
+
+@media (min-width: 1200px) {
+  #main-wrapper {
+    padding-top: 0; } }
 
 .no-padd {
   padding: 0 !important; }
@@ -639,12 +682,10 @@ body {
 /* 
 *				Header Styling
 ========================================================================== */
-.fixed-nav #header-wrapper {
+#header-wrapper {
   position: fixed;
   top: 0;
-  left: 0; }
-
-#header-wrapper {
+  left: 0;
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
@@ -659,20 +700,19 @@ body {
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
-  padding: 1.85%;
   padding-bottom: 0; }
   @media (max-width: 767px) {
     #header {
-      margin-bottom: .4em; } }
+      padding: 1.2em; } }
   @media (min-width: 768px) and (max-width: 991px) {
     #header {
-      margin-bottom: .6em; } }
+      padding: 1.4em; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     #header {
-      margin-bottom: .8em; } }
+      padding: 1.6em; } }
   @media (min-width: 1200px) {
     #header {
-      margin-bottom: 1em; } }
+      padding: 2em; } }
 
 #top-nav {
   -ms-flex-item-align: center;
@@ -684,16 +724,31 @@ body {
     font-family: 'Rozha One', serif;
     font-size: 1.3em;
     color: #6d6e71; }
+    @media (max-width: 767px) {
+      #top-nav a {
+        font-size: 1em; } }
+    @media (min-width: 768px) and (max-width: 991px) {
+      #top-nav a {
+        font-size: 1.1em; } }
+    @media (min-width: 992px) and (max-width: 1199px) {
+      #top-nav a {
+        font-size: 1.2em; } }
 
 #dk-logo {
-  max-height: 120px;
+  height: 120px;
   width: auto;
   -ms-flex-item-align: center;
       -ms-grid-row-align: center;
       align-self: center; }
-
-#contact-header {
-  position: static; }
+  @media (max-width: 767px) {
+    #dk-logo {
+      height: 80px; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #dk-logo {
+      height: 100px; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #dk-logo {
+      height: 110px; } }
 
 /* 
 *				Blank Slate Section Styling
@@ -705,10 +760,32 @@ body {
           perspective-origin: bottom; }
 
 #blank-slate {
-  height: 81.5vh;
   -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  margin-bottom: 1.85%; }
+      flex-wrap: wrap; }
+  @media (max-width: 767px) {
+    #blank-slate {
+      margin-bottom: 1.2em; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #blank-slate {
+      margin-bottom: 1.4em; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #blank-slate {
+      margin-bottom: 1.6em; } }
+  @media (min-width: 1200px) {
+    #blank-slate {
+      margin-bottom: 2em; } }
+  @media (max-width: 767px) {
+    #blank-slate {
+      height: calc(100vh - 143.6px); } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #blank-slate {
+      height: calc(100vh - 167.2px); } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #blank-slate {
+      height: calc(100vh - 186.8px); } }
+  @media (min-width: 1200px) {
+    #blank-slate {
+      height: calc(100vh - 216px); } }
   #blank-slate #blank-slate1 {
     background: #41d6b6;
     -webkit-box-flex: 1;
@@ -837,20 +914,42 @@ body {
 #about-1, #about-2, #about-3 {
   text-align: center;
   margin: 0;
-  margin-bottom: 1.85%;
-  min-height: 81.5vh;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center; }
+  @media (max-width: 767px) {
+    #about-1, #about-2, #about-3 {
+      min-height: calc(100vh - 143.6px); } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #about-1, #about-2, #about-3 {
+      min-height: calc(100vh - 167.2px); } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #about-1, #about-2, #about-3 {
+      min-height: calc(100vh - 186.8px); } }
+  @media (min-width: 1200px) {
+    #about-1, #about-2, #about-3 {
+      min-height: calc(100vh - 216px); } }
   #about-1 div, #about-2 div, #about-3 div {
     width: 70%; }
 
 #about-1 {
   background: #e4dbd0;
   position: relative; }
+  @media (max-width: 767px) {
+    #about-1 {
+      margin-bottom: 1.2em; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #about-1 {
+      margin-bottom: 1.4em; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #about-1 {
+      margin-bottom: 1.6em; } }
+  @media (min-width: 1200px) {
+    #about-1 {
+      margin-bottom: 2em; } }
   @media (max-width: 767px) {
     #about-1 h2 {
       font-size: 1.8em; } }
@@ -866,6 +965,18 @@ body {
 
 #about-2 {
   background: #41d6b6; }
+  @media (max-width: 767px) {
+    #about-2 {
+      margin-bottom: 1.2em; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #about-2 {
+      margin-bottom: 1.4em; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #about-2 {
+      margin-bottom: 1.6em; } }
+  @media (min-width: 1200px) {
+    #about-2 {
+      margin-bottom: 2em; } }
   @media (max-width: 767px) {
     #about-2 h2 {
       font-size: 1.5em; } }
@@ -909,9 +1020,53 @@ body {
 /* 
 *				Services Section Styling
 ========================================================================== */
-#tjanster {
-  min-height: 98vh;
-  margin-bottom: 1.85%; }
+@media (max-width: 767px) {
+  #tjanster {
+    margin-top: 1.2em; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #tjanster {
+    margin-top: 1.4em; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #tjanster {
+    margin-top: 1.6em; } }
+
+@media (min-width: 1200px) {
+  #tjanster {
+    margin-top: 2em; } }
+
+@media (max-width: 767px) {
+  #tjanster {
+    margin-bottom: 1.2em; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #tjanster {
+    margin-bottom: 1.4em; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #tjanster {
+    margin-bottom: 1.6em; } }
+
+@media (min-width: 1200px) {
+  #tjanster {
+    margin-bottom: 2em; } }
+
+@media (max-width: 767px) {
+  #tjanster {
+    min-height: calc(100vh - 38.4px); } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #tjanster {
+    min-height: calc(100vh - 44.8px); } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #tjanster {
+    min-height: calc(100vh - 51.2px); } }
+
+@media (min-width: 1200px) {
+  #tjanster {
+    min-height: calc(100vh - 64px); } }
 
 #service-menu {
   position: relative;
@@ -1188,7 +1343,6 @@ body {
 *				Contact Section Styling
 ========================================================================== */
 #kontakt {
-  height: 71.6vh;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap;
   overflow: hidden; }
@@ -1206,9 +1360,17 @@ body {
       margin-bottom: 1em; } }
   @media (max-width: 767px) {
     #kontakt {
-      height: 100%;
-      height: 100vh;
+      height: calc(100vh - 191px);
       overflow: visible; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #kontakt {
+      height: calc(100vh - 201px); } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #kontakt {
+      height: calc(100vh - 211px); } }
+  @media (min-width: 1200px) {
+    #kontakt {
+      height: calc(100vh - 227px); } }
 
 #map-contact-form-container {
   height: 100%; }
@@ -1399,7 +1561,6 @@ body {
   top: 0;
   width: 100%;
   height: 100%;
-  padding: 1.85%;
   background-clip: padding-box;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
@@ -1408,6 +1569,18 @@ body {
       -ms-flex-align: center;
           align-items: center;
   background: #e4dbd0; }
+  @media (max-width: 767px) {
+    #contact-form-container {
+      padding: 1.2em; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #contact-form-container {
+      padding: 1.4em; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #contact-form-container {
+      padding: 1.6em; } }
+  @media (min-width: 1200px) {
+    #contact-form-container {
+      padding: 2em; } }
   @media (max-width: 767px) {
     #contact-form-container {
       position: relative;
@@ -1454,10 +1627,45 @@ body {
 *				Footer Styling
 ========================================================================== */
 #footer {
+  height: 9.2em;
   background: #e4dbd0;
-  color: #6d6e71;
-  padding: 3%;
-  padding-top: 0; }
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: #6d6e71; }
+  @media (max-width: 767px) {
+    #footer {
+      padding: 1.2em; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #footer {
+      padding: 1.4em; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #footer {
+      padding: 1.6em; } }
+  @media (min-width: 1200px) {
+    #footer {
+      padding: 2em; } }
+  @media (max-width: 767px) {
+    #footer {
+      padding-top: 0; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #footer {
+      padding-top: 0; } }
+  @media (min-width: 992px) and (max-width: 1199px) {
+    #footer {
+      padding-top: 0; } }
+  @media (min-width: 1200px) {
+    #footer {
+      padding-top: 0; } }
+  @media (max-width: 767px) {
+    #footer p {
+      font-size: .7em; } }
+  @media (min-width: 768px) and (max-width: 991px) {
+    #footer p {
+      font-size: .9em; } }
 
 #footer-nav {
   -ms-flex-item-align: center;
@@ -1474,5 +1682,11 @@ body {
     font-family: 'Rozha One', serif;
     font-size: 1.3em;
     color: #6d6e71; }
+    @media (max-width: 767px) {
+      #footer-nav a {
+        font-size: 1em; } }
+    @media (min-width: 768px) and (max-width: 991px) {
+      #footer-nav a {
+        font-size: 1.2em; } }
 
 /*# sourceMappingURL=style.css.map*/

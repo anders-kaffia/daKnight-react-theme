@@ -9,8 +9,7 @@ const model = {};
  * @param {string} type of content, posts or pages
  */
 model.getContent = (type) =>
-	axios.get(`/wp-json/wp/v2/${type}/?per_page=50`
-	);
+	axios.get(`/wp-json/wp/v2/${type}/?per_page=50`);
 
 /**
  * @desc Get all content from WP REST API

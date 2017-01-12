@@ -23,7 +23,7 @@ class LocationMap extends React.Component {
 						<Map
 							center={[59.335561, 18.049955]}
 							width={width}
-							height={ width < 666 ? height * .38 : ( width < 600 ? height * .3 : height * .8 )}
+							height={ width < 768 ? height * .3 : height * .8 }
 							zoom={14}
 							provider={mapboxProvider}
 							/>
@@ -31,6 +31,11 @@ class LocationMap extends React.Component {
 			</div>
 		)
 	}
+}
+
+LocationMap.propTypes = {
+	width: React.PropTypes.number.isRequired,
+	height: React.PropTypes.number.isRequired
 }
 
 export default LocationMap;

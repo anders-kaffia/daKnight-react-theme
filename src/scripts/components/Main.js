@@ -71,14 +71,16 @@ class Main extends React.Component {
 
 				const header = document.getElementById('header-wrapper');
 
-				document.body.style.paddingTop = header.offsetHeight + 'px';
+				// document.body.style.paddingTop = header.offsetHeight + 'px';
 				window.addEventListener('scroll', this.handleScroll);
+
 			});
 	}
 
 	componentDidMount() {
 
 		this.mediaQuery();
+		
 		window.addEventListener('resize', this.mediaQuery);
 
 		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 4500);

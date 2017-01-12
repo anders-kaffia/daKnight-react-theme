@@ -13,4 +13,9 @@ class ServiceText extends React.Component {
 	}
 }
 
+ServiceText.propTypes = {
+	activeItem: React.PropTypes.number.isRequired,
+	page: React.PropTypes.array.isRequired
+}
+
 export default ServiceText;

@@ -3,8 +3,21 @@
 ========================================================================== */
 
 #tjanster {
-	min-height: 98vh;
-	margin-bottom: $largeSpacing;
+	@include large-spacing(margin-top);
+	@include large-spacing(margin-bottom);
+	@include breakpoint(xs) {
+		min-height: calc(100vh - 38.4px);
+	}
+	@include breakpoint(sm) {
+		min-height: calc(100vh - 44.8px);
+	}
+	@include breakpoint(md) {
+		min-height: calc(100vh - 51.2px);
+	}
+	@include breakpoint(lg) {
+		min-height: calc(100vh - 64px);
+	}
+	
 }
 
 #service-menu {
@@ -20,9 +33,9 @@
 		align-items: center;
 	}
 	ul {
+		@include small-spacing(margin-bottom);
 		max-width: 100%;
 		margin-top: 0;
-		@include main-spacing(margin-bottom);
 		flex: 1;
 		flex-wrap: wrap;
 		justify-content: space-around;
@@ -144,10 +157,10 @@
 		color: $color-darkgrey;
 		justify-content: center;
 		@include breakpoint(md) {
-			@include main-spacing(margin-left);
+			@include small-spacing(margin-left);
 		}
 		@include breakpoint(lg) {
-			@include main-spacing(margin-left);
+			@include small-spacing(margin-left);
 		}
 		>div {
 			padding: 6% 4%;
@@ -163,12 +176,12 @@ $bar-width: 4em;
 $bar-height: .5em;
 $bar-spacing: 1.2em;
 #service-burger-container {
+	@include small-spacing(margin-bottom);
 	position: relative;
 	flex: 1;
     min-height: 5em;
 	max-height: 2em;
 	background: $color-2;
-	@include main-spacing(margin-bottom);
 	@include breakpoint(sm) { 
 			display: none;
 		}

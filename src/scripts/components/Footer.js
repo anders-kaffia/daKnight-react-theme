@@ -11,7 +11,7 @@ class Footer extends React.Component {
 			{ loading ? (
 				null
 			) : (
-				<div  id="footer">
+				<div  id="footer" className="flex-column">
 					<nav id="footer-nav">
 						<ul>
 							{menu.map((page) => (
@@ -25,6 +25,12 @@ class Footer extends React.Component {
 			</div>
 		)
 	}
+}
+
+Footer.propTypes = {
+	details:  React.PropTypes.object.isRequired,
+	loading:  React.PropTypes.bool.isRequired,
+	menu:  React.PropTypes.array.isRequired
 }
 
 export default Footer;
