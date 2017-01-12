@@ -27274,6 +27274,9 @@
 	};
 	
 	scripts.smoothScroll = function (margin) {
+		/**
+	  * Enables smooth scrolling
+	  * */
 		(0, _jquery2.default)('a[href^="#"]').on('click', function (e) {
 			e.preventDefault();
 	

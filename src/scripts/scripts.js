@@ -18,6 +18,9 @@ scripts.init = () => {
 };
 
 scripts.smoothScroll = (margin) => {
+	/**
+	 * Enables smooth scrolling
+	 * */
 	$('a[href^="#"]').on('click', function (e) {
 		e.preventDefault();
 
