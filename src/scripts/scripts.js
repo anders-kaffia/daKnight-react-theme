@@ -3,9 +3,6 @@ import $ from 'jquery';
 const scripts = {};
 
 scripts.init = () => {
-	/**
-	 * Adds offset, matching targets margin-top, to top of scroll target
-	 * */
 	if ($(window.innerWidth)[0] < 768) {
 		scripts.smoothScroll(19.2);
 	} else if ($(window.innerWidth)[0] > 768 && $(window.innerWidth)[0] < 992) {
@@ -17,10 +14,14 @@ scripts.init = () => {
 	}
 };
 
+/**
+ * @desc Enables smooth scrolling
+ *
+ * @param {number} number of margin-top pixels,
+ * this will set the correct offset so the full
+ * target element is shown, including margin-top.
+ */
 scripts.smoothScroll = (margin) => {
-	/**
-	 * Enables smooth scrolling
-	 * */
 	$('a[href^="#"]').on('click', function (e) {
 		e.preventDefault();
 

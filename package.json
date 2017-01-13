@@ -1,12 +1,11 @@
 {
   "name": "daKnight",
-  "version": "0.1",
-  "description": "A new theme for daKnight.se based on React",
+  "version": "1.0",
+  "description": "A Wordpress theme for daKnight.se based on React",
   "main": "index.js",
   "scripts": {
     "build": "webpack --optimize-minimize --optimize-dedupe",
-    "dev": "webpack --optimize-dedupe",
-    "dmc": "webpack-dev-server --progress --inline --hot"
+    "dmc": "webpack --optimize-dedupe"
   },
   "repository": "https://anders_daknight@bitbucket.org/anders_daknight/daknight-react.git",
   "author": "Anders Söderström <anders@godrowsy.com>",

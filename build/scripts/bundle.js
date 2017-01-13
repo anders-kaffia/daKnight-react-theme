@@ -21178,7 +21178,7 @@
 					var header = document.getElementById('header-wrapper');
 	
 					window.addEventListener('scroll', _this2.handleScroll);
-	
+					console.log(_this2.state.mainPageTitles);
 					_scripts2.default.init();
 				});
 			}
@@ -25695,6 +25695,10 @@
 		getAllContent: function getAllContent(type1, type2, type3) {
 			return _axios2.default.all([model.getContent(type1), model.getContent(type2), model.getContent(type3)]).then(function (arr) {
 				return {
+					/**
+	     * Page.parent is not dynamic.
+	     * This number need to be changed to the ID of the page with slug 'tjanster'
+	     * */
 					pages: arr[0].data,
 					logo: arr[2].data.filter(function (page) {
 						return page.title.rendered === 'DKN_Logotyp';
@@ -25718,7 +25722,7 @@
 						return page.title;
 					}),
 					mainPageTitles: arr[0].data.filter(function (page) {
-						return page.parent === 0 && page.slug != 'footer';
+						return page.parent === 0 && page.slug === 'om-oss' || page.slug === 'tjanster' || page.slug === 'kontakt';
 					}).sort(function (a, b) {
 						return a.menu_order > b.menu_order ? 1 : 0;
 					}),
@@ -27259,9 +27263,6 @@
 	var scripts = {};
 	
 	scripts.init = function () {
-		/**
-	  * Adds offset, matching targets margin-top, to top of scroll target
-	  * */
 		if ((0, _jquery2.default)(window.innerWidth)[0] < 768) {
 			scripts.smoothScroll(19.2);
 		} else if ((0, _jquery2.default)(window.innerWidth)[0] > 768 && (0, _jquery2.default)(window.innerWidth)[0] < 992) {
@@ -27273,10 +27274,14 @@
 		}
 	};
 	
+	/**
+	 * @desc Enables smooth scrolling
+	 *
+	 * @param {number} number of margin-top pixels,
+	 * this will set the correct offset so the full
+	 * target element is shown, including margin-top.
+	 */
 	scripts.smoothScroll = function (margin) {
-		/**
-	  * Enables smooth scrolling
-	  * */
 		(0, _jquery2.default)('a[href^="#"]').on('click', function (e) {
 			e.preventDefault();
 	
