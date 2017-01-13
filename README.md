@@ -4,14 +4,14 @@ A Wordpress theme developed for daKnight Productions. The theme is based on Reac
 *Developed by Anders Söderström*
 
 ***This theme develop environment uses:***
-* Sass (autoprefixer in Webpack)
-* React
-* React Router
-* ESLint
-* Axios
-* Pigeon Maps
-* jQuery
-* Webpack, to bundle it all together
+  - Sass (autoprefixer in Webpack)
+  - React
+  - React Router
+  - ESLint
+  - Axios
+  - Pigeon Maps
+  - jQuery
+  - Webpack, to bundle it all together
 
 ### Installation
 
