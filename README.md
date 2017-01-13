@@ -39,7 +39,7 @@ $ yarn run build
 This theme does not use Bootstrap. It uses flex box. Major React components have their own Sass files. Some minor components, like ContactForm.js, share Sass file with their parent component. Autoprefixer is applied with Webpack, so prefixing is not needed. 
 
 ### Wordpress REST API
-All content is fetched from the Wordpress REST API through the React plugin Axios in model.js. Most requests are queried on slugs. There are a few requests queried on page parent ID (serviceChildPages, serviceChildPageTitles, activeItem). Until a parent page slug endpoint is added, these will have to be updated to match the ID of the page 'Tjänster'.
+All content is fetched from the Wordpress REST API through the React plugin Axios in model.js. 
 
 ### Tech
 

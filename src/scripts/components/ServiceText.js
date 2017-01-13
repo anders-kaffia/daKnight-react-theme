@@ -7,7 +7,7 @@ class ServiceText extends React.Component {
 
 		return (
 			<div id="service-text" className="flex-row">
-				<div dangerouslySetInnerHTML={ {__html: page.filter(page => page.id === activeItem)[0].content.rendered } } />
+				<div className="flex-column" dangerouslySetInnerHTML={ {__html: page.filter(page => page.id === activeItem)[0].content.rendered } } />
 			</div>
 		);
 	}

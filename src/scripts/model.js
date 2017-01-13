@@ -29,14 +29,15 @@ model.apiCall = {
 				arrow: arr[2].data.filter(page => page.slug === 'arrow')[0],
 				about: arr[0].data.filter(page => page.slug === 'om-oss')[0],
 				services: arr[0].data.filter(page => page.slug === 'tjanster')[0],
+				servicesId: arr[0].data.filter(page => page.slug === 'tjanster')[0].id,
 				contact: arr[0].data.filter(page => page.slug === 'kontakt')[0],
 				footer: arr[0].data.filter(page => page.slug === 'footer')[0],
 				allPageTitles: arr[0].data.map(page => page.title),
 				mainPageTitles: arr[0].data.filter(page => page.parent === 0 && page.slug === 'om-oss' || page.slug === 'tjanster' || page.slug === 'kontakt').sort((a, b) => a.menu_order > b.menu_order ? 1 : 0),
-				serviceChildPages: arr[0].data.filter(page => page.parent === 5).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0),
-				serviceChildPageTitles: arr[0].data.filter(page => page.parent === 5).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0).map(page => page.title),
+				serviceChildPages: arr[0].data.filter(page => page.parent === arr[0].data.filter(page => page.slug === 'tjanster')[0].id).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0),
+				serviceChildPageTitles: arr[0].data.filter(page => page.parent === arr[0].data.filter(page => page.slug === 'tjanster')[0].id).sort((a, b) => a.menu_order > b.menu_order ? 1 : 0).map(page => page.title),
 				posts: arr[1].data,
-				activeItem: arr[0].data.filter(page => page.parent === 5).filter(page => page.slug === 'webbutveckling')[0].id
+				activeItem: arr[0].data.filter(page => page.parent === arr[0].data.filter(page => page.slug === 'tjanster')[0].id).filter(page => page.slug === 'webbutveckling')[0].id
 			};
 		})
 };

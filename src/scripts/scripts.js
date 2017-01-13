@@ -35,7 +35,6 @@ scripts.smoothScroll = (margin) => {
 		}, 700, 'swing', () => {
 			window.location.hash = target;
 		});
-		console.log(target);
 	});
 };
 

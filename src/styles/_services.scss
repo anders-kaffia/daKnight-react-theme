@@ -86,7 +86,8 @@
 		color: $color-darkgrey;
 		@include breakpoint(xs) {
 			font-size: 14px;
-			font-size: 3.5vw;
+			font-size: 5.5vw;
+			font-weight: bold;
 		}
 		@include breakpoint(sm) {
 			font-size: 10px;
@@ -119,6 +120,7 @@
 	ul.flex-row {
 		height: 100%;
 		margin: 0;
+		padding-top: 92px;
 	}
 }
 
@@ -163,7 +165,9 @@
 			@include small-spacing(margin-left);
 		}
 		>div {
-			padding: 6%;
+			justify-content: center;
+			align-items: center;
+			padding: 10%;
 		}
 	}	
 }

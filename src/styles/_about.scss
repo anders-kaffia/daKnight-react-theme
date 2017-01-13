@@ -53,6 +53,7 @@
 
 #about-1, #about-2, #about-3 {
   	@include section-height;
+	position: relative;
 	text-align: center;
 	margin: 0;
 	align-items: center;
@@ -83,6 +84,6 @@
 		@include mq-size(font-size, 2.5, em);
 	}
 	h4 {
-		@include mq-size(font-size, 1.6, em);
+		@include mq-size(font-size, 1.8, em);
 	}
 }

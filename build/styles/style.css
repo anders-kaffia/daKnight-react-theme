@@ -912,6 +912,7 @@ body {
         height: auto; } }
 
 #about-1, #about-2, #about-3 {
+  position: relative;
   text-align: center;
   margin: 0;
   -webkit-box-align: center;
@@ -952,7 +953,7 @@ body {
       margin-bottom: 2em; } }
   @media (max-width: 767px) {
     #about-1 h2 {
-      font-size: 1.8em; } }
+      font-size: 1.5em; } }
   @media (min-width: 768px) and (max-width: 991px) {
     #about-1 h2 {
       font-size: 2.7em; } }
@@ -979,7 +980,7 @@ body {
       margin-bottom: 2em; } }
   @media (max-width: 767px) {
     #about-2 h2 {
-      font-size: 1.5em; } }
+      font-size: 1.25em; } }
   @media (min-width: 768px) and (max-width: 991px) {
     #about-2 h2 {
       font-size: 2.25em; } }
@@ -994,7 +995,7 @@ body {
   background: #d1c7b9; }
   @media (max-width: 767px) {
     #about-3 h2 {
-      font-size: 1.5em; } }
+      font-size: 1.25em; } }
   @media (min-width: 768px) and (max-width: 991px) {
     #about-3 h2 {
       font-size: 2.25em; } }
@@ -1006,16 +1007,16 @@ body {
       font-size: 3em; } }
   @media (max-width: 767px) {
     #about-3 h4 {
-      font-size: 0.96em; } }
+      font-size: 0.9em; } }
   @media (min-width: 768px) and (max-width: 991px) {
     #about-3 h4 {
-      font-size: 1.44em; } }
+      font-size: 1.62em; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     #about-3 h4 {
-      font-size: 1.6em; } }
+      font-size: 1.8em; } }
   @media (min-width: 1200px) {
     #about-3 h4 {
-      font-size: 1.92em; } }
+      font-size: 2.16em; } }
 
 /* 
 *				Services Section Styling
@@ -1147,7 +1148,8 @@ body {
     @media (max-width: 767px) {
       #service-menu span {
         font-size: 14px;
-        font-size: 3.5vw; } }
+        font-size: 5.5vw;
+        font-weight: bold; } }
     @media (min-width: 768px) and (max-width: 991px) {
       #service-menu span {
         font-size: 10px;
@@ -1176,7 +1178,8 @@ body {
   z-index: 3000; }
   #service-menu.service-menu-open ul.flex-row {
     height: 100%;
-    margin: 0; }
+    margin: 0;
+    padding-top: 92px; }
 
 .services-content {
   -webkit-box-flex: 1;
@@ -1244,7 +1247,13 @@ body {
   .services-content #service-text {
     margin-left: 1em; } }
     .services-content #service-text > div {
-      padding: 6%; }
+      -webkit-box-pack: center;
+          -ms-flex-pack: center;
+              justify-content: center;
+      -webkit-box-align: center;
+          -ms-flex-align: center;
+              align-items: center;
+      padding: 10%; }
 
 /*
 *			Burger menu

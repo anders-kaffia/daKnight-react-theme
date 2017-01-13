@@ -21178,7 +21178,6 @@
 					var header = document.getElementById('header-wrapper');
 	
 					window.addEventListener('scroll', _this2.handleScroll);
-					console.log(_this2.state.mainPageTitles);
 					_scripts2.default.init();
 				});
 			}
@@ -23729,18 +23728,40 @@
 							_react2.default.createElement(
 								"div",
 								{ id: "arrow" },
-								_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
+								_react2.default.createElement(
+									"a",
+									{ href: "#about-2" },
+									_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
+								)
 							),
 							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.om_oss } })
 						),
 						_react2.default.createElement(
 							"section",
 							{ id: "about-2", className: "flex-column" },
+							_react2.default.createElement(
+								"div",
+								{ id: "arrow" },
+								_react2.default.createElement(
+									"a",
+									{ href: "#about-3" },
+									_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
+								)
+							),
 							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.bakgrund } })
 						),
 						_react2.default.createElement(
 							"section",
 							{ id: "about-3", className: "flex-column" },
+							_react2.default.createElement(
+								"div",
+								{ id: "arrow" },
+								_react2.default.createElement(
+									"a",
+									{ href: "#tjanster" },
+									_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
+								)
+							),
 							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
 						)
 					)
@@ -24100,7 +24121,7 @@
 				return _react2.default.createElement(
 					"div",
 					{ id: "service-text", className: "flex-row" },
-					_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: page.filter(function (page) {
+					_react2.default.createElement("div", { className: "flex-column", dangerouslySetInnerHTML: { __html: page.filter(function (page) {
 								return page.id === activeItem;
 							})[0].content.rendered } })
 				);
@@ -25712,6 +25733,9 @@
 					services: arr[0].data.filter(function (page) {
 						return page.slug === 'tjanster';
 					})[0],
+					servicesId: arr[0].data.filter(function (page) {
+						return page.slug === 'tjanster';
+					})[0].id,
 					contact: arr[0].data.filter(function (page) {
 						return page.slug === 'kontakt';
 					})[0],
@@ -25727,12 +25751,16 @@
 						return a.menu_order > b.menu_order ? 1 : 0;
 					}),
 					serviceChildPages: arr[0].data.filter(function (page) {
-						return page.parent === 5;
+						return page.parent === arr[0].data.filter(function (page) {
+							return page.slug === 'tjanster';
+						})[0].id;
 					}).sort(function (a, b) {
 						return a.menu_order > b.menu_order ? 1 : 0;
 					}),
 					serviceChildPageTitles: arr[0].data.filter(function (page) {
-						return page.parent === 5;
+						return page.parent === arr[0].data.filter(function (page) {
+							return page.slug === 'tjanster';
+						})[0].id;
 					}).sort(function (a, b) {
 						return a.menu_order > b.menu_order ? 1 : 0;
 					}).map(function (page) {
@@ -25740,7 +25768,9 @@
 					}),
 					posts: arr[1].data,
 					activeItem: arr[0].data.filter(function (page) {
-						return page.parent === 5;
+						return page.parent === arr[0].data.filter(function (page) {
+							return page.slug === 'tjanster';
+						})[0].id;
 					}).filter(function (page) {
 						return page.slug === 'webbutveckling';
 					})[0].id
@@ -27295,7 +27325,6 @@
 			}, 700, 'swing', function () {
 				window.location.hash = target;
 			});
-			console.log(target);
 		});
 	};
 	

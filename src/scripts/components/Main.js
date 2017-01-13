@@ -73,7 +73,6 @@ class Main extends React.Component {
 				const header = document.getElementById('header-wrapper');
 
 				window.addEventListener('scroll', this.handleScroll);
-				console.log(this.state.mainPageTitles);
 				scripts.init();
 
 			});
