@@ -1476,7 +1476,8 @@ body {
   text-align: center;
   -webkit-box-flex: 1;
       -ms-flex: 1;
-          flex: 1; }
+          flex: 1;
+  color: #231f20; }
   #contact-text > div {
     height: 100%;
     padding: 6% 5%; }

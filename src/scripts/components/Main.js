@@ -12,15 +12,15 @@ import Contact from './Contact';
 import Footer from './Footer';
 
 // Other
-import model from '../model';
-import scripts from '../scripts';
+import model from '../helpers/model';
+import scripts from '../helpers/scripts';
+import jqueryScripts from '../helpers/jqueryScripts';
 
 class Main extends React.Component {
 
 	constructor() {
 		super();
 
-		this.handleScroll = this.handleScroll.bind(this);
 		this.mediaQuery = this.mediaQuery.bind(this);
 		this.setActive = this.setActive.bind(this);
 		this.burgerMenu = this.burgerMenu.bind(this);
@@ -69,36 +69,19 @@ class Main extends React.Component {
 					isLoading: false,
 					activeItem: data.activeItem
 				});
-
-				const header = document.getElementById('header-wrapper');
-
-				window.addEventListener('scroll', this.handleScroll);
-				scripts.init();
-
+				jqueryScripts.smoothScroll();
+				window.addEventListener('scroll', scripts.handleHeaderPosition);
+				window.addEventListener('keydown', jqueryScripts.handleArrowKeyScroll);
 			});
 	};
 
 	componentDidMount() {
 		this.mediaQuery();
 
+
 		window.addEventListener('resize', this.mediaQuery);
 
-		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 4000);
-	};
-
-
-	/**
-	 * @desc toggles the header position from fixed to absolute
-	 */
-	handleScroll() {
-		const services = document.getElementById('tjanster');
-		const header = document.getElementById('header-wrapper');
-		const headerHeight = header.offsetHeight;
-		const topOfServices = services.offsetTop;
-		const absPosition = 'position: absolute; top: ' + (topOfServices - headerHeight) + 'px';
-
-		window.scrollY >= (topOfServices - headerHeight) ? header.style.cssText += absPosition : null;
-		window.scrollY <= (topOfServices - headerHeight) ? header.style.cssText = window.getComputedStyle(header, null) - absPosition : null;
+		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
 	};
 
 	/**
