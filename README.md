@@ -59,10 +59,10 @@ Documentation:
 
 Plugins used with this theme:
 
-* Contact Form 7
-* WP REST API
-* Advanced Custom Fields
-* ACF to REST API
+* [Contact Form 7](http://contactform7.com/)
+* [WP REST API](http://v2.wp-api.org/)
+* [Advanced Custom Fields](https://www.advancedcustomfields.com/)
+* [ACF to REST API](http://github.com/airesvsg/acf-to-rest-api)
 
 #### Todos
 
