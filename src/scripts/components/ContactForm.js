@@ -18,8 +18,8 @@ class ContactForm extends React.Component {
 }
 
 ContactForm.propTypes = {
-	form:  React.PropTypes.object.isRequired,
-	toggleForm:  React.PropTypes.bool.isRequired
+	form:  React.PropTypes.string.isRequired,
+	toggleForm:  React.PropTypes.func.isRequired
 };
 
 export default ContactForm;

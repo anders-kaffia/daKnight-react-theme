@@ -20,13 +20,13 @@ class LocationMap extends React.Component {
 			<div id="map-container" >
 				<div id="map" className="flex-row">
 					<div className="disableScroll" />
-						<Map
-							center={[59.335561, 18.049955]}
-							width={width}
-							height={ width < 768 ? height * .3 : height * .8 }
-							zoom={14}
-							provider={mapboxProvider}
-							/>
+					<Map
+						center={[59.335561, 18.049955]}
+						width={width}
+						height={height}
+						zoom={14}
+						provider={mapboxProvider}
+						/>
 				</div>
 			</div>
 		);

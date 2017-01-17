@@ -85,8 +85,7 @@
 		text-transform: uppercase;
 		color: $color-darkgrey;
 		@include breakpoint(xs) {
-			font-size: 14px;
-			font-size: 5.5vw;
+			font-size: 1.1em;
 			font-weight: bold;
 		}
 		@include breakpoint(sm) {

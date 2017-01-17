@@ -11,15 +11,15 @@ class Contact extends React.Component {
 		const { details, loading, showForm, toggleForm, width, height } = this.props;
 
 		return (
-			<div className="pigeon-drag-block pigeon-click-block">
+			<div id="contact-container" className="pigeon-drag-block pigeon-click-block">
 				{ loading ? (
 					null
 				) : (
 					<div id={ details.slug } className="flex-row pigeon-drag-block pigeon-click-block">
-						<section id="contact-text">
+						<section id="contact-text" className="flex-row">
 							<div className="pigeon-drag-block pigeon-click-block">
-								<div dangerouslySetInnerHTML={ {__html: details.content.rendered} } className="pigeon-drag-block pigeon-click-block" />
-								<button id="open-contact-form" onClick={ toggleForm } className="pigeon-drag-block pigeon-click-block">Kontakta oss!</button>
+								<div dangerouslySetInnerHTML={ {__html: details.content.rendered} } className="pigeon-drag-block pigeon-click-block flex-column" />
+								<button id="open-contact-form" onClick={ toggleForm } className="pigeon-drag-block pigeon-click-block">Boka möte här!</button>
 							</div>
 						</section>
 						{ showForm ? (

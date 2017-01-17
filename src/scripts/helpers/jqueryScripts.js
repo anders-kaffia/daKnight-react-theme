@@ -1,8 +1,14 @@
 import $ from 'jquery';
+import scripts from './scripts';
 
+let currentScrollPoint;
 let headerHeight;
 let marginTop;
-if ($(window.innerWidth)[0] < 768) {
+
+/**
+ * Sets the correct media query values of the header height and top margin.
+ * */
+if ($(window.innerWidth)[0] <= 768) {
 	headerHeight = 143.6;
 	marginTop = 19.2;
 } else if ($(window.innerWidth)[0] > 768 && $(window.innerWidth)[0] < 992) {
@@ -20,7 +26,6 @@ const jqueryScripts = {
 
 	/**
 	 * @desc Enables smooth scrolling
-	 *
 	 */
 	smoothScroll() {
 		$('a[href^="#"]').on('click', function (e) {
@@ -39,16 +44,58 @@ const jqueryScripts = {
 		});
 	},
 
-	handleArrowKeyScroll(e) {
+	/**
+	 * @desc Handles page scroll on arrow keys
+	 * */
+	handleArrowKeyScroll() {
+		const lastAboutSection = document.getElementById('about-2').offsetTop;
+
 		$('html, body').keydown((e) => {
-			e.keyCode === 40 ? $('html, body').stop().animate({
-				scrollTop: (window.scrollY + window.innerHeight)
-			}, 500, 'swing')
-				: (e.keyCode === 38 ?
-					$('html, body').stop().animate({
-						scrollTop: (window.scrollY - window.innerHeight)
-					}, 500, 'swing') : null);
+			e.keyCode === 38 ? ((lastAboutSection + 10) > window.scrollY ? jqueryScripts.arrowScrollTopUp()
+				: jqueryScripts.arrowScrollbottomUp())
+				: (e.keyCode === 40 ? ((lastAboutSection - 200) > window.scrollY ? jqueryScripts.arrowScrollTopDown()
+					: jqueryScripts.arrowScrollbottomDown()) : null);
 		});
+	},
+
+	/**
+	 * @desc Handles scroll amount above the services section.
+	 * Scroll direction: up.
+	 * */
+	arrowScrollTopUp() {
+		$('html, body').stop().animate({
+			scrollTop: (window.scrollY - (window.innerHeight - (headerHeight - marginTop)))
+		}, 500, 'swing');
+	},
+
+	/**
+	 * @desc Handles scroll amount above the services section.
+	 * Scroll direction: down.
+	 * */
+	arrowScrollTopDown() {
+		$('html, body').stop().animate({
+			scrollTop: (window.scrollY + (window.innerHeight - (headerHeight - marginTop)))
+		}, 500, 'swing');
+	},
+
+	/**
+	 * @desc Handles scroll amount below the services section.
+	 * Scroll direction: up.
+	 * */
+	arrowScrollbottomUp() {
+		$('html, body').stop().animate({
+			scrollTop: (window.scrollY - (window.innerHeight - marginTop))
+		}, 500, 'swing');
+	},
+
+	/**
+	 * @desc Handles scroll amount below the services section.
+	 * Scroll direction: down.
+	 * */
+	arrowScrollbottomDown() {
+		$('html, body').stop().animate({
+			scrollTop: (window.scrollY + (window.innerHeight - marginTop))
+		}, 500, 'swing');
 	},
 };
 
