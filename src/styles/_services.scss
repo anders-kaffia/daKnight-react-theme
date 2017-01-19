@@ -37,25 +37,25 @@
 		max-width: 100%;
 		margin-top: 0;
 		flex: 1;
-		flex-wrap: wrap;
+		// flex-wrap: wrap;
 		justify-content: space-around;
 		background: $color-3;
 		@include breakpoint(xs) {
 			flex-direction: column;
-			padding: 2.5%;
+			padding: 1em;
 		}
 		@include breakpoint(sm) {
-			padding: 2.5%;
+			padding: 1.2em;
+			flex-wrap: wrap;
 		}
 		@include breakpoint(md) {
-			padding: 3%;
+			padding: 1.7em;
 		}
 		@include breakpoint(lg) {
-			padding: 3.5%;
+			padding: 2.3em;
 		}
 	}
 	li {
-		max-width: 9%;
 		cursor: pointer;
 		@include breakpoint(xs) {
 			max-width: 100%;
@@ -63,16 +63,17 @@
 		}
 	
 		@include breakpoint(sm) {
-			max-width: 17%;
-    		margin: 2%;
+			padding: .97em;
+			flex: 0 1 25%;
 		}
 	
 		@include breakpoint(md) {
-			max-width: 11%;
+			flex: 0 1 calc(25%);
 		}
 	
 		@include breakpoint(lg) {
-			
+			padding: 10px;
+			flex: 0 0 12.5%;
 		}
 	}
 	img {
@@ -136,14 +137,6 @@
 		@include breakpoint(sm) {
 			display: none;
 		}
-	
-		@include breakpoint(md) {
-			// min-width: 100%;
-		}
-	
-		@include breakpoint(lg) {
-			// min-width:100%;
-		}
 		#service-feat-img {
 			flex: 1;
 			background-size: cover;
@@ -167,6 +160,9 @@
 			justify-content: center;
 			align-items: center;
 			padding: 10%;
+			span {
+				line-height: 2.0;
+			}
 		}
 	}	
 }

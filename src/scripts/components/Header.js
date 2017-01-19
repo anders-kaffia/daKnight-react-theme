@@ -9,7 +9,7 @@ class Header extends React.Component {
 		const { details, loading, logo, id } = this.props;
 
 		return (
-			<div>
+			<div className="flex-row">
 				{ loading ? (
 					null
 				) : (

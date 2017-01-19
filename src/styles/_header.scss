@@ -6,7 +6,7 @@
 	position: fixed;
 	top: 0;
 	left: 0;
-	flex: 1;
+	flex: 1 1 100%;
 	background: $color-white;
 	width: 100%;
 	z-index: 2000;
@@ -14,7 +14,7 @@
 
 #header {
 	@include large-spacing(padding);
-	flex: 1;
+	flex: 1 1 100%;
 	justify-content: space-between;
 	padding-bottom: 0;
 }

@@ -3,7 +3,7 @@
 ========================================================================== */
 
 // The Wordpress page slug
-#om-oss {
+#about {
 	width: 100%;
 }
 
@@ -31,25 +31,7 @@
 	}
 }
 
-#arrow {
-	position: absolute;
-	top: 85%;
-	left: 50%;
-	cursor: pointer;
-	z-index: 999;
-	animation: arrow 2s infinite;
-	img {
-		position: relative;
-		left: -50%;
-	}
-	@media only screen and ( max-width : 768px ) {
-		img {
-			width: 2em;
-			height: auto;
-		}
-			top: 92%;
-	}
-}
+
 
 #about-1, #about-2, #about-3 {
   	@include section-height;
@@ -60,6 +42,26 @@
 	justify-content: center;
 	div {
 		width: 70%;
+	}
+	div.arrow {
+		position: absolute;
+		max-width: 60px;
+		top: 85%;
+		left: 50%;
+		cursor: pointer;
+		z-index: 999;
+		animation: arrow 2s infinite;
+		img {
+			position: relative;
+			left: -50%;
+		}
+		@media only screen and ( max-width : 768px ) {
+			img {
+				width: 2em;
+				height: auto;
+			}
+				top: 92%;
+		}
 	}
 }
 

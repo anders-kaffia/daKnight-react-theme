@@ -606,30 +606,27 @@ body {
           align-items: center; }
   .loading h2 {
     margin-bottom: 4em; }
-  .loading .loading-span-container {
+  .loading .loading-span-container span {
+    width: 3em;
+    height: 3em;
+    border-radius: 50%;
+    display: inline-block;
     position: absolute;
-    top: 50%; }
-    .loading .loading-span-container span {
-      width: 3em;
-      height: 3em;
-      border-radius: 50%;
-      display: inline-block;
-      position: absolute;
-      left: 50%;
-      margin-left: -1em;
-      -webkit-animation: 3s infinite linear;
-              animation: 3s infinite linear; }
-      .loading .loading-span-container span:nth-child(1) {
-        background: #e4dbd0;
-        -webkit-animation: left 1s infinite linear;
-                animation: left 1s infinite linear; }
-      .loading .loading-span-container span:nth-child(2) {
-        background: #41d6b6;
-        z-index: 100; }
-      .loading .loading-span-container span:nth-child(3) {
-        background: #d1c7b9;
-        -webkit-animation: right 1s infinite linear;
-                animation: right 1s infinite linear; }
+    left: 50%;
+    margin-left: -1em;
+    -webkit-animation: 3s infinite linear;
+            animation: 3s infinite linear; }
+    .loading .loading-span-container span:nth-child(1) {
+      background: #e4dbd0;
+      -webkit-animation: left 1s infinite linear;
+              animation: left 1s infinite linear; }
+    .loading .loading-span-container span:nth-child(2) {
+      background: #41d6b6;
+      z-index: 100; }
+    .loading .loading-span-container span:nth-child(3) {
+      background: #d1c7b9;
+      -webkit-animation: right 1s infinite linear;
+              animation: right 1s infinite linear; }
 
 @-webkit-keyframes right {
   0% {
@@ -687,16 +684,16 @@ body {
   top: 0;
   left: 0;
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   background: #fff;
   width: 100%;
   z-index: 2000; }
 
 #header {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+      -ms-flex: 1 1 100%;
+          flex: 1 1 100%;
   -webkit-box-pack: justify;
       -ms-flex-pack: justify;
           justify-content: space-between;
@@ -846,7 +843,7 @@ body {
 /* 
 *				About Section Styling
 ========================================================================== */
-#om-oss {
+#about {
   width: 100%; }
 
 @-webkit-keyframes arrow {
@@ -893,24 +890,6 @@ body {
     -webkit-transform: translateY(-0.5em);
             transform: translateY(-0.5em); } }
 
-#arrow {
-  position: absolute;
-  top: 85%;
-  left: 50%;
-  cursor: pointer;
-  z-index: 999;
-  -webkit-animation: arrow 2s infinite;
-          animation: arrow 2s infinite; }
-  #arrow img {
-    position: relative;
-    left: -50%; }
-  @media only screen and (max-width: 768px) {
-    #arrow {
-      top: 92%; }
-      #arrow img {
-        width: 2em;
-        height: auto; } }
-
 #about-1, #about-2, #about-3 {
   position: relative;
   text-align: center;
@@ -935,6 +914,24 @@ body {
       min-height: calc(100vh - 216px); } }
   #about-1 div, #about-2 div, #about-3 div {
     width: 70%; }
+  #about-1 div.arrow, #about-2 div.arrow, #about-3 div.arrow {
+    position: absolute;
+    max-width: 60px;
+    top: 85%;
+    left: 50%;
+    cursor: pointer;
+    z-index: 999;
+    -webkit-animation: arrow 2s infinite;
+            animation: arrow 2s infinite; }
+    #about-1 div.arrow img, #about-2 div.arrow img, #about-3 div.arrow img {
+      position: relative;
+      left: -50%; }
+    @media only screen and (max-width: 768px) {
+      #about-1 div.arrow, #about-2 div.arrow, #about-3 div.arrow {
+        top: 92%; }
+        #about-1 div.arrow img, #about-2 div.arrow img, #about-3 div.arrow img {
+          width: 2em;
+          height: auto; } }
 
 #about-1 {
   background: #e4dbd0;
@@ -1090,8 +1087,6 @@ body {
     -webkit-box-flex: 1;
         -ms-flex: 1;
             flex: 1;
-    -ms-flex-wrap: wrap;
-        flex-wrap: wrap;
     -ms-flex-pack: distribute;
         justify-content: space-around;
     background: #d1c7b9; }
@@ -1113,18 +1108,19 @@ body {
         -webkit-box-direction: normal;
             -ms-flex-direction: column;
                 flex-direction: column;
-        padding: 2.5%; } }
+        padding: 1em; } }
     @media (min-width: 768px) and (max-width: 991px) {
       #service-menu ul {
-        padding: 2.5%; } }
+        padding: 1.2em;
+        -ms-flex-wrap: wrap;
+            flex-wrap: wrap; } }
     @media (min-width: 992px) and (max-width: 1199px) {
       #service-menu ul {
-        padding: 3%; } }
+        padding: 1.7em; } }
     @media (min-width: 1200px) {
       #service-menu ul {
-        padding: 3.5%; } }
+        padding: 2.3em; } }
   #service-menu li {
-    max-width: 9%;
     cursor: pointer; }
     @media (max-width: 767px) {
       #service-menu li {
@@ -1132,11 +1128,21 @@ body {
         margin: 2%; } }
     @media (min-width: 768px) and (max-width: 991px) {
       #service-menu li {
-        max-width: 17%;
-        margin: 2%; } }
+        padding: .97em;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 1 25%;
+                flex: 0 1 25%; } }
     @media (min-width: 992px) and (max-width: 1199px) {
       #service-menu li {
-        max-width: 11%; } }
+        -webkit-box-flex: 0;
+            -ms-flex: 0 1 calc(25%);
+                flex: 0 1 calc(25%); } }
+    @media (min-width: 1200px) {
+      #service-menu li {
+        padding: 10px;
+        -webkit-box-flex: 0;
+            -ms-flex: 0 0 12.5%;
+                flex: 0 0 12.5%; } }
   #service-menu img {
     max-width: 90%; }
     @media (max-width: 767px) {
@@ -1253,6 +1259,8 @@ body {
           -ms-flex-align: center;
               align-items: center;
       padding: 10%; }
+      .services-content #service-text > div span {
+        line-height: 2.0; }
 
 /*
 *			Burger menu

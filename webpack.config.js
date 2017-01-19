@@ -1,5 +1,6 @@
 'use strict';
 
+const webpack = require('webpack');
 const path = require('path');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
@@ -57,6 +58,16 @@ module.exports = {
 		]
 	},
 	plugins: [
+		// new webpack.DefinePlugin({
+		// 	'process.env': {
+		// 		'NODE_ENV': JSON.stringify('production')
+		// 	}
+		// }),
+		// new webpack.optimize.UglifyJsPlugin({
+		// 	compress: {
+		// 		warnings: true
+		// 	}
+		// }),
 		new ExtractTextPlugin('../styles/style.css'),
 		new CompressionPlugin({
 			asset: "[path].gz[query]",

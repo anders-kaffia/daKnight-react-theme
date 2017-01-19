@@ -21160,6 +21160,34 @@
 		_createClass(Main, [{
 			key: 'componentWillMount',
 			value: function componentWillMount() {
+				// model.apiCall.getAllContent('pages', 'posts', 'media')
+				// 	.then(data => {
+				// 		this.setState({
+				// 			pages: data.pages,
+				// 			logo: data.logo,
+				// 			arrow: data.arrow,
+				// 			about: data.about,
+				// 			contact: data.contact,
+				// 			services: data.services,
+				// 			footer: data.footer,
+				// 			allPageTitles: data.allPageTitles,
+				// 			mainPageTitles: data.mainPageTitles,
+				// 			serviceChildPages: data.serviceChildPages,
+				// 			serviceChildPageTitles: data.serviceChildPageTitles,
+				// 			posts: data.posts,
+				// 			isLoading: false,
+				// 			activeItem: data.activeItem
+				// 		});
+				// 		jqueryScripts.smoothScroll();
+				// 		this.eventListeners();
+				// 		this.mediaQuery();
+				// 		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
+	
+				// 	});
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
 				var _this2 = this;
 	
 				_model2.default.apiCall.getAllContent('pages', 'posts', 'media').then(function (data) {
@@ -21182,16 +21210,10 @@
 					_jqueryScripts2.default.smoothScroll();
 					_this2.eventListeners();
 					_this2.mediaQuery();
+					_this2.interval = setTimeout(function () {
+						return _this2.setState({ renderBlankSlate: false });
+					}, 3000);
 				});
-			}
-		}, {
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				var _this3 = this;
-	
-				this.interval = setTimeout(function () {
-					return _this3.setState({ renderBlankSlate: false });
-				}, 3000);
 			}
 		}, {
 			key: 'eventListeners',
@@ -21229,79 +21251,79 @@
 	
 				// iPhone 4 portrait
 				if (window.innerHeight >= 480 && window.innerHeight < 568 && window.innerWidth >= 320 && window.innerWidth < 400) {
-					console.log('iPhone 4 portrait');
+					// console.log('iPhone 4 portrait');
 					updateMapWidth = window.innerWidth * 1.2;
 					updateMapHeight = window.innerHeight * .72;
 	
 					// iPhone 4 landscape
 				} else if (window.innerHeight >= 320 && window.innerHeight < 375 && window.innerWidth >= 480 && window.innerWidth < 568) {
-					console.log('iPhone 4 landscape');
+					// console.log('iPhone 4 landscape');
 					updateMapWidth = window.innerWidth * 1.3;
 					updateMapHeight = window.innerHeight * .9;
 	
 					// iPhone 5 portrait
 				} else if (window.innerHeight >= 568 && window.innerHeight < 667 && window.innerWidth >= 320 && window.innerWidth < 568) {
-					console.log('iPhone 5 portrait');
+					// console.log('iPhone 5 portrait');
 					updateMapWidth = window.innerWidth * 1.3;
 					updateMapHeight = window.innerHeight * .68;
 	
 					// iPhone 5 landscape
 				} else if (window.innerHeight >= 320 && window.innerHeight < 375 && window.innerWidth >= 568 && window.innerWidth < 667) {
-					console.log('iPhone 5 landscape');
+					// console.log('iPhone 5 landscape');
 					updateMapWidth = window.innerWidth * 1.35;
 					updateMapHeight = window.innerHeight * .9;
 	
 					// iPhone 6 portrait
 				} else if (window.innerHeight >= 667 && window.innerHeight < 736 && window.innerWidth >= 375 && window.innerWidth < 414) {
-					console.log('iPhone 6 portrait');
+					// console.log('iPhone 6 portrait');
 					updateMapWidth = window.innerWidth * 1.3;
 					updateMapHeight = window.innerHeight * .7;
 	
 					// iPhone 6 landscape
 				} else if (window.innerHeight >= 375 && window.innerHeight < 414 && window.innerWidth >= 667 && window.innerWidth < 736) {
-					console.log('iPhone 6 landscape');
+					// console.log('iPhone 6 landscape');
 					updateMapWidth = window.innerWidth * 1.35;
 					updateMapHeight = window.innerHeight * .92;
 	
 					// iPhone 6 plus portrait
 				} else if (window.innerHeight >= 736 && window.innerHeight < 1024 && window.innerWidth >= 414 && window.innerWidth < 768) {
-					console.log('iPhone 6 plus portrait');
+					// console.log('iPhone 6 plus portrait');
 					updateMapWidth = window.innerWidth * 1.3;
 					updateMapHeight = window.innerHeight * .75;
 	
 					// iPhone 6 plus landscape
 				} else if (window.innerHeight >= 414 && window.innerHeight < 768 && window.innerWidth >= 736 && window.innerWidth < 1024) {
-					console.log('iPhone 6 plus landscape');
+					// console.log('iPhone 6 plus landscape');
 					updateMapWidth = window.innerWidth * 2;
 					updateMapHeight = window.innerHeight * .95;
 	
 					// iPad portrait
 				} else if (window.innerHeight >= 1024 && window.innerWidth >= 768 && window.innerWidth < 992) {
-					console.log('iPad portrait');
+					// console.log('iPad portrait');
 					updateMapWidth = window.innerWidth * 1.9;
 					updateMapHeight = window.innerHeight * .75;
 	
 					// iPad landscape
 				} else if (window.innerHeight === 768 && window.innerWidth >= 1024 && window.innerWidth < 1200) {
-					console.log('iPad landscape');
+					// console.log('iPad landscape');
 					updateMapWidth = window.innerWidth * .65;
 					updateMapHeight = window.innerHeight * .72;
 	
 					// Desktop
 				} else if (window.innerHeight >= 768 && window.innerWidth >= 992) {
-					console.log('Desktop');
+					// console.log('Desktop');
 					updateMapWidth = window.innerWidth;
 					updateMapHeight = window.innerHeight * .84;
 	
 					// Custom dimentions between iPad and small desktop
 				} else if (window.innerHeight <= 1024 && window.innerWidth >= 768 && window.innerWidth < 992) {
-					console.log('Custom dimentions between iPad and small desktop');
+					// console.log('Custom dimentions between iPad and small desktop');
 					updateMapWidth = window.innerWidth * 1.9;
 					updateMapHeight = window.innerHeight * .8;
 	
 					// iPad Pro
 				} else if (window.innerHeight === 1366 && window.innerWidth === 1024) {
-					console.log('iPad Pro');
+					// console.log('iPad Pro');
 					updateMapWidth = window.innerWidth * 1.9;
 					updateMapHeight = window.innerHeight * .9;
 				}
@@ -23644,7 +23666,7 @@
 	
 				return _react2.default.createElement(
 					'div',
-					null,
+					{ className: 'flex-row' },
 					loading ? null : _react2.default.createElement(
 						'div',
 						{ id: id, className: 'flex-row' },
@@ -23811,7 +23833,7 @@
 							{ id: "about-1", className: "flex-column" },
 							_react2.default.createElement(
 								"div",
-								{ id: "arrow" },
+								{ className: "arrow" },
 								_react2.default.createElement(
 									"a",
 									{ href: "#about-2" },
@@ -23825,7 +23847,7 @@
 							{ id: "about-2", className: "flex-column" },
 							_react2.default.createElement(
 								"div",
-								{ id: "arrow" },
+								{ className: "arrow" },
 								_react2.default.createElement(
 									"a",
 									{ href: "#about-3" },
@@ -23839,7 +23861,7 @@
 							{ id: "about-3", className: "flex-column" },
 							_react2.default.createElement(
 								"div",
-								{ id: "arrow" },
+								{ className: "arrow" },
 								_react2.default.createElement(
 									"a",
 									{ href: "#tjanster" },
@@ -25800,10 +25822,6 @@
 		getAllContent: function getAllContent(type1, type2, type3) {
 			return _axios2.default.all([model.getContent(type1), model.getContent(type2), model.getContent(type3)]).then(function (arr) {
 				return {
-					/**
-	     * Page.parent is not dynamic.
-	     * This number need to be changed to the ID of the page with slug 'tjanster'
-	     * */
 					pages: arr[0].data,
 					logo: arr[2].data.filter(function (page) {
 						return page.title.rendered === 'DKN_Logotyp';
@@ -25812,7 +25830,7 @@
 						return page.slug === 'arrow';
 					})[0],
 					about: arr[0].data.filter(function (page) {
-						return page.slug === 'om-oss';
+						return page.slug === 'about';
 					})[0],
 					services: arr[0].data.filter(function (page) {
 						return page.slug === 'tjanster';
@@ -25830,7 +25848,7 @@
 						return page.title;
 					}),
 					mainPageTitles: arr[0].data.filter(function (page) {
-						return page.parent === 0 && page.slug === 'om-oss' || page.slug === 'tjanster' || page.slug === 'kontakt';
+						return page.parent === 0 && page.slug === 'about' || page.slug === 'tjanster' || page.slug === 'kontakt';
 					}).sort(function (a, b) {
 						return a.menu_order > b.menu_order ? 1 : 0;
 					}),
@@ -27452,7 +27470,7 @@
 				var absoluteTop = 500;
 	
 				(0, _jquery2.default)('html, body').stop().animate({
-					'scrollTop': $target.offset().top - (target === '#om-oss' || target === '#main-wrapper' ? absoluteTop : target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop)
+					'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? absoluteTop : target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop)
 				}, 700, 'swing', function () {
 					window.location.hash = target;
 				});

@@ -36,7 +36,7 @@ const jqueryScripts = {
 			const absoluteTop = 500;
 
 			$('html, body').stop().animate({
-				'scrollTop': $target.offset().top - (target === '#om-oss' || target === '#main-wrapper' ? absoluteTop :
+				'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? absoluteTop :
 					(target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop))
 			}, 700, 'swing', () => {
 				window.location.hash = target;
