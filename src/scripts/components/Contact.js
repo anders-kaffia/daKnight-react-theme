@@ -2,34 +2,43 @@ import React from 'react';
 
 // Components
 import Header from './Header';
-import LocationMap from './LocationMap';
 import ContactForm from './ContactForm';
 
+// Other
+import map from '../helpers/map';
+
 class Contact extends React.Component {
+
+	componentDidMount() {
+		!this.props.loading ? map.init() : null;
+	}
+
 	render() {
 		// Props
 		const { details, loading, showForm, toggleForm, width, height } = this.props;
 
 		return (
-			<div id="contact-container" className="pigeon-drag-block pigeon-click-block">
-				{ loading ? (
+			<div id="contact-container" >
+				{loading ? (
 					null
 				) : (
-					<div id={ details.slug } className="flex-row pigeon-drag-block pigeon-click-block">
-						<section id="contact-text" className="flex-row">
-							<div className="pigeon-drag-block pigeon-click-block">
-								<div dangerouslySetInnerHTML={ {__html: details.content.rendered} } className="pigeon-drag-block pigeon-click-block flex-column" />
-								<button id="open-contact-form" onClick={ toggleForm } className="pigeon-drag-block pigeon-click-block">Boka möte här!</button>
+						<div id={details.slug} className="flex-row">
+							<section id="contact-text" className="flex-row">
+								<div>
+									<div dangerouslySetInnerHTML={{ __html: details.content.rendered }} className="flex-column" />
+									<button id="open-contact-form" onClick={toggleForm}>Boka möte här!</button>
+								</div>
+							</section>
+							{showForm ? (
+								<ContactForm form={details.acf.contact_form} showForm={showForm} toggleForm={toggleForm} />
+							) : (
+									null
+								)}
+							<div id="map-container">
+								<div id="map" />
 							</div>
-						</section>
-						{ showForm ? (
-							<ContactForm form={ details.acf.contact_form } showForm={ showForm } toggleForm={ toggleForm } />
-						) : (
-							null
-						)}
-						<LocationMap width={ width } height={ height } />
-					</div>
-				)}
+						</div>
+					)}
 			</div>
 		);
 	}

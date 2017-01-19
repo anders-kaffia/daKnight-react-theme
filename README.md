@@ -9,7 +9,6 @@ A Wordpress theme developed for daKnight Productions. The theme is based on Reac
   - React Router
   - ESLint
   - Axios
-  - Pigeon Maps
   - jQuery
   - Webpack, to bundle it all together
 
