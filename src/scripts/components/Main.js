@@ -22,7 +22,6 @@ class Main extends React.Component {
 		super();
 
 		this.eventListeners = this.eventListeners.bind(this);
-		this.mediaQuery = this.mediaQuery.bind(this);
 		this.scrollMethods = this.scrollMethods.bind(this);
 		this.setActive = this.setActive.bind(this);
 		this.burgerMenu = this.burgerMenu.bind(this);
@@ -43,40 +42,11 @@ class Main extends React.Component {
 			burgerMenuActive: false,
 			showContactForm: false,
 			width: window.innerWidth,
-			mapWidth: 600,
-			mapHeight: 400
 		};
 
 		this.interval = null;
 		this.interval2 = null;
 
-	};
-
-	componentWillMount() {
-		// model.apiCall.getAllContent('pages', 'posts', 'media')
-		// 	.then(data => {
-		// 		this.setState({
-		// 			pages: data.pages,
-		// 			logo: data.logo,
-		// 			arrow: data.arrow,
-		// 			about: data.about,
-		// 			contact: data.contact,
-		// 			services: data.services,
-		// 			footer: data.footer,
-		// 			allPageTitles: data.allPageTitles,
-		// 			mainPageTitles: data.mainPageTitles,
-		// 			serviceChildPages: data.serviceChildPages,
-		// 			serviceChildPageTitles: data.serviceChildPageTitles,
-		// 			posts: data.posts,
-		// 			isLoading: false,
-		// 			activeItem: data.activeItem
-		// 		});
-		// 		jqueryScripts.smoothScroll();
-		// 		this.eventListeners();
-		// 		this.mediaQuery();
-		// 		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
-
-		// 	});
 	};
 
 	componentDidMount() {
@@ -100,7 +70,6 @@ class Main extends React.Component {
 				});
 				jqueryScripts.smoothScroll();
 				this.eventListeners();
-				this.mediaQuery();
 				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
 
 			});
@@ -111,7 +80,6 @@ class Main extends React.Component {
 	 */
 	eventListeners() {
 		window.addEventListener('scroll', this.scrollMethods);
-		window.addEventListener('resize', this.mediaQuery);
 		jqueryScripts.handleArrowKeyScroll();
 	}
 
@@ -121,99 +89,6 @@ class Main extends React.Component {
 	scrollMethods() {
 		scripts.handleHeaderPosition();
 	}
-
-	/**
-	 * @desc Enables dynamic width and height for the map.
-	 * Sets dimensions relative to screen size and landscape/portrait mode.
-	 */
-	mediaQuery() {
-		let updateMapWidth = window.innerWidth;
-		let updateMapHeight = window.innerHeight;
-
-		// iPhone 4 portrait
-		if ((window.innerHeight >= 480 && window.innerHeight < 568) && (window.innerWidth >= 320 && window.innerWidth < 400)) {
-			// console.log('iPhone 4 portrait');
-			updateMapWidth = window.innerWidth * 1.2;
-			updateMapHeight = window.innerHeight * .72;
-
-			// iPhone 4 landscape
-		} else if ((window.innerHeight >= 320 && window.innerHeight < 375) && (window.innerWidth >= 480 && window.innerWidth < 568)) {
-			// console.log('iPhone 4 landscape');
-			updateMapWidth = window.innerWidth * 1.3;
-			updateMapHeight = window.innerHeight * .9;
-
-			// iPhone 5 portrait
-		} else if ((window.innerHeight >= 568 && window.innerHeight < 667) && (window.innerWidth >= 320 && window.innerWidth < 568)) {
-			// console.log('iPhone 5 portrait');
-			updateMapWidth = window.innerWidth * 1.3;
-			updateMapHeight = window.innerHeight * .68;
-
-			// iPhone 5 landscape
-		} else if ((window.innerHeight >= 320 && window.innerHeight < 375) && (window.innerWidth >= 568 && window.innerWidth < 667)) {
-			// console.log('iPhone 5 landscape');
-			updateMapWidth = window.innerWidth * 1.35;
-			updateMapHeight = window.innerHeight * .9;
-
-			// iPhone 6 portrait
-		} else if ((window.innerHeight >= 667 && window.innerHeight < 736) && (window.innerWidth >= 375 && window.innerWidth < 414)) {
-			// console.log('iPhone 6 portrait');
-			updateMapWidth = window.innerWidth * 1.3;
-			updateMapHeight = window.innerHeight * .7;
-
-			// iPhone 6 landscape
-		} else if ((window.innerHeight >= 375 && window.innerHeight < 414) && (window.innerWidth >= 667 && window.innerWidth < 736)) {
-			// console.log('iPhone 6 landscape');
-			updateMapWidth = window.innerWidth * 1.35;
-			updateMapHeight = window.innerHeight * .92;
-
-			// iPhone 6 plus portrait
-		} else if ((window.innerHeight >= 736 && window.innerHeight < 1024) && (window.innerWidth >= 414 && window.innerWidth < 768)) {
-			// console.log('iPhone 6 plus portrait');
-			updateMapWidth = window.innerWidth * 1.3;
-			updateMapHeight = window.innerHeight * .75;
-
-			// iPhone 6 plus landscape
-		} else if ((window.innerHeight >= 414 && window.innerHeight < 768) && (window.innerWidth >= 736 && window.innerWidth < 1024)) {
-			// console.log('iPhone 6 plus landscape');
-			updateMapWidth = window.innerWidth * 2;
-			updateMapHeight = window.innerHeight * .95;
-
-			// iPad portrait
-		} else if (window.innerHeight >= 1024 && (window.innerWidth >= 768 && window.innerWidth < 992)) {
-			// console.log('iPad portrait');
-			updateMapWidth = window.innerWidth * 1.9;
-			updateMapHeight = window.innerHeight * .75;
-
-			// iPad landscape
-		} else if (window.innerHeight === 768 && (window.innerWidth >= 1024 && window.innerWidth < 1200)) {
-			// console.log('iPad landscape');
-			updateMapWidth = window.innerWidth * .65;
-			updateMapHeight = window.innerHeight * .72;
-
-			// Desktop
-		} else if (window.innerHeight >= 768 && window.innerWidth >= 992) {
-			// console.log('Desktop');
-			updateMapWidth = window.innerWidth;
-			updateMapHeight = window.innerHeight * .84;
-
-			// Custom dimentions between iPad and small desktop
-		} else if (window.innerHeight <= 1024 && (window.innerWidth >= 768 && window.innerWidth < 992)) {
-			// console.log('Custom dimentions between iPad and small desktop');
-			updateMapWidth = window.innerWidth * 1.9;
-			updateMapHeight = window.innerHeight * .8;
-
-			// iPad Pro
-		} else if (window.innerHeight === 1366 && window.innerWidth === 1024) {
-			// console.log('iPad Pro');
-			updateMapWidth = window.innerWidth * 1.9;
-			updateMapHeight = window.innerHeight * .9;
-		}
-
-		this.setState({
-			mapWidth: updateMapWidth < 992 ? updateMapWidth * .72 : updateMapWidth * .5,
-			mapHeight: updateMapHeight
-		});
-	};
 
 	/**
 	 * @desc Sets the active page for Services
@@ -286,8 +161,6 @@ class Main extends React.Component {
 								toggleForm={this.toggleContactForm}
 								footer={this.state.footer}
 								menu={this.state.mainPageTitles}
-								width={this.state.mapWidth}
-								height={this.state.mapHeight}
 								/>
 							<Footer
 								loading={this.state.isLoading}

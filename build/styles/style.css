@@ -1190,6 +1190,8 @@ body {
   -webkit-box-flex: 1;
       -ms-flex: 1;
           flex: 1;
+  -ms-flex-preferred-size: auto;
+      flex-basis: auto;
   -ms-flex-wrap: wrap;
       flex-wrap: wrap; }
   .services-content #service-feat-img-container {
@@ -1218,7 +1220,8 @@ body {
     color: #231f20;
     -webkit-box-pack: center;
         -ms-flex-pack: center;
-            justify-content: center; }
+            justify-content: center;
+    min-height: 100%; }
 
 @media (min-width: 992px) and (max-width: 1199px) and (max-width: 767px) {
   .services-content #service-text {
@@ -1304,6 +1307,8 @@ body {
     height: 2.9em;
     cursor: pointer;
     z-index: 4000; }
+  #service-burger-container .hamburger-menu.hamburger-menu-active {
+    position: fixed; }
   #service-burger-container .bar,
   #service-burger-container .bar:after,
   #service-burger-container .bar:before {
@@ -1358,26 +1363,30 @@ body {
 /* 
 *				Contact Section Styling
 ========================================================================== */
-#kontakt {
-  -ms-flex-wrap: wrap;
-      flex-wrap: wrap;
-  overflow: hidden; }
+#contact-container {
+  min-height: 100%; }
   @media (max-width: 767px) {
-    #kontakt {
+    #contact-container {
       margin-bottom: .4em; } }
   @media (min-width: 768px) and (max-width: 991px) {
-    #kontakt {
+    #contact-container {
       margin-bottom: .6em; } }
   @media (min-width: 992px) and (max-width: 1199px) {
-    #kontakt {
+    #contact-container {
       margin-bottom: .8em; } }
   @media (min-width: 1200px) {
-    #kontakt {
+    #contact-container {
       margin-bottom: 1em; } }
-  @media (max-width: 767px) {
-    #kontakt {
-      height: calc(100vh - 191px);
-      overflow: visible; } }
+
+#kontakt {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap; }
   @media (min-width: 768px) and (max-width: 991px) {
     #kontakt {
       min-height: calc(100vh - 201px); } }
@@ -1419,9 +1428,6 @@ body {
           align-items: center;
   text-align: center;
   min-height: 100%;
-  -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
   color: #231f20; }
   #contact-text > div {
     -webkit-box-pack: center;
@@ -1433,7 +1439,11 @@ body {
     padding: 10%; }
   @media (max-width: 767px) {
     #contact-text {
-      min-height: 50%;
+      height: 36vh;
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 200vw;
+              flex: 1 1 200vw;
+      max-height: 60vh;
       -webkit-box-ordinal-group: 2;
           -ms-flex-order: 1;
               order: 1;
@@ -1454,6 +1464,10 @@ body {
   @media (min-width: 768px) and (max-width: 991px) {
     #contact-text {
       min-height: 50%;
+      -webkit-box-flex: 1;
+          -ms-flex: 1 1 200vw;
+              flex: 1 1 200vw;
+      max-height: 60vh;
       -webkit-box-ordinal-group: 2;
           -ms-flex-order: 1;
               order: 1;
@@ -1472,6 +1486,7 @@ body {
       margin-bottom: 1em; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     #contact-text {
+      width: 50%;
       -webkit-box-ordinal-group: 3;
           -ms-flex-order: 2;
               order: 2; } }
@@ -1489,21 +1504,10 @@ body {
       margin-left: 1em; } }
   @media (min-width: 1200px) {
     #contact-text {
+      width: 50%;
       -webkit-box-ordinal-group: 3;
           -ms-flex-order: 2;
               order: 2; } }
-  @media (min-width: 1200px) and (max-width: 767px) {
-    #contact-text {
-      margin-left: .4em; } }
-  @media (min-width: 1200px) and (min-width: 768px) and (max-width: 991px) {
-    #contact-text {
-      margin-left: .6em; } }
-  @media (min-width: 1200px) and (min-width: 992px) and (max-width: 1199px) {
-    #contact-text {
-      margin-left: .8em; } }
-  @media (min-width: 1200px) and (min-width: 1200px) {
-    #contact-text {
-      margin-left: 1em; } }
   #contact-text #open-contact-form {
     text-transform: uppercase;
     background: #41d6b6;
@@ -1542,14 +1546,6 @@ body {
   @media (min-width: 1200px) {
     #contact-form-container {
       padding: 2em; } }
-  @media (max-width: 767px) {
-    #contact-form-container {
-      position: relative;
-      height: 100%;
-      min-height: 140vh;
-      width: 100%;
-      width: 100vw;
-      overflow: visible; } }
   #contact-form-container #contact-form {
     position: absolute;
     background: #e4dbd0;
@@ -1589,8 +1585,10 @@ body {
 ------------------------------------------------------------- */
 #map-container {
   -webkit-box-flex: 1;
-      -ms-flex: 1;
-          flex: 1;
+      -ms-flex: 1 1 50%;
+          flex: 1 1 50%;
+  -ms-flex-item-align: start;
+      align-self: flex-start;
   z-index: 0;
   position: relative;
   -webkit-box-ordinal-group: 2;
@@ -1599,7 +1597,7 @@ body {
   height: 100%; }
   @media (max-width: 767px) {
     #map-container {
-      min-height: 50%;
+      height: 40vh;
       -webkit-box-ordinal-group: 3;
           -ms-flex-order: 2;
               order: 2;
@@ -1619,7 +1617,7 @@ body {
       margin-bottom: 1em; } }
   @media (min-width: 768px) and (max-width: 991px) {
     #map-container {
-      min-height: 50%;
+      height: 40vh;
       -webkit-box-ordinal-group: 3;
           -ms-flex-order: 2;
               order: 2;
@@ -1650,11 +1648,16 @@ body {
       margin-bottom: 1em; } }
   @media (min-width: 992px) and (max-width: 1199px) {
     #map-container {
+      width: calc(50% - 1em);
       -webkit-box-ordinal-group: 2;
           -ms-flex-order: 1;
               order: 1; } }
-  #map-container * {
-    overflow: hidden; }
+  @media (min-width: 1200px) {
+    #map-container {
+      width: calc(50% - 1em);
+      -webkit-box-ordinal-group: 2;
+          -ms-flex-order: 1;
+              order: 1; } }
 
 #map {
   width: 100%;
@@ -1668,23 +1671,6 @@ body {
       -ms-flex-align: center;
           align-items: center;
   position: relative; }
-
-.mapboxgl-map {
-  font-family: "Raleway", sans-serif; }
-
-#mapWrap {
-  background: #160d00;
-  position: absolute;
-  width: 100%;
-  top: 0;
-  bottom: 0; }
-  #mapWrap #map {
-    width: 100%;
-    height: 100%;
-    position: relative;
-    overflow: visible; }
-    #mapWrap #map .mapboxgl-canvas {
-      z-index: 10; }
 
 #mapFallback {
   display: none;
@@ -1703,13 +1689,6 @@ body {
   background: url(https://api.mapbox.com/styles/v1/daknight/citmr9xdx004h2hp2svgnxq30/static/18.051254,59.335659,15.00,0.00,0.00/900x700?access_token=pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA);
   background-size: cover;
   background-position: center center; }
-
-.scrollBlock {
-  width: 100%;
-  height: 100%;
-  background: transparent;
-  position: absolute;
-  z-index: 100; }
 
 /* 
 *				Footer Styling

@@ -40,32 +40,29 @@ map.handleFallback = () => {
 	})();
 
 	/**
-	 * Fix for Internet Explorer.
+	 * @desc Fix for Internet Explorer.
 	 * */
 	// if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || $.browser.msie == 1) {
 	// 	fallBack();
 	// }
 };
 
+/**
+ * Generates the map, or calls a callback function.
+ * */
 map.createMap = () => {
-	/**
-	 * Generates the map, or calls a callback function.
-	 * */
-	if (!mapboxgl.supported()) {
-		fallBack();
-	} else {
-		mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
-		const map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30',
-		});
-		map.on('load', function () {
-			window.onresize = function (event) {
-				map.resize();
-				map.repaint;
-			};
-		});
-	}
+	!mapboxgl.supported() ? fallBack()
+		: mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
+	const map = new mapboxgl.Map({
+		container: 'map',
+		style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30',
+	});
+	map.on('load', function () {
+		window.onresize = function (event) {
+			map.resize();
+			map.repaint;
+		};
+	});
 };
 
 export default map;

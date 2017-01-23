@@ -21171,7 +21171,6 @@
 			var _this = _possibleConstructorReturn(this, (Main.__proto__ || Object.getPrototypeOf(Main)).call(this));
 	
 			_this.eventListeners = _this.eventListeners.bind(_this);
-			_this.mediaQuery = _this.mediaQuery.bind(_this);
 			_this.scrollMethods = _this.scrollMethods.bind(_this);
 			_this.setActive = _this.setActive.bind(_this);
 			_this.burgerMenu = _this.burgerMenu.bind(_this);
@@ -21191,9 +21190,7 @@
 				activeItem: null,
 				burgerMenuActive: false,
 				showContactForm: false,
-				width: window.innerWidth,
-				mapWidth: 600,
-				mapHeight: 400
+				width: window.innerWidth
 			};
 	
 			_this.interval = null;
@@ -21203,34 +21200,6 @@
 		}
 	
 		_createClass(Main, [{
-			key: 'componentWillMount',
-			value: function componentWillMount() {
-				// model.apiCall.getAllContent('pages', 'posts', 'media')
-				// 	.then(data => {
-				// 		this.setState({
-				// 			pages: data.pages,
-				// 			logo: data.logo,
-				// 			arrow: data.arrow,
-				// 			about: data.about,
-				// 			contact: data.contact,
-				// 			services: data.services,
-				// 			footer: data.footer,
-				// 			allPageTitles: data.allPageTitles,
-				// 			mainPageTitles: data.mainPageTitles,
-				// 			serviceChildPages: data.serviceChildPages,
-				// 			serviceChildPageTitles: data.serviceChildPageTitles,
-				// 			posts: data.posts,
-				// 			isLoading: false,
-				// 			activeItem: data.activeItem
-				// 		});
-				// 		jqueryScripts.smoothScroll();
-				// 		this.eventListeners();
-				// 		this.mediaQuery();
-				// 		this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
-	
-				// 	});
-			}
-		}, {
 			key: 'componentDidMount',
 			value: function componentDidMount() {
 				var _this2 = this;
@@ -21254,7 +21223,6 @@
 					});
 					_jqueryScripts2.default.smoothScroll();
 					_this2.eventListeners();
-					_this2.mediaQuery();
 					_this2.interval = setTimeout(function () {
 						return _this2.setState({ renderBlankSlate: false });
 					}, 3000);
@@ -21269,7 +21237,6 @@
 	   */
 			value: function eventListeners() {
 				window.addEventListener('scroll', this.scrollMethods);
-				window.addEventListener('resize', this.mediaQuery);
 				_jqueryScripts2.default.handleArrowKeyScroll();
 			}
 	
@@ -21284,109 +21251,13 @@
 			}
 	
 			/**
-	   * @desc Enables dynamic width and height for the map.
-	   * Sets dimensions relative to screen size and landscape/portrait mode.
-	   */
-	
-		}, {
-			key: 'mediaQuery',
-			value: function mediaQuery() {
-				var updateMapWidth = window.innerWidth;
-				var updateMapHeight = window.innerHeight;
-	
-				// iPhone 4 portrait
-				if (window.innerHeight >= 480 && window.innerHeight < 568 && window.innerWidth >= 320 && window.innerWidth < 400) {
-					// console.log('iPhone 4 portrait');
-					updateMapWidth = window.innerWidth * 1.2;
-					updateMapHeight = window.innerHeight * .72;
-	
-					// iPhone 4 landscape
-				} else if (window.innerHeight >= 320 && window.innerHeight < 375 && window.innerWidth >= 480 && window.innerWidth < 568) {
-					// console.log('iPhone 4 landscape');
-					updateMapWidth = window.innerWidth * 1.3;
-					updateMapHeight = window.innerHeight * .9;
-	
-					// iPhone 5 portrait
-				} else if (window.innerHeight >= 568 && window.innerHeight < 667 && window.innerWidth >= 320 && window.innerWidth < 568) {
-					// console.log('iPhone 5 portrait');
-					updateMapWidth = window.innerWidth * 1.3;
-					updateMapHeight = window.innerHeight * .68;
-	
-					// iPhone 5 landscape
-				} else if (window.innerHeight >= 320 && window.innerHeight < 375 && window.innerWidth >= 568 && window.innerWidth < 667) {
-					// console.log('iPhone 5 landscape');
-					updateMapWidth = window.innerWidth * 1.35;
-					updateMapHeight = window.innerHeight * .9;
-	
-					// iPhone 6 portrait
-				} else if (window.innerHeight >= 667 && window.innerHeight < 736 && window.innerWidth >= 375 && window.innerWidth < 414) {
-					// console.log('iPhone 6 portrait');
-					updateMapWidth = window.innerWidth * 1.3;
-					updateMapHeight = window.innerHeight * .7;
-	
-					// iPhone 6 landscape
-				} else if (window.innerHeight >= 375 && window.innerHeight < 414 && window.innerWidth >= 667 && window.innerWidth < 736) {
-					// console.log('iPhone 6 landscape');
-					updateMapWidth = window.innerWidth * 1.35;
-					updateMapHeight = window.innerHeight * .92;
-	
-					// iPhone 6 plus portrait
-				} else if (window.innerHeight >= 736 && window.innerHeight < 1024 && window.innerWidth >= 414 && window.innerWidth < 768) {
-					// console.log('iPhone 6 plus portrait');
-					updateMapWidth = window.innerWidth * 1.3;
-					updateMapHeight = window.innerHeight * .75;
-	
-					// iPhone 6 plus landscape
-				} else if (window.innerHeight >= 414 && window.innerHeight < 768 && window.innerWidth >= 736 && window.innerWidth < 1024) {
-					// console.log('iPhone 6 plus landscape');
-					updateMapWidth = window.innerWidth * 2;
-					updateMapHeight = window.innerHeight * .95;
-	
-					// iPad portrait
-				} else if (window.innerHeight >= 1024 && window.innerWidth >= 768 && window.innerWidth < 992) {
-					// console.log('iPad portrait');
-					updateMapWidth = window.innerWidth * 1.9;
-					updateMapHeight = window.innerHeight * .75;
-	
-					// iPad landscape
-				} else if (window.innerHeight === 768 && window.innerWidth >= 1024 && window.innerWidth < 1200) {
-					// console.log('iPad landscape');
-					updateMapWidth = window.innerWidth * .65;
-					updateMapHeight = window.innerHeight * .72;
-	
-					// Desktop
-				} else if (window.innerHeight >= 768 && window.innerWidth >= 992) {
-					// console.log('Desktop');
-					updateMapWidth = window.innerWidth;
-					updateMapHeight = window.innerHeight * .84;
-	
-					// Custom dimentions between iPad and small desktop
-				} else if (window.innerHeight <= 1024 && window.innerWidth >= 768 && window.innerWidth < 992) {
-					// console.log('Custom dimentions between iPad and small desktop');
-					updateMapWidth = window.innerWidth * 1.9;
-					updateMapHeight = window.innerHeight * .8;
-	
-					// iPad Pro
-				} else if (window.innerHeight === 1366 && window.innerWidth === 1024) {
-					// console.log('iPad Pro');
-					updateMapWidth = window.innerWidth * 1.9;
-					updateMapHeight = window.innerHeight * .9;
-				}
-	
-				this.setState({
-					mapWidth: updateMapWidth < 992 ? updateMapWidth * .72 : updateMapWidth * .5,
-					mapHeight: updateMapHeight
-				});
-			}
-		}, {
-			key: 'setActive',
-	
-	
-			/**
 	   * @desc Sets the active page for Services
 	   *
 	   * @param {number} id of active page
 	   */
+	
+		}, {
+			key: 'setActive',
 			value: function setActive(itemId) {
 				this.setState({ activeItem: itemId });
 			}
@@ -21461,9 +21332,7 @@
 							showForm: this.state.showContactForm,
 							toggleForm: this.toggleContactForm,
 							footer: this.state.footer,
-							menu: this.state.mainPageTitles,
-							width: this.state.mapWidth,
-							height: this.state.mapHeight
+							menu: this.state.mainPageTitles
 						}),
 						_react2.default.createElement(_Footer2.default, {
 							loading: this.state.isLoading,
@@ -23988,7 +23857,7 @@
 							{ id: 'service-burger-container' },
 							_react2.default.createElement(
 								'div',
-								{ className: 'hamburger-menu', onClick: burgerMenu },
+								{ className: burgerMenuActive ? "hamburger-menu hamburger-menu-active" : "hamburger-menu", onClick: burgerMenu },
 								_react2.default.createElement('div', { className: burgerMenuActive ? "bar animate" : "bar" })
 							)
 						),
@@ -24336,9 +24205,7 @@
 				    details = _props.details,
 				    loading = _props.loading,
 				    showForm = _props.showForm,
-				    toggleForm = _props.toggleForm,
-				    width = _props.width,
-				    height = _props.height;
+				    toggleForm = _props.toggleForm;
 	
 	
 				return _react2.default.createElement(
@@ -24346,7 +24213,7 @@
 					{ id: 'contact-container' },
 					loading ? null : _react2.default.createElement(
 						'div',
-						{ id: details.slug, className: 'flex-row' },
+						{ id: details.slug, className: 'flex-column' },
 						_react2.default.createElement(
 							'section',
 							{ id: 'contact-text', className: 'flex-row' },
@@ -24379,9 +24246,7 @@
 		details: _react2.default.PropTypes.object.isRequired,
 		loading: _react2.default.PropTypes.bool.isRequired,
 		showForm: _react2.default.PropTypes.bool.isRequired,
-		toggleForm: _react2.default.PropTypes.func.isRequired,
-		width: _react2.default.PropTypes.number.isRequired,
-		height: _react2.default.PropTypes.number.isRequired
+		toggleForm: _react2.default.PropTypes.func.isRequired
 	};
 	
 	exports.default = Contact;
@@ -24524,34 +24389,28 @@
 		})();
 	
 		/**
-	  * Fix for Internet Explorer.
+	  * @desc Fix for Internet Explorer.
 	  * */
 		// if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || $.browser.msie == 1) {
 		// 	fallBack();
 		// }
 	};
 	
+	/**
+	 * Generates the map, or calls a callback function.
+	 * */
 	map.createMap = function () {
-		/**
-	  * Generates the map, or calls a callback function.
-	  * */
-		if (!mapboxgl.supported()) {
-			fallBack();
-		} else {
-			(function () {
-				mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
-				var map = new mapboxgl.Map({
-					container: 'map',
-					style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30'
-				});
-				map.on('load', function () {
-					window.onresize = function (event) {
-						map.resize();
-						map.repaint;
-					};
-				});
-			})();
-		}
+		!mapboxgl.supported() ? fallBack() : mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
+		var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30'
+		});
+		map.on('load', function () {
+			window.onresize = function (event) {
+				map.resize();
+				map.repaint;
+			};
+		});
 	};
 	
 	exports.default = map;

@@ -73,6 +73,9 @@ body {
 	@include breakpoint(lg) {
 		padding-top: 0;
 	}
+	// > div {
+	// 	flex-basis: auto;
+	// }
 }
 
 .no-padd {

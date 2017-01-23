@@ -37,7 +37,6 @@
 		max-width: 100%;
 		margin-top: 0;
 		flex: 1;
-		// flex-wrap: wrap;
 		justify-content: space-around;
 		background: $color-3;
 		@include breakpoint(xs) {
@@ -126,6 +125,7 @@
 
 .services-content {
 	flex: 1;
+	flex-basis: auto;
 	flex-wrap: wrap;
 	#service-feat-img-container {
 		flex: 1;
@@ -133,7 +133,6 @@
 		@include breakpoint(xs) { 
 			display: none;
 		}
-	
 		@include breakpoint(sm) {
 			display: none;
 		}
@@ -150,6 +149,7 @@
 		background: $color-1;
 		color: $color-darkgrey;
 		justify-content: center;
+		min-height: 100%;
 		@include breakpoint(md) {
 			@include small-spacing(margin-left);
 		}
@@ -200,6 +200,9 @@ $bar-spacing: 1.2em;
 		height: $bar-height + $bar-spacing*2;
 		cursor: pointer;
 		z-index: 4000;
+	}
+	.hamburger-menu.hamburger-menu-active {
+		position: fixed;
 	}
 	.bar,
 	.bar:after,
