@@ -11,15 +11,13 @@
 	width: 100%;
 	width: 100vw;
 	z-index: 9999;
-	background: $color-white;
+	background: rgba(255, 255, 255, .1);
 	justify-content: center;
 	align-items: center;
 	h2 {
 		margin-bottom: 4em;
 	}
 	.loading-span-container {
-		// position: absolute;
-		// top: 50%;
 		span {
 			width: 3em;
 			height: 3em;

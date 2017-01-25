@@ -49,7 +49,7 @@ model.apiCall = {
 		model.getContent(type)
 			.then(response => {
 				return {
-					contact: response.data.filter(page => page.slug === 'kontakt')
+					contact: response.data.filter(page => page.slug === 'kontakt')[0]
 				};
 			}),
 
@@ -57,7 +57,7 @@ model.apiCall = {
 		model.getContent(type)
 			.then(response => {
 				return {
-					contact: response.data.filter(page => page.slug === 'footer')
+					footer: response.data.filter(page => page.slug === 'footer')[0]
 				};
 			}),
 

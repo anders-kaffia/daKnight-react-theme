@@ -87,7 +87,6 @@ class Main extends React.Component {
 			.then(() => {
 				model.apiCall.getContactContent('pages')
 					.then(data => {
-						console.log(data);
 						this.setState({
 							contact: data.contact,
 							contactIsLoading: false
@@ -97,18 +96,15 @@ class Main extends React.Component {
 			.then(() => {
 				model.apiCall.getFooterContent('pages')
 					.then(data => {
-						console.log(data);
 						this.setState({
 							footer: data.footer,
 							footerIsLoading: false
 						});
+						jqueryScripts.smoothScroll();
+						this.eventListeners();
+						scripts.handleIosFlexBug();
+						this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 300000);
 					});
-			})
-			.then(() => {
-				jqueryScripts.smoothScroll();
-				this.eventListeners();
-				scripts.handleIosFlexBug();
-				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 300000);
 			});
 	};
 
@@ -193,7 +189,7 @@ class Main extends React.Component {
 										/>
 								)}
 							{this.state.contactIsLoading ? (
-								null
+								<Loading />
 							) : (
 									<Contact
 										loading={this.state.contactIsLoading}
