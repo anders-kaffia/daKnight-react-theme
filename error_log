@@ -1,1 +1,0 @@
-[30-Oct-2015 10:13:40 Europe/Stockholm] PHP Fatal error:  Call to undefined function register_nav_menus() in /home/daknight/public_html/wp-content/themes/daKnight/functions.php on line 3
