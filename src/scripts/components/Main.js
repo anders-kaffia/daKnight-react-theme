@@ -22,7 +22,6 @@ class Main extends React.Component {
 		super();
 
 		this.eventListeners = this.eventListeners.bind(this);
-		this.scrollMethods = this.scrollMethods.bind(this);
 		this.setActive = this.setActive.bind(this);
 		this.burgerMenu = this.burgerMenu.bind(this);
 		this.toggleContactForm = this.toggleContactForm.bind(this);
@@ -37,7 +36,12 @@ class Main extends React.Component {
 			serviceChildPages: {},
 			serviceChildPageTitles: {},
 			posts: {},
-			isLoading: true,
+			headerIsLoading: true,
+			aboutIsLoading: true,
+			servicesIsLoading: true,
+			contactIsLoading: true,
+			footerIsLoading: true,
+			mainContentIsLoading: true,
 			activeItem: null,
 			burgerMenuActive: false,
 			showContactForm: false,
@@ -50,28 +54,61 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		model.apiCall.getAllContent('pages', 'posts', 'media')
+		model.apiCall.getHeaderContent('pages', 'media')
 			.then(data => {
 				this.setState({
-					pages: data.pages,
-					logo: data.logo,
-					arrow: data.arrow,
-					about: data.about,
-					contact: data.contact,
-					services: data.services,
-					footer: data.footer,
-					allPageTitles: data.allPageTitles,
 					mainPageTitles: data.mainPageTitles,
-					serviceChildPages: data.serviceChildPages,
-					serviceChildPageTitles: data.serviceChildPageTitles,
-					posts: data.posts,
-					isLoading: false,
-					activeItem: data.activeItem
+					logo: data.logo,
+					headerIsLoading: false
 				});
+			})
+			.then(() => {
+				model.apiCall.getAboutContent('pages', 'media')
+					.then(data => {
+						this.setState({
+							arrow: data.arrow,
+							about: data.about,
+							aboutIsLoading: false
+						});
+					});
+			})
+			.then(() => {
+				model.apiCall.getServicesContent('pages')
+					.then(data => {
+						this.setState({
+							services: data.services,
+							serviceChildPages: data.serviceChildPages,
+							serviceChildPageTitles: data.serviceChildPageTitles,
+							activeItem: data.activeItem,
+							servicesIsLoading: false
+						});
+					});
+			})
+			.then(() => {
+				model.apiCall.getContactContent('pages')
+					.then(data => {
+						console.log(data);
+						this.setState({
+							contact: data.contact,
+							contactIsLoading: false
+						});
+					});
+			})
+			.then(() => {
+				model.apiCall.getFooterContent('pages')
+					.then(data => {
+						console.log(data);
+						this.setState({
+							footer: data.footer,
+							footerIsLoading: false
+						});
+					});
+			})
+			.then(() => {
 				jqueryScripts.smoothScroll();
 				this.eventListeners();
-				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
-
+				scripts.handleIosFlexBug();
+				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 300000);
 			});
 	};
 
@@ -79,15 +116,8 @@ class Main extends React.Component {
 	 * @desc Gathers main eventlisterers.
 	 */
 	eventListeners() {
-		window.addEventListener('scroll', this.scrollMethods);
+		window.addEventListener('scroll', scripts.handleHeaderPosition);
 		jqueryScripts.handleArrowKeyScroll();
-	}
-
-	/**
-	 * @desc Gathers all methods connected to the scroll event.
-	 */
-	scrollMethods() {
-		scripts.handleHeaderPosition();
 	}
 
 	/**
@@ -120,12 +150,12 @@ class Main extends React.Component {
 	render() {
 		return (
 			<div>
-				{this.state.isLoading ? (
+				{this.state.headerIsLoading ? (
 					<Loading />
 				) : (
 						<div id="main-wrapper" className="flex-column">
 							<Header
-								loading={this.state.isLoading}
+								loading={this.state.headerIsLoading}
 								details={this.state.mainPageTitles}
 								logo={this.state.logo}
 								id="header-wrapper"
@@ -139,34 +169,50 @@ class Main extends React.Component {
 								>
 								{this.state.renderBlankSlate ? <BlankSlate /> : null}
 							</ReactCSSTransisionGroup>
-							<About
-								loading={this.state.isLoading}
-								arrow={this.state.arrow}
-								details={this.state.about}
-								/>
-							<Services
-								loading={this.state.isLoading}
-								childPages={this.state.serviceChildPages}
-								page={this.state.services}
-								activeItem={this.state.activeItem}
-								setActive={this.setActive}
-								burgerMenu={this.burgerMenu}
-								burgerMenuActive={this.state.burgerMenuActive}
-								width={this.state.width}
-								/>
-							<Contact
-								loading={this.state.isLoading}
-								details={this.state.contact}
-								showForm={this.state.showContactForm}
-								toggleForm={this.toggleContactForm}
-								footer={this.state.footer}
-								menu={this.state.mainPageTitles}
-								/>
-							<Footer
-								loading={this.state.isLoading}
-								details={this.state.footer}
-								menu={this.state.mainPageTitles}
-								/>
+							{this.state.aboutIsLoading ? (
+								null
+							) : (
+									<About
+										loading={this.state.aboutIsLoading}
+										arrow={this.state.arrow}
+										details={this.state.about}
+										/>
+								)}
+							{this.state.servicesIsLoading ? (
+								null
+							) : (
+									<Services
+										loading={this.state.servicesIsLoading}
+										childPages={this.state.serviceChildPages}
+										page={this.state.services}
+										activeItem={this.state.activeItem}
+										setActive={this.setActive}
+										burgerMenu={this.burgerMenu}
+										burgerMenuActive={this.state.burgerMenuActive}
+										width={this.state.width}
+										/>
+								)}
+							{this.state.contactIsLoading ? (
+								null
+							) : (
+									<Contact
+										loading={this.state.contactIsLoading}
+										details={this.state.contact}
+										showForm={this.state.showContactForm}
+										toggleForm={this.toggleContactForm}
+										footer={this.state.footer}
+										menu={this.state.mainPageTitles}
+										/>
+								)}
+							{this.state.footerIsLoading ? (
+								null
+							) : (
+									<Footer
+										loading={this.state.footerIsLoading}
+										details={this.state.footer}
+										menu={this.state.mainPageTitles}
+										/>
+								)}
 						</div>
 					)}
 			</div>

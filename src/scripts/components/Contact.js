@@ -24,7 +24,7 @@ class Contact extends React.Component {
 				) : (
 						<div id={details.slug} className="flex-column">
 							<section id="contact-text" className="flex-row">
-								<div>
+								<div id="contact-text-content">
 									<div dangerouslySetInnerHTML={{ __html: details.content.rendered }} className="flex-column" />
 									<button id="open-contact-form" onClick={toggleForm}>Boka möte här!</button>
 								</div>
@@ -35,6 +35,7 @@ class Contact extends React.Component {
 									null
 								)}
 							<div id="map-container">
+								<div className="disable-scroll"></div>
 								<div id="map" />
 							</div>
 						</div>

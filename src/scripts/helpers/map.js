@@ -3,18 +3,9 @@ import $ from 'jquery';
 const map = {};
 
 map.init = () => {
-	map.handleOrientationChange();
+	// map.handleOrientationChange();
 	map.handleFallback();
 	map.createMap();
-};
-
-/**
- * @desc Reloads the location on orientation change.
- * */
-map.handleOrientationChange = () => {
-	$(window).on("orientationchange", function (event) {
-		location.reload();
-	});
 };
 
 /**

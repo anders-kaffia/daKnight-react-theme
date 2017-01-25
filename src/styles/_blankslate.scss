@@ -5,10 +5,10 @@
 .blank-slate-container {
 	perspective: 1000px;
 	perspective-origin: bottom;
+	@include large-spacing(margin-bottom);
 }
 
 #blank-slate {
-	@include large-spacing(margin-bottom);
 	@include breakpoint(xs) { 
 		height: calc(100vh - 143.6px);
 	}
@@ -31,6 +31,7 @@
 	#blank-slate-inside-wrapper {
 		flex: 1;
 		height: 100%;
+		overflow: hidden;
 		#blank-slate2 {
 			@include small-spacing(margin-bottom);
 			background: $color-2;

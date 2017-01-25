@@ -1,0 +1,87 @@
+/*  _____________________________________________________________________________
+
+    PAGE
+    _____________________________________________________________________________
+*/
+
+/**
+ * @namespace: page
+ * @author: matilda@daknight.se
+ */
+
+
+.custom-page{
+	text-align: center;
+	a{
+		color: @color-gold;
+		font-weight: 700;
+	}
+}
+
+.page-title{
+	text-align: center;
+}
+
+.service{
+	text-align: center;
+	padding-top: 40px;
+	padding-bottom: 40px;
+	a{
+		color: @color-gold;
+		font-weight: 700;
+		&:hover{
+			color: @color-black;
+			text-decoration: none;
+		}
+	}
+	.fa{
+		color: @color-gold;
+	}
+}
+
+.offer{
+	text-align: center;
+}
+
+.span-small{
+	font-size: 16px;
+	font-weight: 700;
+	color: @color-white;
+}
+
+.case{
+	text-align: center;
+	padding-top: 12%;
+}
+
+
+/*  _____________________________________________________________________________
+
+    MEDIA QUERIES
+    _____________________________________________________________________________ */
+
+/**
+ * For all breakpoints refers to `_vars.less`
+ * Here we're using desktop first…
+ */
+
+
+// TABLET
+// ___________________
+
+@media @max-tablet {
+	.view {
+	    width: auto;
+	 }
+}
+
+
+// PALM
+// ___________________
+
+@media @max-tablet {
+	.service{
+	padding-top: 30px;
+	padding-bottom: 30px;
+	}
+}

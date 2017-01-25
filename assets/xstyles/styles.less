@@ -1,0 +1,142 @@
+@import "_vars";
+@import "_breakpoints";
+@import "_mixins";
+@import "_helpers";
+@import "reset";
+
+
+/*  _____________________________________________________________________________
+
+    DEFAULT STYLES
+    _____________________________________________________________________________ */
+
+html,
+body {
+    width: 100%;
+    background-color: transparent;
+}
+
+html{
+    overflow-x: hidden;
+}
+
+body{
+    overflow: hidden;
+}
+
+span{
+    color: @color-gold;
+    font-weight: 700;
+}
+
+.col-sm-4{ padding: 0 20px; }
+.nopad{ padding: 0;}
+.push-down{margin-top: 30px;}
+.push-up{margin-bottom: 30px;}
+.margin-top{margin-top: 200px;}
+
+.lazy{
+    height: 100vh;
+}
+.lazy-2-3{
+    height: 66vh;
+}
+.lazy-half{
+    height: 50vh;
+}
+
+.news{
+    h5{
+        padding-bottom: 0;
+    }
+    a{
+        text-decoration: none;
+    }
+}
+
+.background {
+    background: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover !important;
+    min-height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.background-2-3 {
+    background: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover !important;
+    min-height: 100%;
+    width: 100%;
+    z-index: -1;
+}
+
+.background-half {
+    position: relative;
+    background: center center;
+    background-repeat: no-repeat;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover !important;
+    width: 100%;
+    z-index: 1;
+}
+
+@import "typography";
+
+/*  _____________________________________________________________________________
+
+    COMPONENTS
+    _____________________________________________________________________________ */
+
+@import "components/menu";
+@import "components/slideshow";
+@import "components/contact";
+@import "components/forms";
+@import "components/team";
+
+/*  _____________________________________________________________________________
+
+    PARTIALS
+    _____________________________________________________________________________ */
+
+@import "partials/page";
+@import "partials/front-page";
+@import "partials/header";
+@import "partials/footer";
+
+/*  _____________________________________________________________________________
+
+    MEDIA QUERIES
+    _____________________________________________________________________________ */
+
+/**
+ * For all breakpoints refers to `_vars.less`
+ * Here we're using desktop first…
+ */
+
+
+// TABLET
+// ___________________
+
+@media @max-laptop {
+
+    .background-half{
+        height: 600px;
+    }
+
+}
+
+
+
+// PALM
+// ___________________
+

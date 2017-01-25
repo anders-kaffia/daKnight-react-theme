@@ -1,10 +1,10 @@
 /* 
 *				Services Section Styling
 ========================================================================== */
-
-#tjanster {
-	@include large-spacing(margin-top);
+#service-section-container {
 	@include large-spacing(margin-bottom);
+}
+#tjanster {
 	@include breakpoint(xs) {
 		min-height: calc(100vh - 38.4px);
 	}
@@ -36,6 +36,7 @@
 		@include small-spacing(margin-bottom);
 		max-width: 100%;
 		margin-top: 0;
+		padding: 0;
 		flex: 1;
 		justify-content: space-around;
 		background: $color-3;
@@ -44,14 +45,14 @@
 			padding: 1em;
 		}
 		@include breakpoint(sm) {
-			padding: 1.2em;
-			flex-wrap: wrap;
+			padding-top: 1.7em;
 		}
 		@include breakpoint(md) {
-			padding: 1.7em;
+			padding: 2em;
+    		justify-content: space-between;
 		}
 		@include breakpoint(lg) {
-			padding: 2.3em;
+			padding: 2em;
 		}
 	}
 	li {
@@ -60,25 +61,37 @@
 			max-width: 100%;
 			margin: 2%;
 		}
-	
 		@include breakpoint(sm) {
-			padding: .97em;
+			padding: 0 1.7em 1.7em;
+			margin: auto;
+			width: 170px;
 			flex: 0 1 25%;
+			text-align: center;
 		}
-	
 		@include breakpoint(md) {
-			flex: 0 1 calc(25%);
+			width: 110px;
+			height: 110px;
+			flex: 0 0 12.5%;
+			margin: auto;
+			text-align: center;
 		}
-	
 		@include breakpoint(lg) {
 			padding: 10px;
+			max-width: 12.5%;
 			flex: 0 0 12.5%;
+			margin: auto;
+			text-align: center;
 		}
 	}
 	img {
 		max-width: 90%;
+		height: auto;
 		@include breakpoint(xs) { 
 			display: none;
+		}
+		@include breakpoint(lg) {
+			max-width: 110px;
+			max-height: 110px;
 		}
 	}
 	span {
@@ -89,16 +102,13 @@
 			font-weight: bold;
 		}
 		@include breakpoint(sm) {
-			font-size: 10px;
-			font-size: 1.2vw;
+			font-size: 9px;
 		}
 		@include breakpoint(md) {
-			font-size: 12px;
-			font-size: .8vw;
+			font-size: 9px;
 		}
 		@include breakpoint(lg) {
-			font-size: 14px;
-			font-size: .7vw;
+			font-size: 10px;
 		}
 	}
 	.active-item span {
@@ -127,6 +137,9 @@
 	flex: 1;
 	flex-basis: auto;
 	flex-wrap: wrap;
+	@include breakpoint(lg) {
+		min-height: 67vh;
+	}
 	#service-feat-img-container {
 		flex: 1;
 		background: $color-2;
@@ -136,6 +149,9 @@
 		@include breakpoint(sm) {
 			display: none;
 		}
+		@include breakpoint(md) {
+			width: 50%;
+		}
 		#service-feat-img {
 			flex: 1;
 			background-size: cover;
@@ -143,7 +159,6 @@
 			background-repeat: no-repeat;
 		}
 	}
-	
 	#service-text {
 		flex: 1;
 		background: $color-1;
@@ -152,19 +167,23 @@
 		min-height: 100%;
 		@include breakpoint(md) {
 			@include small-spacing(margin-left);
+			width: 50%;
 		}
 		@include breakpoint(lg) {
 			@include small-spacing(margin-left);
+			width: 50%;
 		}
 		>div {
 			justify-content: center;
 			align-items: center;
 			padding: 10%;
-			span {
-				line-height: 2.0;
+			max-width: 99.9%;
+			span, p {
+				line-height: 1.2;
+				max-width: 100%;
 			}
 		}
-	}	
+	}
 }
 
 /*

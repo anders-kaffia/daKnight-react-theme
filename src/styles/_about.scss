@@ -1,8 +1,10 @@
 /* 
 *				About Section Styling
 ========================================================================== */
+#about-section-container {
+	@include large-spacing(margin-bottom);
+}
 
-// The Wordpress page slug
 #about {
 	width: 100%;
 }
@@ -42,12 +44,14 @@
 	justify-content: center;
 	div {
 		width: 70%;
+		margin: 8%;
 	}
 	div.arrow {
 		position: absolute;
 		max-width: 60px;
 		top: 85%;
 		left: 50%;
+		margin: .5em;
 		cursor: pointer;
 		z-index: 999;
 		animation: arrow 2s infinite;

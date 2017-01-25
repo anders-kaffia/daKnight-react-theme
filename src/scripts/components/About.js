@@ -8,7 +8,7 @@ class About extends React.Component {
 		const { details, loading, arrow } = this.props;
 
 		return (
-			<div className="flex-column">
+			<div className="flex-column" id="about-section-container">
 				{ loading ? (
 					null
 				) : (

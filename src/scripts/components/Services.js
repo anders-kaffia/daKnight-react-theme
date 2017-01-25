@@ -15,7 +15,7 @@ class Services extends React.Component {
 		const { childPages, loading, page, activeItem, setActive, burgerMenu, burgerMenuActive, width } = this.props;
 
 		return (
-			<div>
+			<div id="service-section-container">
 				{loading ? (
 					null
 				) : (
@@ -26,7 +26,7 @@ class Services extends React.Component {
 								</div>
 							</div>
 							<nav id="service-menu" className={burgerMenuActive ? "flex-row service-menu-open" : "flex-row"}>
-								<ul className="flex-row">
+								<ul id="service-menu-ul" className="flex-row">
 									{childPages.map((page) => (
 										<ServiceMenuItem
 											key={page.id}

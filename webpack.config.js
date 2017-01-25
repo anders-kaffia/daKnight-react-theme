@@ -6,7 +6,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-	entry: './src/scripts/index.js',
+	entry: ['babel-polyfill', './src/scripts/index.js'],
 	output: {
 		path: './build/scripts/',
 		filename: 'bundle.js'

@@ -1,0 +1,54 @@
+//	_____________________________________________________________________________
+//
+//	HELPER SILENT CLASSES
+//	_____________________________________________________________________________
+
+
+// Image Replacement
+// ___________________
+
+.ir(){
+	display: block;
+	border: 0;
+	font: 0/0 a;
+	text-shadow: none;
+	color: transparent;
+	background-color: transparent;
+	background-repeat: no-repeat;
+	text-align: left;
+	direction: ltr;
+}
+
+
+// Assistive Technology
+// ___________________
+
+.at(){
+	position: absolute;
+	overflow: hidden;
+	height: 1px;
+	width: 1px;
+	padding: 0;
+	line-height: 0;
+	border: 0;
+	clip: rect(0 0 0 0);
+}
+
+
+// Clear Fix
+// ___________________
+
+.cf(){
+	
+	&:before,
+	&:after {
+		content: "";
+		display: table;
+	}
+	
+	&:after {
+		clear: both;
+	}
+	
+    zoom: 1;
+}

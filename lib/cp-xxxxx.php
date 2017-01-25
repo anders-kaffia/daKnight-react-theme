@@ -1,5 +1,4 @@
 <?php
-//Template for Custom post types, change xxxxx to the name you want, require the file in functions.php
 
 add_action( 'init', 'xxxxx_register_post_type' );
 

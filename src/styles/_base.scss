@@ -26,7 +26,6 @@ body {
 		}
 		@include breakpoint(lg) {
 			font-size: 2em;
-			font-size: 3vh;
 		}
 	}
 	p {
@@ -73,9 +72,6 @@ body {
 	@include breakpoint(lg) {
 		padding-top: 0;
 	}
-	// > div {
-	// 	flex-basis: auto;
-	// }
 }
 
 .no-padd {
@@ -106,13 +102,8 @@ body {
 .button {
 	padding: 4%;
 	margin: 2%;
-	border: 1px solid $color-darkgrey;
 }
 
 .button-close {
-	border-radius: 50%;
-	border: 1px solid $color-darkgrey;
 	color: $color-darkgrey;
-	height: 2em;
-	width: 2em;
 }
