@@ -6,10 +6,20 @@ const model = {};
 /**
  * @desc Get type specific content from WP REST API
  *
- * @param {string} type of content, posts or pages
+ * @param {string, number} type of content, posts, pages, or media
+ * and the number of results.
  */
-model.getContent = (type) =>
-	axios.get(`/wp-json/wp/v2/${type}/?per_page=50`);
+model.getContent = (type, number) =>
+	axios.get(`/wp-json/wp/v2/${type}/?per_page=${number}`);
+
+/**
+ * @desc Get a single piece of content.
+ *
+ * @param {string, string} type of content, posts, page, or media
+ * based on the slug.
+ */
+model.getSingleContent = (type, slug) =>
+	axios.get(`/wp-json/wp/v2/${type}/?slug=${slug}`);
 
 /**
  * @desc Get all content from WP REST API
@@ -17,15 +27,15 @@ model.getContent = (type) =>
  * @param {string, string, string} three types of content (pages, posts, media)
  */
 model.apiCall = {
-	getHeaderContent: (type1, type2) => axios.all([model.getContent(type1), model.getContent(type2)])
+	getHeaderContent: (type1, number, type2, slug2) => axios.all([model.getContent(type1, number), model.getSingleContent(type2, slug2)])
 		.then(arr => {
 			return {
-				logo: arr[1].data.filter(page => page.title.rendered === 'DKN_Logotyp')[0],
 				mainPageTitles: arr[0].data.filter(page => page.parent === 0 && page.slug === 'about' || page.slug === 'tjanster' || page.slug === 'kontakt').sort((a, b) => (a.menu_order > b.menu_order) ? 1 : (a.menu_order < b.menu_order) ? -1 : 0),
+				logo: arr[1].data.filter(page => page.title.rendered === 'DKN_Logotyp')[0],
 			};
 		}),
 
-	getAboutContent: (type1, type2) => axios.all([model.getContent(type1), model.getContent(type2)])
+	getAboutContent: (type1, slug1, type2, slug2) => axios.all([model.getSingleContent(type1, slug1), model.getSingleContent(type2, slug2)])
 		.then(arr => {
 			return {
 				arrow: arr[1].data.filter(page => page.slug === 'arrow')[0],
@@ -33,8 +43,8 @@ model.apiCall = {
 			};
 		}),
 
-	getServicesContent: (type) =>
-		model.getContent(type)
+	getServicesContent: (type, number) =>
+		model.getContent(type, number)
 			.then(response => {
 				return {
 					services: response.data.filter(page => page.slug === 'tjanster')[0],
@@ -45,30 +55,30 @@ model.apiCall = {
 				};
 			}),
 
-	getContactContent: (type) =>
-		model.getContent(type)
+	getContactContent: (type, slug) =>
+		model.getSingleContent(type, slug)
 			.then(response => {
 				return {
-					contact: response.data.filter(page => page.slug === 'kontakt')[0]
+					contact: response.data[0]
 				};
 			}),
 
-	getFooterContent: (type) =>
-		model.getContent(type)
+	getFooterContent: (type, slug) =>
+		model.getSingleContent(type, slug)
 			.then(response => {
 				return {
-					footer: response.data.filter(page => page.slug === 'footer')[0]
+					footer: response.data[0]
 				};
 			}),
 
-	getAllPages: (type) =>
-		model.getContent(type)
+	getAllPages: (type, number) =>
+		model.getContent(type, number)
 			.then(response => {
 				pages: response.data;
 			}),
 
-	getAllPosts: (type) =>
-		model.getContent(type)
+	getAllPosts: (type, number) =>
+		model.getContent(type, number)
 			.then(response => {
 				posts: response.data;
 			}),

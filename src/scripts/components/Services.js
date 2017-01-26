@@ -5,10 +5,30 @@ import ServiceMenuItem from './ServiceMenuItem';
 import ServiceFeatImage from './ServiceFeatImage';
 import ServiceText from './ServiceText';
 
+// Others
+import jqueryScripts from '../helpers/jqueryScripts';
+import scripts from '../helpers/scripts';
+
 class Services extends React.Component {
 	constructor(props) {
 		super(props);
+
+		this.eventListeners.bind(this);
 	};
+
+	componentDidMount() {
+		jqueryScripts.smoothScroll();
+		scripts.handleIosFlexBug();
+		this.eventListeners();
+	}
+
+	/**
+	 * @desc Gathers main eventlisterers.
+	 */
+	eventListeners() {
+		window.addEventListener('scroll', scripts.handleHeaderPosition);
+		jqueryScripts.handleArrowKeyScroll();
+	}
 
 	render() {
 		// Props

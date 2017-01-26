@@ -97,8 +97,4 @@ jqueryScripts.arrowScrollbottomDown = () => {
 	}, 500, 'swing');
 };
 
-jqueryScripts.testScroll = () => {
-	console.log(window.pageYOffset);
-};
-
 export default jqueryScripts;

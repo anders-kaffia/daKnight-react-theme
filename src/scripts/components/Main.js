@@ -54,7 +54,7 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		model.apiCall.getHeaderContent('pages', 'media')
+		model.apiCall.getHeaderContent('pages', 47, 'media', 'DKN_Logotyp')
 			.then(data => {
 				this.setState({
 					mainPageTitles: data.mainPageTitles,
@@ -63,7 +63,7 @@ class Main extends React.Component {
 				});
 			})
 			.then(() => {
-				model.apiCall.getAboutContent('pages', 'media')
+				model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
 					.then(data => {
 						this.setState({
 							arrow: data.arrow,
@@ -73,7 +73,7 @@ class Main extends React.Component {
 					});
 			})
 			.then(() => {
-				model.apiCall.getServicesContent('pages')
+				model.apiCall.getServicesContent('pages', 47)
 					.then(data => {
 						this.setState({
 							services: data.services,
@@ -85,7 +85,7 @@ class Main extends React.Component {
 					});
 			})
 			.then(() => {
-				model.apiCall.getContactContent('pages')
+				model.apiCall.getContactContent('pages', 'kontakt')
 					.then(data => {
 						this.setState({
 							contact: data.contact,
@@ -94,17 +94,14 @@ class Main extends React.Component {
 					});
 			})
 			.then(() => {
-				model.apiCall.getFooterContent('pages')
+				model.apiCall.getFooterContent('pages', 'footer')
 					.then(data => {
 						this.setState({
 							footer: data.footer,
 							footerIsLoading: false
 						});
-						jqueryScripts.smoothScroll();
-						this.eventListeners();
-						scripts.handleIosFlexBug();
-						this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 300000);
 					});
+				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 1000);
 			});
 	};
 
