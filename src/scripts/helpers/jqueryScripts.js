@@ -24,22 +24,20 @@ if ($(window.innerWidth)[0] <= 768) {
 const jqueryScripts = {};
 
 /**
-	 * @desc Enables smooth scrolling
-	 */
+ * @desc Enables smooth scrolling
+ */
 jqueryScripts.smoothScroll = () => {
 	$('a[href^="#"]').on('click', function (e) {
 		e.preventDefault();
 
 		let target = this.hash;
 		const $target = $(target);
-		const absoluteTop = 500;
+		const absoluteTop = 200;
 
 		$('html, body').stop().animate({
-			'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? absoluteTop :
-				(target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop))
-		}, 700, 'swing', () => {
-			window.location.hash = target;
-		});
+			'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? headerHeight :
+				(target === '#about-2' || target === '#about-3' ? (headerHeight - marginTop) : marginTop))
+		}, 700, 'swing');
 	});
 };
 
@@ -47,7 +45,7 @@ jqueryScripts.smoothScroll = () => {
  * @desc Handles page scroll on arrow keys
  * */
 jqueryScripts.handleArrowKeyScroll = () => {
-	const lastAboutSection = document.getElementById('about-2').offsetTop;
+	const lastAboutSection = document.getElementById('about-3').offsetTop;
 
 	$('html, body').keydown((e) => {
 		e.keyCode === 38 ? ((lastAboutSection + 10) > window.pageYOffset ? jqueryScripts.arrowScrollTopUp()

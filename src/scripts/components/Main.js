@@ -16,6 +16,9 @@ import model from '../helpers/model';
 import scripts from '../helpers/scripts';
 import jqueryScripts from '../helpers/jqueryScripts';
 
+model.setLocalStorage();
+model.localStoreIsSupported();
+
 class Main extends React.Component {
 
 	constructor() {

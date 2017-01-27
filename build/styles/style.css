@@ -749,18 +749,6 @@ body {
           perspective: 1000px;
   -webkit-perspective-origin: bottom;
           perspective-origin: bottom; }
-  @media (max-width: 767px) {
-    .blank-slate-container {
-      margin-bottom: 1.2em; } }
-  @media (min-width: 768px) and (max-width: 991px) {
-    .blank-slate-container {
-      margin-bottom: 1.4em; } }
-  @media (min-width: 992px) and (max-width: 1199px) {
-    .blank-slate-container {
-      margin-bottom: 1.6em; } }
-  @media (min-width: 1200px) {
-    .blank-slate-container {
-      margin-bottom: 2em; } }
 
 #blank-slate {
   -ms-flex-wrap: wrap;
@@ -839,6 +827,22 @@ body {
 /* 
 *				About Section Styling
 ========================================================================== */
+@media (max-width: 767px) {
+  #about-section-container {
+    margin-bottom: 1.2em; } }
+
+@media (min-width: 768px) and (max-width: 991px) {
+  #about-section-container {
+    margin-bottom: 1.4em; } }
+
+@media (min-width: 992px) and (max-width: 1199px) {
+  #about-section-container {
+    margin-bottom: 1.6em; } }
+
+@media (min-width: 1200px) {
+  #about-section-container {
+    margin-bottom: 2em; } }
+
 @media (max-width: 767px) {
   #about-section-container {
     margin-bottom: 1.2em; } }

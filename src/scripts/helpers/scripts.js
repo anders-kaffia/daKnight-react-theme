@@ -30,8 +30,8 @@ scripts.handleIosFlexBug = () => {
 	contactSection.style.cssText = cssFix;
 
 	window.innerWidth >= 992 ?
-		(mapEl.setAttribute("style","-webkit-order: 1"),
-		contactTextEl.setAttribute("style","-webkit-order: 2"))
+		(mapEl.setAttribute("style", "-webkit-order: 1"),
+			contactTextEl.setAttribute("style", "-webkit-order: 2"))
 		: null;
 };
 

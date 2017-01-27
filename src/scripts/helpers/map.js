@@ -3,7 +3,6 @@ import $ from 'jquery';
 const map = {};
 
 map.init = () => {
-	// map.handleOrientationChange();
 	map.handleFallback();
 	map.createMap();
 };

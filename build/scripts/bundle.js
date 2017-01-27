@@ -29089,23 +29089,23 @@
 	
 	var _Services2 = _interopRequireDefault(_Services);
 	
-	var _Contact = __webpack_require__(501);
+	var _Contact = __webpack_require__(504);
 	
 	var _Contact2 = _interopRequireDefault(_Contact);
 	
-	var _Footer = __webpack_require__(505);
+	var _Footer = __webpack_require__(507);
 	
 	var _Footer2 = _interopRequireDefault(_Footer);
 	
-	var _model = __webpack_require__(506);
+	var _model = __webpack_require__(508);
 	
 	var _model2 = _interopRequireDefault(_model);
 	
-	var _scripts = __webpack_require__(532);
+	var _scripts = __webpack_require__(503);
 	
 	var _scripts2 = _interopRequireDefault(_scripts);
 	
-	var _jqueryScripts = __webpack_require__(533);
+	var _jqueryScripts = __webpack_require__(501);
 	
 	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
 	
@@ -29123,6 +29123,9 @@
 	
 	// Other
 	
+	
+	_model2.default.setLocalStorage();
+	_model2.default.localStoreIsSupported();
 	
 	var Main = function (_React$Component) {
 		_inherits(Main, _React$Component);
@@ -31786,11 +31789,11 @@
 	
 	var _ServiceText2 = _interopRequireDefault(_ServiceText);
 	
-	var _jqueryScripts = __webpack_require__(533);
+	var _jqueryScripts = __webpack_require__(501);
 	
 	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
 	
-	var _scripts = __webpack_require__(532);
+	var _scripts = __webpack_require__(503);
 	
 	var _scripts2 = _interopRequireDefault(_scripts);
 	
@@ -31836,7 +31839,8 @@
 			key: 'eventListeners',
 			value: function eventListeners() {
 				window.addEventListener('scroll', _scripts2.default.handleHeaderPosition);
-				_jqueryScripts2.default.handleArrowKeyScroll();
+				// jqueryScripts.handleArrowKeyScroll();
+				document.readyState !== 'loading' ? _jqueryScripts2.default.handleArrowKeyScroll() : document.addEventListener('DOMContentLoaded', _jqueryScripts2.default.handleArrowKeyScroll);
 			}
 		}, {
 			key: 'render',
@@ -32158,266 +32162,112 @@
 		value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _Header = __webpack_require__(494);
-	
-	var _Header2 = _interopRequireDefault(_Header);
-	
-	var _ContactForm = __webpack_require__(502);
-	
-	var _ContactForm2 = _interopRequireDefault(_ContactForm);
-	
-	var _map = __webpack_require__(503);
-	
-	var _map2 = _interopRequireDefault(_map);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	// Components
-	
-	
-	// Other
-	
-	
-	var Contact = function (_React$Component) {
-		_inherits(Contact, _React$Component);
-	
-		function Contact() {
-			_classCallCheck(this, Contact);
-	
-			return _possibleConstructorReturn(this, (Contact.__proto__ || Object.getPrototypeOf(Contact)).apply(this, arguments));
-		}
-	
-		_createClass(Contact, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				!this.props.loading ? _map2.default.init() : null;
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				// Props
-				var _props = this.props,
-				    details = _props.details,
-				    loading = _props.loading,
-				    showForm = _props.showForm,
-				    toggleForm = _props.toggleForm;
-	
-	
-				return _react2.default.createElement(
-					'div',
-					{ id: 'contact-container' },
-					loading ? null : _react2.default.createElement(
-						'div',
-						{ id: details.slug, className: 'flex-column' },
-						_react2.default.createElement(
-							'section',
-							{ id: 'contact-text', className: 'flex-row' },
-							_react2.default.createElement(
-								'div',
-								{ id: 'contact-text-content' },
-								_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.content.rendered }, className: 'flex-column' }),
-								_react2.default.createElement(
-									'button',
-									{ id: 'open-contact-form', onClick: toggleForm },
-									'Boka m\xF6te h\xE4r!'
-								)
-							)
-						),
-						showForm ? _react2.default.createElement(_ContactForm2.default, { form: details.acf.contact_form, showForm: showForm, toggleForm: toggleForm }) : null,
-						_react2.default.createElement(
-							'div',
-							{ id: 'map-container' },
-							_react2.default.createElement('div', { className: 'disable-scroll' }),
-							_react2.default.createElement('div', { id: 'map' })
-						)
-					)
-				);
-			}
-		}]);
-	
-		return Contact;
-	}(_react2.default.Component);
-	
-	Contact.propTypes = {
-		details: _react2.default.PropTypes.object.isRequired,
-		loading: _react2.default.PropTypes.bool.isRequired,
-		showForm: _react2.default.PropTypes.bool.isRequired,
-		toggleForm: _react2.default.PropTypes.func.isRequired
-	};
-	
-	exports.default = Contact;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Contact.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 502 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ContactForm = function (_React$Component) {
-		_inherits(ContactForm, _React$Component);
-	
-		function ContactForm() {
-			_classCallCheck(this, ContactForm);
-	
-			return _possibleConstructorReturn(this, (ContactForm.__proto__ || Object.getPrototypeOf(ContactForm)).apply(this, arguments));
-		}
-	
-		_createClass(ContactForm, [{
-			key: "render",
-			value: function render() {
-				// Props
-				var _props = this.props,
-				    form = _props.form,
-				    toggleForm = _props.toggleForm;
-	
-	
-				return _react2.default.createElement(
-					"div",
-					{ id: "contact-form-container", className: "flex-row" },
-					_react2.default.createElement(
-						"div",
-						{ id: "contact-form", className: "flex-column" },
-						_react2.default.createElement(
-							"button",
-							{ className: "button-close", onClick: toggleForm },
-							"\xD7"
-						),
-						_react2.default.createElement(
-							"h2",
-							null,
-							"Kontakta oss!"
-						),
-						_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: form } })
-					)
-				);
-			}
-		}]);
-	
-		return ContactForm;
-	}(_react2.default.Component);
-	
-	ContactForm.propTypes = {
-		form: _react2.default.PropTypes.string.isRequired,
-		toggleForm: _react2.default.PropTypes.func.isRequired
-	};
-	
-	exports.default = ContactForm;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ContactForm.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 503 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _jquery = __webpack_require__(504);
+	var _jquery = __webpack_require__(502);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
+	var _scripts = __webpack_require__(503);
+	
+	var _scripts2 = _interopRequireDefault(_scripts);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var map = {};
-	
-	map.init = function () {
-		// map.handleOrientationChange();
-		map.handleFallback();
-		map.createMap();
-	};
+	var headerHeight = void 0;
+	var marginTop = void 0;
 	
 	/**
-	 * @desc Fallback for unsupported browsers.
+	 * Sets the correct media query values of the header height and top margin.
 	 * */
-	map.handleFallback = function () {
-		function fallBack() {
-			document.getElementById("map").className += "map-fallback";
-			document.getElementById("mapFallback").style.display = "block";
-		}
+	if ((0, _jquery2.default)(window.innerWidth)[0] <= 768) {
+		headerHeight = 143.6;
+		marginTop = 19.2;
+	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 768 && (0, _jquery2.default)(window.innerWidth)[0] < 992) {
+		headerHeight = 167.2;
+		marginTop = 22.4;
+	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 992 && (0, _jquery2.default)(window.innerWidth)[0] < 1200) {
+		headerHeight = 186.8;
+		marginTop = 25.6;
+	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 1200) {
+		headerHeight = 216;
+		marginTop = 32;
+	}
 	
-		/**
-	  * @desc Load old jQuery function for browser detection.
-	  * */
-		jQuery.browser = {};
-		(function () {
-			jQuery.browser.msie = false;
-			jQuery.browser.version = 0;
-			if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
-				jQuery.browser.msie = true;
-				jQuery.browser.version = RegExp.$1;
-			}
-		})();
-	
-		/**
-	  * @desc Fix for Internet Explorer.
-	  * */
-		// if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || $.browser.msie == 1) {
-		// 	fallBack();
-		// }
-	};
+	var jqueryScripts = {};
 	
 	/**
-	 * Generates the map, or calls a callback function.
-	 * */
-	map.createMap = function () {
-		!mapboxgl.supported() ? fallBack() : mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
-		var map = new mapboxgl.Map({
-			container: 'map',
-			style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30'
-		});
-		map.on('load', function () {
-			window.onresize = function (event) {
-				map.resize();
-				map.repaint;
-			};
+	 * @desc Enables smooth scrolling
+	 */
+	jqueryScripts.smoothScroll = function () {
+		(0, _jquery2.default)('a[href^="#"]').on('click', function (e) {
+			e.preventDefault();
+	
+			var target = this.hash;
+			var $target = (0, _jquery2.default)(target);
+			var absoluteTop = 200;
+	
+			(0, _jquery2.default)('html, body').stop().animate({
+				'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? headerHeight : target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop)
+			}, 700, 'swing');
 		});
 	};
 	
-	exports.default = map;
+	/**
+	 * @desc Handles page scroll on arrow keys
+	 * */
+	jqueryScripts.handleArrowKeyScroll = function () {
+		var lastAboutSection = document.getElementById('about-3').offsetTop;
 	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "map.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+		(0, _jquery2.default)('html, body').keydown(function (e) {
+			e.keyCode === 38 ? lastAboutSection + 10 > window.pageYOffset ? jqueryScripts.arrowScrollTopUp() : jqueryScripts.arrowScrollbottomUp() : e.keyCode === 40 ? lastAboutSection - 200 > window.pageYOffset ? jqueryScripts.arrowScrollTopDown() : jqueryScripts.arrowScrollbottomDown() : null;
+		});
+	};
+	
+	/**
+	 * @desc Handles scroll amount above the services section.
+	 * Scroll direction: up.
+	 * */
+	jqueryScripts.arrowScrollTopUp = function () {
+		(0, _jquery2.default)('html, body').stop().animate({
+			scrollTop: window.pageYOffset - (window.innerHeight - (headerHeight - marginTop))
+		}, 500, 'swing');
+	};
+	
+	/**
+	 * @desc Handles scroll amount above the services section.
+	 * Scroll direction: down.
+	 * */
+	jqueryScripts.arrowScrollTopDown = function () {
+		(0, _jquery2.default)('html, body').stop().animate({
+			scrollTop: window.pageYOffset + (window.innerHeight - (headerHeight - marginTop))
+		}, 500, 'swing');
+	};
+	
+	/**
+	 * @desc Handles scroll amount below the services section.
+	 * Scroll direction: up.
+	 * */
+	jqueryScripts.arrowScrollbottomUp = function () {
+		(0, _jquery2.default)('html, body').stop().animate({
+			scrollTop: window.pageYOffset - (window.innerHeight - marginTop)
+		}, 500, 'swing');
+	};
+	
+	/**
+	 * @desc Handles scroll amount below the services section.
+	 * Scroll direction: down.
+	 * */
+	jqueryScripts.arrowScrollbottomDown = function () {
+		(0, _jquery2.default)('html, body').stop().animate({
+			scrollTop: window.pageYOffset + (window.innerHeight - marginTop)
+		}, 500, 'swing');
+	};
+	
+	exports.default = jqueryScripts;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "jqueryScripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 504 */
+/* 502 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -42643,7 +42493,330 @@
 
 
 /***/ },
+/* 503 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _jqueryScripts = __webpack_require__(501);
+	
+	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var scripts = {};
+	
+	/**
+	 * @desc toggles the header position from fixed to absolute
+	 */
+	scripts.handleHeaderPosition = function () {
+		var services = document.getElementById('tjanster');
+		var header = document.getElementById('header-wrapper');
+		var headerHeight = header.offsetHeight;
+		var topOfServices = services.offsetTop;
+		var absPosition = 'position: absolute; top: ' + (topOfServices - headerHeight) + 'px';
+		window.pageYOffset >= topOfServices - headerHeight ? header.style.cssText += absPosition : null;
+		window.pageYOffset <= topOfServices - headerHeight ? header.style.cssText = window.getComputedStyle(header, null) - absPosition : null;
+	};
+	
+	/**
+	 * @desc Handles a bug with older iOS Flex properties.
+	 * Autoprefixer does not solve this problem.
+	 */
+	scripts.handleIosFlexBug = function () {
+		var serviceNav = document.getElementById('service-menu-ul');
+		var contactSection = document.getElementById('kontakt');
+		var mapEl = document.getElementById('map-container');
+		var contactTextEl = document.getElementById('contact-text');
+		var cssFix = "-webkit-flex-wrap: wrap; display: -webkit-flex;";
+	
+		serviceNav.style.cssText = cssFix;
+		contactSection.style.cssText = cssFix;
+	
+		window.innerWidth >= 992 ? (mapEl.setAttribute("style", "-webkit-order: 1"), contactTextEl.setAttribute("style", "-webkit-order: 2")) : null;
+	};
+	
+	exports.default = scripts;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 504 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _Header = __webpack_require__(494);
+	
+	var _Header2 = _interopRequireDefault(_Header);
+	
+	var _ContactForm = __webpack_require__(505);
+	
+	var _ContactForm2 = _interopRequireDefault(_ContactForm);
+	
+	var _map = __webpack_require__(506);
+	
+	var _map2 = _interopRequireDefault(_map);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// Components
+	
+	
+	// Other
+	
+	
+	var Contact = function (_React$Component) {
+		_inherits(Contact, _React$Component);
+	
+		function Contact() {
+			_classCallCheck(this, Contact);
+	
+			return _possibleConstructorReturn(this, (Contact.__proto__ || Object.getPrototypeOf(Contact)).apply(this, arguments));
+		}
+	
+		_createClass(Contact, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				!this.props.loading ? _map2.default.init() : null;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				// Props
+				var _props = this.props,
+				    details = _props.details,
+				    loading = _props.loading,
+				    showForm = _props.showForm,
+				    toggleForm = _props.toggleForm;
+	
+	
+				return _react2.default.createElement(
+					'div',
+					{ id: 'contact-container' },
+					loading ? null : _react2.default.createElement(
+						'div',
+						{ id: details.slug, className: 'flex-column' },
+						_react2.default.createElement(
+							'section',
+							{ id: 'contact-text', className: 'flex-row' },
+							_react2.default.createElement(
+								'div',
+								{ id: 'contact-text-content' },
+								_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.content.rendered }, className: 'flex-column' }),
+								_react2.default.createElement(
+									'button',
+									{ id: 'open-contact-form', onClick: toggleForm },
+									'Boka m\xF6te h\xE4r!'
+								)
+							)
+						),
+						showForm ? _react2.default.createElement(_ContactForm2.default, { form: details.acf.contact_form, showForm: showForm, toggleForm: toggleForm }) : null,
+						_react2.default.createElement(
+							'div',
+							{ id: 'map-container' },
+							_react2.default.createElement('div', { className: 'disable-scroll' }),
+							_react2.default.createElement('div', { id: 'map' })
+						)
+					)
+				);
+			}
+		}]);
+	
+		return Contact;
+	}(_react2.default.Component);
+	
+	Contact.propTypes = {
+		details: _react2.default.PropTypes.object.isRequired,
+		loading: _react2.default.PropTypes.bool.isRequired,
+		showForm: _react2.default.PropTypes.bool.isRequired,
+		toggleForm: _react2.default.PropTypes.func.isRequired
+	};
+	
+	exports.default = Contact;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Contact.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
 /* 505 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ContactForm = function (_React$Component) {
+		_inherits(ContactForm, _React$Component);
+	
+		function ContactForm() {
+			_classCallCheck(this, ContactForm);
+	
+			return _possibleConstructorReturn(this, (ContactForm.__proto__ || Object.getPrototypeOf(ContactForm)).apply(this, arguments));
+		}
+	
+		_createClass(ContactForm, [{
+			key: "render",
+			value: function render() {
+				// Props
+				var _props = this.props,
+				    form = _props.form,
+				    toggleForm = _props.toggleForm;
+	
+	
+				return _react2.default.createElement(
+					"div",
+					{ id: "contact-form-container", className: "flex-row" },
+					_react2.default.createElement(
+						"div",
+						{ id: "contact-form", className: "flex-column" },
+						_react2.default.createElement(
+							"button",
+							{ className: "button-close", onClick: toggleForm },
+							"\xD7"
+						),
+						_react2.default.createElement(
+							"h2",
+							null,
+							"Kontakta oss!"
+						),
+						_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: form } })
+					)
+				);
+			}
+		}]);
+	
+		return ContactForm;
+	}(_react2.default.Component);
+	
+	ContactForm.propTypes = {
+		form: _react2.default.PropTypes.string.isRequired,
+		toggleForm: _react2.default.PropTypes.func.isRequired
+	};
+	
+	exports.default = ContactForm;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ContactForm.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 506 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _jquery = __webpack_require__(502);
+	
+	var _jquery2 = _interopRequireDefault(_jquery);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	var map = {};
+	
+	map.init = function () {
+		map.handleFallback();
+		map.createMap();
+	};
+	
+	/**
+	 * @desc Fallback for unsupported browsers.
+	 * */
+	map.handleFallback = function () {
+		function fallBack() {
+			document.getElementById("map").className += "map-fallback";
+			document.getElementById("mapFallback").style.display = "block";
+		}
+	
+		/**
+	  * @desc Load old jQuery function for browser detection.
+	  * */
+		jQuery.browser = {};
+		(function () {
+			jQuery.browser.msie = false;
+			jQuery.browser.version = 0;
+			if (navigator.userAgent.match(/MSIE ([0-9]+)\./)) {
+				jQuery.browser.msie = true;
+				jQuery.browser.version = RegExp.$1;
+			}
+		})();
+	
+		/**
+	  * @desc Fix for Internet Explorer.
+	  * */
+		// if (navigator.appName == 'Microsoft Internet Explorer' || !!(navigator.userAgent.match(/Trident/) || navigator.userAgent.match(/rv 11/)) || $.browser.msie == 1) {
+		// 	fallBack();
+		// }
+	};
+	
+	/**
+	 * Generates the map, or calls a callback function.
+	 * */
+	map.createMap = function () {
+		!mapboxgl.supported() ? fallBack() : mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
+		var map = new mapboxgl.Map({
+			container: 'map',
+			style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30'
+		});
+		map.on('load', function () {
+			window.onresize = function (event) {
+				map.resize();
+				map.repaint;
+			};
+		});
+	};
+	
+	exports.default = map;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "map.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 507 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -42733,7 +42906,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Footer.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 506 */
+/* 508 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -42744,7 +42917,7 @@
 		value: true
 	});
 	
-	var _axios = __webpack_require__(507);
+	var _axios = __webpack_require__(509);
 	
 	var _axios2 = _interopRequireDefault(_axios);
 	
@@ -42752,13 +42925,80 @@
 	
 	var model = {};
 	
+	// const localStoragePromise = new Promise((resolve, reject) => {
+	// 	const getLS = () => {
+	// 		localStorage.getItem('Hey Ho');
+	// 	};
+	// });
+	
+	
+	// Libs
+	model.setRammonesStorage = function () {
+		localStorage.setItem('Hey Ho', "Let's go!");
+	};
+	
+	/**
+	 * @desc Set local storage.
+	 *
+	 * @return {Boolean} Boolean value for if local store is supported
+	 */
+	model.localStoreIsSupported = function () {
+	
+		/**
+	  * 1. Set local storage with a simple string.
+	  * 2. Check if local storage is empty
+	  * 3. If local storage is successfully set, 
+	  * 		3.1 run an API call and set the results in local storage with the same name as state.
+	  * 		3.2 set the state from local storage.
+	  * 4. If local storage is not set,
+	  * 		4.1 local storage is not supported.
+	  * 		4.2 Run an API call and set the state directly.
+	  */
+		var localStoragePromise = new Promise();
+	
+		localStoragePromise.storage.local.set({ foo: 'bar' }).then(function () {
+			alert('foo set');
+			return localStoragePromise.storage.local.get('foo');
+		}).then(function (items) {
+			alert(JSON.stringify(items)); // => {"foo":"bar"} 
+		});
+	
+		localStoragePromise.then(function (data) {
+			console.log(data);
+		});
+	
+		// model.setRammonesStorage()
+		// 	.then(() => {
+		// 	console.log('1');
+		// })
+		// 	.then(() => {
+		// 		console.log('2');
+		// 		model.checkLocalStorage();
+		// 	});
+		// const store = model.getLocalStore();
+		// model.setLocalStorage();
+	
+	};
+	
+	/**
+	 * @desc Check if local storage is empty.
+	 */
+	model.checkLocalStorage = function () {
+		if (window.localStorage.length === 0 || 'localStorage' in window && window['localStorage'] === null || model.getLocalStore === null) {
+			console.log('Local Storage is not supported!');
+			return false;
+		} else {
+			console.log('Local Storage is supported');
+			return true;
+		}
+	};
+	
 	/**
 	 * @desc Get type specific content from WP REST API
 	 *
 	 * @param {string, number} type of content, posts, pages, or media
 	 * and the number of results.
 	 */
-	// Libs
 	model.getContent = function (type, number) {
 		return _axios2.default.get('/wp-json/wp/v2/' + type + '/?per_page=' + number);
 	};
@@ -42872,26 +43112,59 @@
 		}
 	};
 	
+	/**
+	 * @desc Set local storage from API response
+	 */
+	model.setLocalStorage = function () {
+		localStorage.setItem('Hey Ho', "Let's Go!");
+	
+		model.apiCall.getHeaderContent('pages', 47, 'media', 'DKN_Logotyp').then(function (data) {
+			localStorage.setItem('mainPageTitles', JSON.stringify(data.mainPageTitles));
+			localStorage.setItem('logo', JSON.stringify(data.logo));
+			localStorage.setItem('mainPageTitles', JSON.stringify(data.mainPageTitles));
+		}).then(function () {
+			model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow').then(function (data) {
+				localStorage.setItem('arrow', JSON.stringify(data.arrow));
+				localStorage.setItem('about', JSON.stringify(data.about));
+			});
+		}).then(function () {
+			model.apiCall.getServicesContent('pages', 47).then(function (data) {
+				localStorage.setItem('services', JSON.stringify(data.services));
+				localStorage.setItem('serviceChildPages', JSON.stringify(data.serviceChildPages));
+				localStorage.setItem('serviceChildPageTitles', JSON.stringify(data.serviceChildPageTitles));
+				localStorage.setItem('activeItem', JSON.stringify(data.activeItem));
+			});
+		}).then(function () {
+			model.apiCall.getContactContent('pages', 'kontakt').then(function (data) {
+				localStorage.setItem('contact', JSON.stringify(data.contact));
+			});
+		}).then(function () {
+			model.apiCall.getFooterContent('pages', 'footer').then(function (data) {
+				localStorage.setItem('footer', JSON.stringify(data.footer));
+			});
+		});
+	};
+	
 	exports.default = model;
 	
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "model.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 507 */
+/* 509 */
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(508);
+	module.exports = __webpack_require__(510);
 
 /***/ },
-/* 508 */
+/* 510 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
-	var bind = __webpack_require__(510);
-	var Axios = __webpack_require__(511);
-	var defaults = __webpack_require__(512);
+	var utils = __webpack_require__(511);
+	var bind = __webpack_require__(512);
+	var Axios = __webpack_require__(513);
+	var defaults = __webpack_require__(514);
 	
 	/**
 	 * Create an instance of Axios
@@ -42924,15 +43197,15 @@
 	};
 	
 	// Expose Cancel & CancelToken
-	axios.Cancel = __webpack_require__(529);
-	axios.CancelToken = __webpack_require__(530);
-	axios.isCancel = __webpack_require__(526);
+	axios.Cancel = __webpack_require__(531);
+	axios.CancelToken = __webpack_require__(532);
+	axios.isCancel = __webpack_require__(528);
 	
 	// Expose all/spread
 	axios.all = function all(promises) {
 	  return Promise.all(promises);
 	};
-	axios.spread = __webpack_require__(531);
+	axios.spread = __webpack_require__(533);
 	
 	module.exports = axios;
 	
@@ -42941,12 +43214,12 @@
 
 
 /***/ },
-/* 509 */
+/* 511 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var bind = __webpack_require__(510);
+	var bind = __webpack_require__(512);
 	
 	/*global toString:true*/
 	
@@ -43246,7 +43519,7 @@
 
 
 /***/ },
-/* 510 */
+/* 512 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -43263,17 +43536,17 @@
 
 
 /***/ },
-/* 511 */
+/* 513 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var defaults = __webpack_require__(512);
-	var utils = __webpack_require__(509);
-	var InterceptorManager = __webpack_require__(523);
-	var dispatchRequest = __webpack_require__(524);
-	var isAbsoluteURL = __webpack_require__(527);
-	var combineURLs = __webpack_require__(528);
+	var defaults = __webpack_require__(514);
+	var utils = __webpack_require__(511);
+	var InterceptorManager = __webpack_require__(525);
+	var dispatchRequest = __webpack_require__(526);
+	var isAbsoluteURL = __webpack_require__(529);
+	var combineURLs = __webpack_require__(530);
 	
 	/**
 	 * Create a new instance of Axios
@@ -43354,13 +43627,13 @@
 
 
 /***/ },
-/* 512 */
+/* 514 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(509);
-	var normalizeHeaderName = __webpack_require__(513);
+	var utils = __webpack_require__(511);
+	var normalizeHeaderName = __webpack_require__(515);
 	
 	var PROTECTION_PREFIX = /^\)\]\}',?\n/;
 	var DEFAULT_CONTENT_TYPE = {
@@ -43377,10 +43650,10 @@
 	  var adapter;
 	  if (typeof XMLHttpRequest !== 'undefined') {
 	    // For browsers use XHR adapter
-	    adapter = __webpack_require__(514);
+	    adapter = __webpack_require__(516);
 	  } else if (typeof process !== 'undefined') {
 	    // For node use HTTP adapter
-	    adapter = __webpack_require__(514);
+	    adapter = __webpack_require__(516);
 	  }
 	  return adapter;
 	}
@@ -43454,12 +43727,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 513 */
+/* 515 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	module.exports = function normalizeHeaderName(headers, normalizedName) {
 	  utils.forEach(headers, function processHeader(value, name) {
@@ -43472,18 +43745,18 @@
 
 
 /***/ },
-/* 514 */
+/* 516 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* WEBPACK VAR INJECTION */(function(process) {'use strict';
 	
-	var utils = __webpack_require__(509);
-	var settle = __webpack_require__(515);
-	var buildURL = __webpack_require__(518);
-	var parseHeaders = __webpack_require__(519);
-	var isURLSameOrigin = __webpack_require__(520);
-	var createError = __webpack_require__(516);
-	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(521);
+	var utils = __webpack_require__(511);
+	var settle = __webpack_require__(517);
+	var buildURL = __webpack_require__(520);
+	var parseHeaders = __webpack_require__(521);
+	var isURLSameOrigin = __webpack_require__(522);
+	var createError = __webpack_require__(518);
+	var btoa = (typeof window !== 'undefined' && window.btoa && window.btoa.bind(window)) || __webpack_require__(523);
 	
 	module.exports = function xhrAdapter(config) {
 	  return new Promise(function dispatchXhrRequest(resolve, reject) {
@@ -43579,7 +43852,7 @@
 	    // This is only done if running in a standard browser environment.
 	    // Specifically not if we're in a web worker, or react-native.
 	    if (utils.isStandardBrowserEnv()) {
-	      var cookies = __webpack_require__(522);
+	      var cookies = __webpack_require__(524);
 	
 	      // Add xsrf header
 	      var xsrfValue = (config.withCredentials || isURLSameOrigin(config.url)) && config.xsrfCookieName ?
@@ -43656,12 +43929,12 @@
 	/* WEBPACK VAR INJECTION */}.call(exports, __webpack_require__(294)))
 
 /***/ },
-/* 515 */
+/* 517 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var createError = __webpack_require__(516);
+	var createError = __webpack_require__(518);
 	
 	/**
 	 * Resolve or reject a Promise based on response status.
@@ -43687,12 +43960,12 @@
 
 
 /***/ },
-/* 516 */
+/* 518 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var enhanceError = __webpack_require__(517);
+	var enhanceError = __webpack_require__(519);
 	
 	/**
 	 * Create an Error with the specified message, config, error code, and response.
@@ -43710,7 +43983,7 @@
 
 
 /***/ },
-/* 517 */
+/* 519 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -43735,12 +44008,12 @@
 
 
 /***/ },
-/* 518 */
+/* 520 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	function encode(val) {
 	  return encodeURIComponent(val).
@@ -43809,12 +44082,12 @@
 
 
 /***/ },
-/* 519 */
+/* 521 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	/**
 	 * Parse headers into an object
@@ -43852,12 +44125,12 @@
 
 
 /***/ },
-/* 520 */
+/* 522 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -43926,7 +44199,7 @@
 
 
 /***/ },
-/* 521 */
+/* 523 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -43968,12 +44241,12 @@
 
 
 /***/ },
-/* 522 */
+/* 524 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	module.exports = (
 	  utils.isStandardBrowserEnv() ?
@@ -44027,12 +44300,12 @@
 
 
 /***/ },
-/* 523 */
+/* 525 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	function InterceptorManager() {
 	  this.handlers = [];
@@ -44085,15 +44358,15 @@
 
 
 /***/ },
-/* 524 */
+/* 526 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
-	var transformData = __webpack_require__(525);
-	var isCancel = __webpack_require__(526);
-	var defaults = __webpack_require__(512);
+	var utils = __webpack_require__(511);
+	var transformData = __webpack_require__(527);
+	var isCancel = __webpack_require__(528);
+	var defaults = __webpack_require__(514);
 	
 	/**
 	 * Throws a `Cancel` if cancellation has been requested.
@@ -44170,12 +44443,12 @@
 
 
 /***/ },
-/* 525 */
+/* 527 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var utils = __webpack_require__(509);
+	var utils = __webpack_require__(511);
 	
 	/**
 	 * Transform the data for a request or a response
@@ -44196,7 +44469,7 @@
 
 
 /***/ },
-/* 526 */
+/* 528 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44207,7 +44480,7 @@
 
 
 /***/ },
-/* 527 */
+/* 529 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44227,7 +44500,7 @@
 
 
 /***/ },
-/* 528 */
+/* 530 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44245,7 +44518,7 @@
 
 
 /***/ },
-/* 529 */
+/* 531 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44270,12 +44543,12 @@
 
 
 /***/ },
-/* 530 */
+/* 532 */
 /***/ function(module, exports, __webpack_require__) {
 
 	'use strict';
 	
-	var Cancel = __webpack_require__(529);
+	var Cancel = __webpack_require__(531);
 	
 	/**
 	 * A `CancelToken` is an object that can be used to request cancellation of an operation.
@@ -44333,7 +44606,7 @@
 
 
 /***/ },
-/* 531 */
+/* 533 */
 /***/ function(module, exports) {
 
 	'use strict';
@@ -44364,178 +44637,6 @@
 	  };
 	};
 
-
-/***/ },
-/* 532 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _jqueryScripts = __webpack_require__(533);
-	
-	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var scripts = {};
-	
-	/**
-	 * @desc toggles the header position from fixed to absolute
-	 */
-	scripts.handleHeaderPosition = function () {
-		var services = document.getElementById('tjanster');
-		var header = document.getElementById('header-wrapper');
-		var headerHeight = header.offsetHeight;
-		var topOfServices = services.offsetTop;
-		var absPosition = 'position: absolute; top: ' + (topOfServices - headerHeight) + 'px';
-		window.pageYOffset >= topOfServices - headerHeight ? header.style.cssText += absPosition : null;
-		window.pageYOffset <= topOfServices - headerHeight ? header.style.cssText = window.getComputedStyle(header, null) - absPosition : null;
-	};
-	
-	/**
-	 * @desc Handles a bug with older iOS Flex properties.
-	 * Autoprefixer does not solve this problem.
-	 */
-	scripts.handleIosFlexBug = function () {
-		var serviceNav = document.getElementById('service-menu-ul');
-		var contactSection = document.getElementById('kontakt');
-		var mapEl = document.getElementById('map-container');
-		var contactTextEl = document.getElementById('contact-text');
-		var cssFix = "-webkit-flex-wrap: wrap; display: -webkit-flex;";
-	
-		serviceNav.style.cssText = cssFix;
-		contactSection.style.cssText = cssFix;
-	
-		window.innerWidth >= 992 ? (mapEl.setAttribute("style", "-webkit-order: 1"), contactTextEl.setAttribute("style", "-webkit-order: 2")) : null;
-	};
-	
-	exports.default = scripts;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 533 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _jquery = __webpack_require__(504);
-	
-	var _jquery2 = _interopRequireDefault(_jquery);
-	
-	var _scripts = __webpack_require__(532);
-	
-	var _scripts2 = _interopRequireDefault(_scripts);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	var headerHeight = void 0;
-	var marginTop = void 0;
-	
-	/**
-	 * Sets the correct media query values of the header height and top margin.
-	 * */
-	if ((0, _jquery2.default)(window.innerWidth)[0] <= 768) {
-		headerHeight = 143.6;
-		marginTop = 19.2;
-	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 768 && (0, _jquery2.default)(window.innerWidth)[0] < 992) {
-		headerHeight = 167.2;
-		marginTop = 22.4;
-	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 992 && (0, _jquery2.default)(window.innerWidth)[0] < 1200) {
-		headerHeight = 186.8;
-		marginTop = 25.6;
-	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 1200) {
-		headerHeight = 216;
-		marginTop = 32;
-	}
-	
-	var jqueryScripts = {};
-	
-	/**
-		 * @desc Enables smooth scrolling
-		 */
-	jqueryScripts.smoothScroll = function () {
-		(0, _jquery2.default)('a[href^="#"]').on('click', function (e) {
-			e.preventDefault();
-	
-			var target = this.hash;
-			var $target = (0, _jquery2.default)(target);
-			var absoluteTop = 500;
-	
-			(0, _jquery2.default)('html, body').stop().animate({
-				'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? absoluteTop : target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop)
-			}, 700, 'swing', function () {
-				window.location.hash = target;
-			});
-		});
-	};
-	
-	/**
-	 * @desc Handles page scroll on arrow keys
-	 * */
-	jqueryScripts.handleArrowKeyScroll = function () {
-		var lastAboutSection = document.getElementById('about-2').offsetTop;
-	
-		(0, _jquery2.default)('html, body').keydown(function (e) {
-			e.keyCode === 38 ? lastAboutSection + 10 > window.pageYOffset ? jqueryScripts.arrowScrollTopUp() : jqueryScripts.arrowScrollbottomUp() : e.keyCode === 40 ? lastAboutSection - 200 > window.pageYOffset ? jqueryScripts.arrowScrollTopDown() : jqueryScripts.arrowScrollbottomDown() : null;
-		});
-	};
-	
-	/**
-	 * @desc Handles scroll amount above the services section.
-	 * Scroll direction: up.
-	 * */
-	jqueryScripts.arrowScrollTopUp = function () {
-		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset - (window.innerHeight - (headerHeight - marginTop))
-		}, 500, 'swing');
-	};
-	
-	/**
-	 * @desc Handles scroll amount above the services section.
-	 * Scroll direction: down.
-	 * */
-	jqueryScripts.arrowScrollTopDown = function () {
-		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset + (window.innerHeight - (headerHeight - marginTop))
-		}, 500, 'swing');
-	};
-	
-	/**
-	 * @desc Handles scroll amount below the services section.
-	 * Scroll direction: up.
-	 * */
-	jqueryScripts.arrowScrollbottomUp = function () {
-		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset - (window.innerHeight - marginTop)
-		}, 500, 'swing');
-	};
-	
-	/**
-	 * @desc Handles scroll amount below the services section.
-	 * Scroll direction: down.
-	 * */
-	jqueryScripts.arrowScrollbottomDown = function () {
-		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset + (window.innerHeight - marginTop)
-		}, 500, 'swing');
-	};
-	
-	exports.default = jqueryScripts;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "jqueryScripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 534 */
