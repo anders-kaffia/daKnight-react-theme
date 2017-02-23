@@ -10,6 +10,9 @@ import About from './About';
 import Services from './Services';
 import Contact from './Contact';
 import Footer from './Footer';
+import FourOhFour from './404';
+import Single from './Single';
+import Archive from './Archive';
 
 // Other
 import model from '../helpers/model';
