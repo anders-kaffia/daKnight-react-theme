@@ -16,9 +16,6 @@ import model from '../helpers/model';
 import scripts from '../helpers/scripts';
 import jqueryScripts from '../helpers/jqueryScripts';
 
-model.setLocalStorage();
-model.localStoreIsSupported();
-
 class Main extends React.Component {
 
 	constructor() {
@@ -41,6 +38,7 @@ class Main extends React.Component {
 			posts: {},
 			headerIsLoading: true,
 			aboutIsLoading: true,
+			aboutContentIsRendering: true,
 			servicesIsLoading: true,
 			contactIsLoading: true,
 			footerIsLoading: true,
@@ -104,7 +102,7 @@ class Main extends React.Component {
 							footerIsLoading: false
 						});
 					});
-				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 1000);
+				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
 			});
 	};
 
@@ -155,24 +153,26 @@ class Main extends React.Component {
 								details={this.state.mainPageTitles}
 								logo={this.state.logo}
 								id="header-wrapper"
-								/>
+							/>
 							<ReactCSSTransisionGroup
 								component="div"
 								className="blank-slate-container"
 								transitionName="slide"
-								transitionEnterTimeout={500}
-								transitionLeaveTimeout={800}
-								>
+								transitionEnterTimeout={1500}
+								transitionLeaveTimeout={1500}
+							>
 								{this.state.renderBlankSlate ? <BlankSlate /> : null}
 							</ReactCSSTransisionGroup>
-							{this.state.aboutIsLoading ? (
+							{this.state.renderBlankSlate || this.state.aboutIsLoading ? (
 								null
 							) : (
 									<About
 										loading={this.state.aboutIsLoading}
+										blankSlate={this.state.renderBlankSlate}
+										contentRendering={this.state.aboutContentIsRendering}
 										arrow={this.state.arrow}
 										details={this.state.about}
-										/>
+									/>
 								)}
 							{this.state.servicesIsLoading ? (
 								null
@@ -186,7 +186,7 @@ class Main extends React.Component {
 										burgerMenu={this.burgerMenu}
 										burgerMenuActive={this.state.burgerMenuActive}
 										width={this.state.width}
-										/>
+									/>
 								)}
 							{this.state.contactIsLoading ? (
 								<Loading />
@@ -198,7 +198,7 @@ class Main extends React.Component {
 										toggleForm={this.toggleContactForm}
 										footer={this.state.footer}
 										menu={this.state.mainPageTitles}
-										/>
+									/>
 								)}
 							{this.state.footerIsLoading ? (
 								null
@@ -207,7 +207,7 @@ class Main extends React.Component {
 										loading={this.state.footerIsLoading}
 										details={this.state.footer}
 										menu={this.state.mainPageTitles}
-										/>
+									/>
 								)}
 						</div>
 					)}

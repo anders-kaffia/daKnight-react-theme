@@ -24,7 +24,7 @@ add_theme_support( 'post-thumbnails' );
 function theme_styles_and_scripts(){
 
 	// Font Awesome
-	wp_enqueue_style( 'prefix-font-awesome', 'https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css', array(), '4.6.3' );
+	wp_enqueue_style( 'prefix-font-awesome', 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css', array(), '4.7.0' );
 	// Google Fonts
 	wp_enqueue_style( 'googlefont_css', '//fonts.googleapis.com/css?family=Raleway|Rozha+One' );
 	// Theme styles

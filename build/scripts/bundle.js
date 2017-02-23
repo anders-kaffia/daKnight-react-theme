@@ -29085,7 +29085,7 @@
 	
 	var _About2 = _interopRequireDefault(_About);
 	
-	var _Services = __webpack_require__(497);
+	var _Services = __webpack_require__(500);
 	
 	var _Services2 = _interopRequireDefault(_Services);
 	
@@ -29101,11 +29101,11 @@
 	
 	var _model2 = _interopRequireDefault(_model);
 	
-	var _scripts = __webpack_require__(503);
+	var _scripts = __webpack_require__(497);
 	
 	var _scripts2 = _interopRequireDefault(_scripts);
 	
-	var _jqueryScripts = __webpack_require__(501);
+	var _jqueryScripts = __webpack_require__(498);
 	
 	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
 	
@@ -29123,9 +29123,6 @@
 	
 	// Other
 	
-	
-	_model2.default.setLocalStorage();
-	_model2.default.localStoreIsSupported();
 	
 	var Main = function (_React$Component) {
 		_inherits(Main, _React$Component);
@@ -29152,6 +29149,7 @@
 				posts: {},
 				headerIsLoading: true,
 				aboutIsLoading: true,
+				aboutContentIsRendering: true,
 				servicesIsLoading: true,
 				contactIsLoading: true,
 				footerIsLoading: true,
@@ -29213,7 +29211,7 @@
 					});
 					_this2.interval = setTimeout(function () {
 						return _this2.setState({ renderBlankSlate: false });
-					}, 1000);
+					}, 3000);
 				});
 			}
 		}, {
@@ -29284,13 +29282,15 @@
 								component: 'div',
 								className: 'blank-slate-container',
 								transitionName: 'slide',
-								transitionEnterTimeout: 500,
-								transitionLeaveTimeout: 800
+								transitionEnterTimeout: 1500,
+								transitionLeaveTimeout: 1500
 							},
 							this.state.renderBlankSlate ? _react2.default.createElement(_BlankSlate2.default, null) : null
 						),
-						this.state.aboutIsLoading ? null : _react2.default.createElement(_About2.default, {
+						this.state.renderBlankSlate || this.state.aboutIsLoading ? null : _react2.default.createElement(_About2.default, {
 							loading: this.state.aboutIsLoading,
+							blankSlate: this.state.renderBlankSlate,
+							contentRendering: this.state.aboutContentIsRendering,
 							arrow: this.state.arrow,
 							details: this.state.about
 						}),
@@ -31653,7 +31653,7 @@
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-	"use strict";
+	'use strict';
 	
 	Object.defineProperty(exports, "__esModule", {
 		value: true
@@ -31664,6 +31664,10 @@
 	var _react = __webpack_require__(299);
 	
 	var _react2 = _interopRequireDefault(_react);
+	
+	var _scripts = __webpack_require__(497);
+	
+	var _scripts2 = _interopRequireDefault(_scripts);
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
@@ -31680,67 +31684,72 @@
 		function About() {
 			_classCallCheck(this, About);
 	
-			return _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).apply(this, arguments));
+			var _this = _possibleConstructorReturn(this, (About.__proto__ || Object.getPrototypeOf(About)).call(this));
+	
+			_this.handleContentLoaded = _this.handleContentLoaded.bind(_this);
+			_this.interval = null;
+			_this.state = {
+				contentLoaded: false
+			};
+			return _this;
 		}
 	
 		_createClass(About, [{
-			key: "render",
+			key: 'handleContentLoaded',
+			value: function handleContentLoaded() {
+				this.setState({
+					contentLoaded: true
+				});
+				this.state.contentLoaded === true ? _scripts2.default.slideSwitcher() : null;
+			}
+		}, {
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				this.interval = setTimeout(this.handleContentLoaded, 500);
+			}
+		}, {
+			key: 'render',
 			value: function render() {
 				// Props
 				var _props = this.props,
 				    details = _props.details,
 				    loading = _props.loading,
-				    arrow = _props.arrow;
+				    arrow = _props.arrow,
+				    blankSlate = _props.blankSlate;
 	
 	
 				return _react2.default.createElement(
-					"div",
-					{ className: "flex-column", id: "about-section-container" },
+					'div',
+					{ className: 'flex-column', id: 'about-section-container' },
 					loading ? null : _react2.default.createElement(
-						"div",
-						{ id: details.slug },
+						'div',
+						{ id: 'about', className: 'flex-row' },
 						_react2.default.createElement(
-							"section",
-							{ id: "about-1", className: "flex-column" },
-							_react2.default.createElement(
-								"div",
-								{ className: "arrow" },
-								_react2.default.createElement(
-									"a",
-									{ href: "#about-2" },
-									_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
-								)
-							),
-							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.om_oss } })
+							'section',
+							{ id: 'about-1', className: 'flex-column about-slide' },
+							_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.acf.om_oss } })
 						),
 						_react2.default.createElement(
-							"section",
-							{ id: "about-2", className: "flex-column" },
-							_react2.default.createElement(
-								"div",
-								{ className: "arrow" },
-								_react2.default.createElement(
-									"a",
-									{ href: "#about-3" },
-									_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
-								)
-							),
-							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.bakgrund } })
+							'section',
+							{ id: 'about-3', className: 'flex-column about-slide' },
+							_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
 						),
 						_react2.default.createElement(
-							"section",
-							{ id: "about-3", className: "flex-column" },
-							_react2.default.createElement(
-								"div",
-								{ className: "arrow" },
-								_react2.default.createElement(
-									"a",
-									{ href: "#tjanster" },
-									_react2.default.createElement("img", { src: arrow.source_url, alt: "Down pointing arrow" })
-								)
-							),
-							_react2.default.createElement("div", { dangerouslySetInnerHTML: { __html: details.acf.arbetssatt } })
+							'section',
+							{ id: 'about-2', className: 'flex-column about-slide' },
+							_react2.default.createElement('div', { dangerouslySetInnerHTML: { __html: details.acf.bakgrund } })
 						)
+					),
+					_react2.default.createElement('div', { className: 'bubbles flex-row' }),
+					_react2.default.createElement(
+						'div',
+						{ className: 'next-slide' },
+						_react2.default.createElement('i', { className: 'fa fa-chevron-right', 'aria-hidden': 'true' })
+					),
+					_react2.default.createElement(
+						'div',
+						{ className: 'prev-slide' },
+						_react2.default.createElement('i', { className: 'fa fa-chevron-left', 'aria-hidden': 'true' })
 					)
 				);
 			}
@@ -31771,155 +31780,97 @@
 		value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	var _ServiceMenuItem = __webpack_require__(498);
-	
-	var _ServiceMenuItem2 = _interopRequireDefault(_ServiceMenuItem);
-	
-	var _ServiceFeatImage = __webpack_require__(499);
-	
-	var _ServiceFeatImage2 = _interopRequireDefault(_ServiceFeatImage);
-	
-	var _ServiceText = __webpack_require__(500);
-	
-	var _ServiceText2 = _interopRequireDefault(_ServiceText);
-	
-	var _jqueryScripts = __webpack_require__(501);
+	var _jqueryScripts = __webpack_require__(498);
 	
 	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
 	
-	var _scripts = __webpack_require__(503);
-	
-	var _scripts2 = _interopRequireDefault(_scripts);
-	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	var scripts = {};
 	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	/**
+	 * @desc Handles a bug with older iOS Flex properties.
+	 * Autoprefixer does not solve this problem.
+	 */
+	scripts.handleIosFlexBug = function () {
+		var serviceNav = document.getElementById('service-menu-ul');
+		var contactSection = document.getElementById('kontakt');
+		var mapEl = document.getElementById('map-container');
+		var contactTextEl = document.getElementById('contact-text');
+		var cssFix = "-webkit-flex-wrap: wrap; display: -webkit-flex;";
 	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+		serviceNav.style.cssText = cssFix;
+		contactSection.style.cssText = cssFix;
 	
-	// Components
-	
-	
-	// Others
-	
-	
-	var Services = function (_React$Component) {
-		_inherits(Services, _React$Component);
-	
-		function Services(props) {
-			_classCallCheck(this, Services);
-	
-			var _this = _possibleConstructorReturn(this, (Services.__proto__ || Object.getPrototypeOf(Services)).call(this, props));
-	
-			_this.eventListeners.bind(_this);
-			return _this;
-		}
-	
-		_createClass(Services, [{
-			key: 'componentDidMount',
-			value: function componentDidMount() {
-				_jqueryScripts2.default.smoothScroll();
-				_scripts2.default.handleIosFlexBug();
-				this.eventListeners();
-			}
-	
-			/**
-	   * @desc Gathers main eventlisterers.
-	   */
-	
-		}, {
-			key: 'eventListeners',
-			value: function eventListeners() {
-				window.addEventListener('scroll', _scripts2.default.handleHeaderPosition);
-				// jqueryScripts.handleArrowKeyScroll();
-				document.readyState !== 'loading' ? _jqueryScripts2.default.handleArrowKeyScroll() : document.addEventListener('DOMContentLoaded', _jqueryScripts2.default.handleArrowKeyScroll);
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				// Props
-				var _props = this.props,
-				    childPages = _props.childPages,
-				    loading = _props.loading,
-				    page = _props.page,
-				    activeItem = _props.activeItem,
-				    setActive = _props.setActive,
-				    burgerMenu = _props.burgerMenu,
-				    burgerMenuActive = _props.burgerMenuActive,
-				    width = _props.width;
-	
-	
-				return _react2.default.createElement(
-					'div',
-					{ id: 'service-section-container' },
-					loading ? null : _react2.default.createElement(
-						'div',
-						{ id: page.slug, className: 'flex-column' },
-						_react2.default.createElement(
-							'div',
-							{ id: 'service-burger-container' },
-							_react2.default.createElement(
-								'div',
-								{ className: burgerMenuActive ? "hamburger-menu hamburger-menu-active" : "hamburger-menu", onClick: burgerMenu },
-								_react2.default.createElement('div', { className: burgerMenuActive ? "bar animate" : "bar" })
-							)
-						),
-						_react2.default.createElement(
-							'nav',
-							{ id: 'service-menu', className: burgerMenuActive ? "flex-row service-menu-open" : "flex-row" },
-							_react2.default.createElement(
-								'ul',
-								{ id: 'service-menu-ul', className: 'flex-row' },
-								childPages.map(function (page) {
-									return _react2.default.createElement(_ServiceMenuItem2.default, {
-										key: page.id,
-										index: page.id,
-										page: page,
-										activeItem: activeItem,
-										setActive: setActive.bind(null, page.id),
-										burgerMenu: burgerMenu,
-										burgerMenuActive: burgerMenuActive,
-										width: width
-									});
-								})
-							)
-						),
-						_react2.default.createElement(
-							'div',
-							{ className: 'services-content flex-row' },
-							_react2.default.createElement(_ServiceFeatImage2.default, { page: childPages, activeItem: activeItem }),
-							_react2.default.createElement(_ServiceText2.default, { page: childPages, activeItem: activeItem })
-						)
-					)
-				);
-			}
-		}]);
-	
-		return Services;
-	}(_react2.default.Component);
-	
-	Services.propTypes = {
-		childPages: _react2.default.PropTypes.array.isRequired,
-		loading: _react2.default.PropTypes.bool.isRequired,
-		page: _react2.default.PropTypes.object.isRequired,
-		activeItem: _react2.default.PropTypes.number.isRequired,
-		setActive: _react2.default.PropTypes.func.isRequired,
-		burgerMenu: _react2.default.PropTypes.func.isRequired,
-		burgerMenuActive: _react2.default.PropTypes.bool.isRequired,
-		width: _react2.default.PropTypes.number.isRequired
+		window.innerWidth >= 992 ? (mapEl.setAttribute("style", "-webkit-order: 1"), contactTextEl.setAttribute("style", "-webkit-order: 2")) : null;
 	};
 	
-	exports.default = Services;
+	/**
+	 * @desc A slider for the about section
+	 */
+	scripts.slideSwitcher = function () {
+		var slideContainer = document.getElementById('about');
+		var nextSlide = document.getElementsByClassName('next-slide')[0];
+		var prevSlide = document.getElementsByClassName('prev-slide')[0];
+		var bubblesContainer = document.getElementsByClassName('bubbles')[0];
+		var slides = document.getElementsByClassName('about-slide');
+		var width = 100;
+		var bubbles = [];
+		var currentSlideIndex = 0;
 	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Services.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+		var _loop = function _loop(i) {
+			var bubble = document.createElement('span');
+			bubble.classList.add('bubble');
+			bubblesContainer.appendChild(bubble);
+			bubbles.push(bubble);
+	
+			bubble.addEventListener('click', function () {
+				currentSlideIndex = i;
+				switchSlide();
+			});
+		};
+	
+		for (var i = 0; i < slides.length; i++) {
+			_loop(i);
+		}
+	
+		function switchSlide() {
+			slideContainer.style.left = -width * currentSlideIndex + '%';
+	
+			bubbles.forEach(function (bubble, index) {
+				if (index === currentSlideIndex) {
+					bubble.classList.add('active');
+				} else {
+					bubble.classList.remove('active');
+				}
+			});
+		};
+		nextSlide.addEventListener('click', function () {
+			currentSlideIndex++;
+	
+			if (currentSlideIndex >= slides.length) {
+				currentSlideIndex = 0;
+			}
+	
+			switchSlide();
+		});
+	
+		prevSlide.addEventListener('click', function () {
+			currentSlideIndex--;
+	
+			if (currentSlideIndex < 0) {
+				currentSlideIndex = slides.length - 1;
+			}
+	
+			switchSlide();
+		});
+	
+		switchSlide();
+	};
+	
+	exports.default = scripts;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 498 */
@@ -31933,240 +31884,11 @@
 		value: true
 	});
 	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ServiceMenuItem = function (_React$Component) {
-		_inherits(ServiceMenuItem, _React$Component);
-	
-		function ServiceMenuItem() {
-			_classCallCheck(this, ServiceMenuItem);
-	
-			var _this = _possibleConstructorReturn(this, (ServiceMenuItem.__proto__ || Object.getPrototypeOf(ServiceMenuItem)).call(this));
-	
-			_this.click = _this.click.bind(_this);
-			return _this;
-		}
-	
-		_createClass(ServiceMenuItem, [{
-			key: 'click',
-	
-	
-			/**
-	   * @desc Toggle active page. Also toggles the burger menu if window size < 768px
-	   */
-			value: function click() {
-				var _props = this.props,
-				    setActive = _props.setActive,
-				    burgerMenu = _props.burgerMenu,
-				    width = _props.width;
-	
-				setActive();
-				width < 768 ? burgerMenu() : null;
-			}
-		}, {
-			key: 'render',
-			value: function render() {
-				var _props2 = this.props,
-				    page = _props2.page,
-				    activeItem = _props2.activeItem,
-				    setActive = _props2.setActive,
-				    burgerMenu = _props2.burgerMenu,
-				    burgerMenuActive = _props2.burgerMenuActive;
-	
-				return _react2.default.createElement(
-					'li',
-					{ className: activeItem === page.id ? 'flex-column active-item service-span' : 'flex-column service-span', onClick: this.click },
-					_react2.default.createElement('img', { src: activeItem === page.id ? page.acf.logo_aktiv : page.acf.logo_passiv, alt: page.title.rendered }),
-					_react2.default.createElement(
-						'span',
-						null,
-						page.title.rendered
-					)
-				);
-			}
-		}]);
-	
-		return ServiceMenuItem;
-	}(_react2.default.Component);
-	
-	ServiceMenuItem.propTypes = {
-		setActive: _react2.default.PropTypes.func.isRequired,
-		burgerMenu: _react2.default.PropTypes.func.isRequired,
-		width: _react2.default.PropTypes.number.isRequired,
-		page: _react2.default.PropTypes.object.isRequired,
-		activeItem: _react2.default.PropTypes.number.isRequired,
-		burgerMenuActive: _react2.default.PropTypes.bool.isRequired
-	};
-	
-	exports.default = ServiceMenuItem;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ServiceMenuItem.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 499 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ServiceFeatImage = function (_React$Component) {
-		_inherits(ServiceFeatImage, _React$Component);
-	
-		function ServiceFeatImage() {
-			_classCallCheck(this, ServiceFeatImage);
-	
-			return _possibleConstructorReturn(this, (ServiceFeatImage.__proto__ || Object.getPrototypeOf(ServiceFeatImage)).apply(this, arguments));
-		}
-	
-		_createClass(ServiceFeatImage, [{
-			key: 'render',
-			value: function render() {
-				// Props
-				var _props = this.props,
-				    activeItem = _props.activeItem,
-				    page = _props.page;
-	
-				var imageUrl = page.filter(function (page) {
-					return page.id === activeItem;
-				})[0].featured_image_url;
-				var divStyle = { backgroundImage: 'url(' + imageUrl + ')' };
-	
-				return _react2.default.createElement(
-					'div',
-					{ className: 'flex-row', id: 'service-feat-img-container' },
-					!page.filter(function (page) {
-						return page.id === activeItem;
-					})[0].featured_image_url ? _react2.default.createElement('div', { id: 'service-feat-img', className: 'flex-row' }) : _react2.default.createElement('div', { id: 'service-feat-img', className: 'flex-row', style: divStyle })
-				);
-			}
-		}]);
-	
-		return ServiceFeatImage;
-	}(_react2.default.Component);
-	
-	ServiceFeatImage.propTypes = {
-		activeItem: _react2.default.PropTypes.number.isRequired,
-		page: _react2.default.PropTypes.array.isRequired
-	};
-	
-	exports.default = ServiceFeatImage;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ServiceFeatImage.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 500 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	"use strict";
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
-	
-	var _react = __webpack_require__(299);
-	
-	var _react2 = _interopRequireDefault(_react);
-	
-	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-	
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-	
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
-	
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
-	
-	var ServiceText = function (_React$Component) {
-		_inherits(ServiceText, _React$Component);
-	
-		function ServiceText() {
-			_classCallCheck(this, ServiceText);
-	
-			return _possibleConstructorReturn(this, (ServiceText.__proto__ || Object.getPrototypeOf(ServiceText)).apply(this, arguments));
-		}
-	
-		_createClass(ServiceText, [{
-			key: "render",
-			value: function render() {
-				// Props
-				var _props = this.props,
-				    activeItem = _props.activeItem,
-				    page = _props.page;
-	
-	
-				return _react2.default.createElement(
-					"div",
-					{ id: "service-text", className: "flex-row" },
-					_react2.default.createElement("div", { className: "flex-column", dangerouslySetInnerHTML: { __html: page.filter(function (page) {
-								return page.id === activeItem;
-							})[0].content.rendered } })
-				);
-			}
-		}]);
-	
-		return ServiceText;
-	}(_react2.default.Component);
-	
-	ServiceText.propTypes = {
-		activeItem: _react2.default.PropTypes.number.isRequired,
-		page: _react2.default.PropTypes.array.isRequired
-	};
-	
-	exports.default = ServiceText;
-	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ServiceText.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
-
-/***/ },
-/* 501 */
-/***/ function(module, exports, __webpack_require__) {
-
-	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
-	
-	'use strict';
-	
-	Object.defineProperty(exports, "__esModule", {
-		value: true
-	});
-	
-	var _jquery = __webpack_require__(502);
+	var _jquery = __webpack_require__(499);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
-	var _scripts = __webpack_require__(503);
+	var _scripts = __webpack_require__(497);
 	
 	var _scripts2 = _interopRequireDefault(_scripts);
 	
@@ -32176,7 +31898,8 @@
 	var marginTop = void 0;
 	
 	/**
-	 * Sets the correct media query values of the header height and top margin.
+	 * @desc Sets the correct media query values of the header height and top margin.
+	 * This enables correct calculation of offset for scrolling.
 	 * */
 	if ((0, _jquery2.default)(window.innerWidth)[0] <= 768) {
 		headerHeight = 143.6;
@@ -32228,7 +31951,7 @@
 	 * */
 	jqueryScripts.arrowScrollTopUp = function () {
 		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset - (window.innerHeight - (headerHeight - marginTop))
+			scrollTop: window.pageYOffset - (window.innerHeight - marginTop)
 		}, 500, 'swing');
 	};
 	
@@ -32238,7 +31961,7 @@
 	 * */
 	jqueryScripts.arrowScrollTopDown = function () {
 		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset + (window.innerHeight - (headerHeight - marginTop))
+			scrollTop: window.pageYOffset + (window.innerHeight - marginTop)
 		}, 500, 'swing');
 	};
 	
@@ -32267,7 +31990,7 @@
 	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "jqueryScripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
-/* 502 */
+/* 499 */
 /***/ function(module, exports, __webpack_require__) {
 
 	var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
@@ -42493,7 +42216,7 @@
 
 
 /***/ },
-/* 503 */
+/* 500 */
 /***/ function(module, exports, __webpack_require__) {
 
 	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
@@ -42504,47 +42227,387 @@
 		value: true
 	});
 	
-	var _jqueryScripts = __webpack_require__(501);
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	var _ServiceMenuItem = __webpack_require__(501);
+	
+	var _ServiceMenuItem2 = _interopRequireDefault(_ServiceMenuItem);
+	
+	var _ServiceFeatImage = __webpack_require__(502);
+	
+	var _ServiceFeatImage2 = _interopRequireDefault(_ServiceFeatImage);
+	
+	var _ServiceText = __webpack_require__(503);
+	
+	var _ServiceText2 = _interopRequireDefault(_ServiceText);
+	
+	var _jqueryScripts = __webpack_require__(498);
 	
 	var _jqueryScripts2 = _interopRequireDefault(_jqueryScripts);
 	
+	var _scripts = __webpack_require__(497);
+	
+	var _scripts2 = _interopRequireDefault(_scripts);
+	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var scripts = {};
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 	
-	/**
-	 * @desc toggles the header position from fixed to absolute
-	 */
-	scripts.handleHeaderPosition = function () {
-		var services = document.getElementById('tjanster');
-		var header = document.getElementById('header-wrapper');
-		var headerHeight = header.offsetHeight;
-		var topOfServices = services.offsetTop;
-		var absPosition = 'position: absolute; top: ' + (topOfServices - headerHeight) + 'px';
-		window.pageYOffset >= topOfServices - headerHeight ? header.style.cssText += absPosition : null;
-		window.pageYOffset <= topOfServices - headerHeight ? header.style.cssText = window.getComputedStyle(header, null) - absPosition : null;
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	// Components
+	
+	
+	// Others
+	
+	
+	var Services = function (_React$Component) {
+		_inherits(Services, _React$Component);
+	
+		function Services(props) {
+			_classCallCheck(this, Services);
+	
+			var _this = _possibleConstructorReturn(this, (Services.__proto__ || Object.getPrototypeOf(Services)).call(this, props));
+	
+			_this.eventListeners.bind(_this);
+			return _this;
+		}
+	
+		_createClass(Services, [{
+			key: 'componentDidMount',
+			value: function componentDidMount() {
+				_jqueryScripts2.default.smoothScroll();
+				_scripts2.default.handleIosFlexBug();
+				this.eventListeners();
+			}
+	
+			/**
+	   * @desc Gathers main eventlisterers.
+	   */
+	
+		}, {
+			key: 'eventListeners',
+			value: function eventListeners() {
+				window.addEventListener('scroll', _scripts2.default.handleHeaderPosition);
+				// document.readyState !== 'loading' ? (
+				// 	jqueryScripts.handleArrowKeyScroll()
+				// ) : (
+				// 		document.addEventListener('DOMContentLoaded', jqueryScripts.handleArrowKeyScroll)
+				// 	);
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				// Props
+				var _props = this.props,
+				    childPages = _props.childPages,
+				    loading = _props.loading,
+				    page = _props.page,
+				    activeItem = _props.activeItem,
+				    setActive = _props.setActive,
+				    burgerMenu = _props.burgerMenu,
+				    burgerMenuActive = _props.burgerMenuActive,
+				    width = _props.width;
+	
+	
+				return _react2.default.createElement(
+					'div',
+					{ id: 'service-section-container' },
+					loading ? null : _react2.default.createElement(
+						'div',
+						{ id: page.slug, className: 'flex-column' },
+						_react2.default.createElement(
+							'div',
+							{ id: 'service-burger-container' },
+							_react2.default.createElement(
+								'div',
+								{ className: burgerMenuActive ? "hamburger-menu hamburger-menu-active" : "hamburger-menu", onClick: burgerMenu },
+								_react2.default.createElement('div', { className: burgerMenuActive ? "bar animate" : "bar" })
+							)
+						),
+						_react2.default.createElement(
+							'nav',
+							{ id: 'service-menu', className: burgerMenuActive ? "flex-row service-menu-open" : "flex-row" },
+							_react2.default.createElement(
+								'ul',
+								{ id: 'service-menu-ul', className: 'flex-row' },
+								childPages.map(function (page) {
+									return _react2.default.createElement(_ServiceMenuItem2.default, {
+										key: page.id,
+										index: page.id,
+										page: page,
+										activeItem: activeItem,
+										setActive: setActive.bind(null, page.id),
+										burgerMenu: burgerMenu,
+										burgerMenuActive: burgerMenuActive,
+										width: width
+									});
+								})
+							)
+						),
+						_react2.default.createElement(
+							'div',
+							{ className: 'services-content flex-row' },
+							_react2.default.createElement(_ServiceFeatImage2.default, { page: childPages, activeItem: activeItem }),
+							_react2.default.createElement(_ServiceText2.default, { page: childPages, activeItem: activeItem })
+						)
+					)
+				);
+			}
+		}]);
+	
+		return Services;
+	}(_react2.default.Component);
+	
+	Services.propTypes = {
+		childPages: _react2.default.PropTypes.array.isRequired,
+		loading: _react2.default.PropTypes.bool.isRequired,
+		page: _react2.default.PropTypes.object.isRequired,
+		activeItem: _react2.default.PropTypes.number.isRequired,
+		setActive: _react2.default.PropTypes.func.isRequired,
+		burgerMenu: _react2.default.PropTypes.func.isRequired,
+		burgerMenuActive: _react2.default.PropTypes.bool.isRequired,
+		width: _react2.default.PropTypes.number.isRequired
 	};
 	
-	/**
-	 * @desc Handles a bug with older iOS Flex properties.
-	 * Autoprefixer does not solve this problem.
-	 */
-	scripts.handleIosFlexBug = function () {
-		var serviceNav = document.getElementById('service-menu-ul');
-		var contactSection = document.getElementById('kontakt');
-		var mapEl = document.getElementById('map-container');
-		var contactTextEl = document.getElementById('contact-text');
-		var cssFix = "-webkit-flex-wrap: wrap; display: -webkit-flex;";
+	exports.default = Services;
 	
-		serviceNav.style.cssText = cssFix;
-		contactSection.style.cssText = cssFix;
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "Services.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 501 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
 	
-		window.innerWidth >= 992 ? (mapEl.setAttribute("style", "-webkit-order: 1"), contactTextEl.setAttribute("style", "-webkit-order: 2")) : null;
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ServiceMenuItem = function (_React$Component) {
+		_inherits(ServiceMenuItem, _React$Component);
+	
+		function ServiceMenuItem() {
+			_classCallCheck(this, ServiceMenuItem);
+	
+			var _this = _possibleConstructorReturn(this, (ServiceMenuItem.__proto__ || Object.getPrototypeOf(ServiceMenuItem)).call(this));
+	
+			_this.click = _this.click.bind(_this);
+			return _this;
+		}
+	
+		_createClass(ServiceMenuItem, [{
+			key: 'click',
+	
+	
+			/**
+	   * @desc Toggle active page. Also toggles the burger menu if window size < 768px
+	   */
+			value: function click() {
+				var _props = this.props,
+				    setActive = _props.setActive,
+				    burgerMenu = _props.burgerMenu,
+				    width = _props.width;
+	
+				setActive();
+				width < 768 ? burgerMenu() : null;
+			}
+		}, {
+			key: 'render',
+			value: function render() {
+				var _props2 = this.props,
+				    page = _props2.page,
+				    activeItem = _props2.activeItem,
+				    setActive = _props2.setActive,
+				    burgerMenu = _props2.burgerMenu,
+				    burgerMenuActive = _props2.burgerMenuActive;
+	
+				return _react2.default.createElement(
+					'li',
+					{ className: activeItem === page.id ? 'flex-column active-item service-span' : 'flex-column service-span', onClick: this.click },
+					_react2.default.createElement('img', { src: activeItem === page.id ? page.acf.logo_aktiv : page.acf.logo_passiv, alt: page.title.rendered }),
+					_react2.default.createElement(
+						'span',
+						null,
+						page.title.rendered
+					)
+				);
+			}
+		}]);
+	
+		return ServiceMenuItem;
+	}(_react2.default.Component);
+	
+	ServiceMenuItem.propTypes = {
+		setActive: _react2.default.PropTypes.func.isRequired,
+		burgerMenu: _react2.default.PropTypes.func.isRequired,
+		width: _react2.default.PropTypes.number.isRequired,
+		page: _react2.default.PropTypes.object.isRequired,
+		activeItem: _react2.default.PropTypes.number.isRequired,
+		burgerMenuActive: _react2.default.PropTypes.bool.isRequired
 	};
 	
-	exports.default = scripts;
+	exports.default = ServiceMenuItem;
 	
-	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "scripts.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ServiceMenuItem.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 502 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	'use strict';
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ServiceFeatImage = function (_React$Component) {
+		_inherits(ServiceFeatImage, _React$Component);
+	
+		function ServiceFeatImage() {
+			_classCallCheck(this, ServiceFeatImage);
+	
+			return _possibleConstructorReturn(this, (ServiceFeatImage.__proto__ || Object.getPrototypeOf(ServiceFeatImage)).apply(this, arguments));
+		}
+	
+		_createClass(ServiceFeatImage, [{
+			key: 'render',
+			value: function render() {
+				// Props
+				var _props = this.props,
+				    activeItem = _props.activeItem,
+				    page = _props.page;
+	
+				var imageUrl = page.filter(function (page) {
+					return page.id === activeItem;
+				})[0].featured_image_url;
+				var divStyle = { backgroundImage: 'url(' + imageUrl + ')' };
+	
+				return _react2.default.createElement(
+					'div',
+					{ className: 'flex-row', id: 'service-feat-img-container' },
+					!page.filter(function (page) {
+						return page.id === activeItem;
+					})[0].featured_image_url ? _react2.default.createElement('div', { id: 'service-feat-img', className: 'flex-row' }) : _react2.default.createElement('div', { id: 'service-feat-img', className: 'flex-row', style: divStyle })
+				);
+			}
+		}]);
+	
+		return ServiceFeatImage;
+	}(_react2.default.Component);
+	
+	ServiceFeatImage.propTypes = {
+		activeItem: _react2.default.PropTypes.number.isRequired,
+		page: _react2.default.PropTypes.array.isRequired
+	};
+	
+	exports.default = ServiceFeatImage;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ServiceFeatImage.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
+
+/***/ },
+/* 503 */
+/***/ function(module, exports, __webpack_require__) {
+
+	/* REACT HOT LOADER */ if (false) { (function () { var ReactHotAPI = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-api/modules/index.js"), RootInstanceProvider = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/RootInstanceProvider.js"), ReactMount = require("react-dom/lib/ReactMount"), React = require("react"); module.makeHot = module.hot.data ? module.hot.data.makeHot : ReactHotAPI(function () { return RootInstanceProvider.getRootInstances(ReactMount); }, React); })(); } try { (function () {
+	
+	"use strict";
+	
+	Object.defineProperty(exports, "__esModule", {
+		value: true
+	});
+	
+	var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();
+	
+	var _react = __webpack_require__(299);
+	
+	var _react2 = _interopRequireDefault(_react);
+	
+	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+	
+	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	
+	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	
+	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	
+	var ServiceText = function (_React$Component) {
+		_inherits(ServiceText, _React$Component);
+	
+		function ServiceText() {
+			_classCallCheck(this, ServiceText);
+	
+			return _possibleConstructorReturn(this, (ServiceText.__proto__ || Object.getPrototypeOf(ServiceText)).apply(this, arguments));
+		}
+	
+		_createClass(ServiceText, [{
+			key: "render",
+			value: function render() {
+				// Props
+				var _props = this.props,
+				    activeItem = _props.activeItem,
+				    page = _props.page;
+	
+	
+				return _react2.default.createElement(
+					"div",
+					{ id: "service-text", className: "flex-row" },
+					_react2.default.createElement("div", { className: "flex-column", dangerouslySetInnerHTML: { __html: page.filter(function (page) {
+								return page.id === activeItem;
+							})[0].content.rendered } })
+				);
+			}
+		}]);
+	
+		return ServiceText;
+	}(_react2.default.Component);
+	
+	ServiceText.propTypes = {
+		activeItem: _react2.default.PropTypes.number.isRequired,
+		page: _react2.default.PropTypes.array.isRequired
+	};
+	
+	exports.default = ServiceText;
+	
+	/* REACT HOT LOADER */ }).call(this); } finally { if (false) { (function () { var foundReactClasses = module.hot.data && module.hot.data.foundReactClasses || false; if (module.exports && module.makeHot) { var makeExportsHot = require("/Users/kaffia/Dropbox/Skolan/Examensarbete/SITE/wp-content/themes/daKnight/node_modules/react-hot-loader/makeExportsHot.js"); if (makeExportsHot(module, require("react"))) { foundReactClasses = true; } var shouldAcceptModule = true && foundReactClasses; if (shouldAcceptModule) { module.hot.accept(function (err) { if (err) { console.error("Cannot apply hot update to " + "ServiceText.js" + ": " + err.message); } }); } } module.hot.dispose(function (data) { data.makeHot = module.makeHot; data.foundReactClasses = foundReactClasses; }); })(); } }
 
 /***/ },
 /* 504 */
@@ -42751,7 +42814,7 @@
 		value: true
 	});
 	
-	var _jquery = __webpack_require__(502);
+	var _jquery = __webpack_require__(499);
 	
 	var _jquery2 = _interopRequireDefault(_jquery);
 	
@@ -42925,80 +42988,13 @@
 	
 	var model = {};
 	
-	// const localStoragePromise = new Promise((resolve, reject) => {
-	// 	const getLS = () => {
-	// 		localStorage.getItem('Hey Ho');
-	// 	};
-	// });
-	
-	
-	// Libs
-	model.setRammonesStorage = function () {
-		localStorage.setItem('Hey Ho', "Let's go!");
-	};
-	
-	/**
-	 * @desc Set local storage.
-	 *
-	 * @return {Boolean} Boolean value for if local store is supported
-	 */
-	model.localStoreIsSupported = function () {
-	
-		/**
-	  * 1. Set local storage with a simple string.
-	  * 2. Check if local storage is empty
-	  * 3. If local storage is successfully set, 
-	  * 		3.1 run an API call and set the results in local storage with the same name as state.
-	  * 		3.2 set the state from local storage.
-	  * 4. If local storage is not set,
-	  * 		4.1 local storage is not supported.
-	  * 		4.2 Run an API call and set the state directly.
-	  */
-		var localStoragePromise = new Promise();
-	
-		localStoragePromise.storage.local.set({ foo: 'bar' }).then(function () {
-			alert('foo set');
-			return localStoragePromise.storage.local.get('foo');
-		}).then(function (items) {
-			alert(JSON.stringify(items)); // => {"foo":"bar"} 
-		});
-	
-		localStoragePromise.then(function (data) {
-			console.log(data);
-		});
-	
-		// model.setRammonesStorage()
-		// 	.then(() => {
-		// 	console.log('1');
-		// })
-		// 	.then(() => {
-		// 		console.log('2');
-		// 		model.checkLocalStorage();
-		// 	});
-		// const store = model.getLocalStore();
-		// model.setLocalStorage();
-	
-	};
-	
-	/**
-	 * @desc Check if local storage is empty.
-	 */
-	model.checkLocalStorage = function () {
-		if (window.localStorage.length === 0 || 'localStorage' in window && window['localStorage'] === null || model.getLocalStore === null) {
-			console.log('Local Storage is not supported!');
-			return false;
-		} else {
-			console.log('Local Storage is supported');
-			return true;
-		}
-	};
-	
 	/**
 	 * @desc Get type specific content from WP REST API
 	 *
 	 * @param {string, number} type of content, posts, pages, or media
 	 * and the number of results.
 	 */
+	// Libs
 	model.getContent = function (type, number) {
 		return _axios2.default.get('/wp-json/wp/v2/' + type + '/?per_page=' + number);
 	};
@@ -43110,39 +43106,6 @@
 				posts: response.data;
 			});
 		}
-	};
-	
-	/**
-	 * @desc Set local storage from API response
-	 */
-	model.setLocalStorage = function () {
-		localStorage.setItem('Hey Ho', "Let's Go!");
-	
-		model.apiCall.getHeaderContent('pages', 47, 'media', 'DKN_Logotyp').then(function (data) {
-			localStorage.setItem('mainPageTitles', JSON.stringify(data.mainPageTitles));
-			localStorage.setItem('logo', JSON.stringify(data.logo));
-			localStorage.setItem('mainPageTitles', JSON.stringify(data.mainPageTitles));
-		}).then(function () {
-			model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow').then(function (data) {
-				localStorage.setItem('arrow', JSON.stringify(data.arrow));
-				localStorage.setItem('about', JSON.stringify(data.about));
-			});
-		}).then(function () {
-			model.apiCall.getServicesContent('pages', 47).then(function (data) {
-				localStorage.setItem('services', JSON.stringify(data.services));
-				localStorage.setItem('serviceChildPages', JSON.stringify(data.serviceChildPages));
-				localStorage.setItem('serviceChildPageTitles', JSON.stringify(data.serviceChildPageTitles));
-				localStorage.setItem('activeItem', JSON.stringify(data.activeItem));
-			});
-		}).then(function () {
-			model.apiCall.getContactContent('pages', 'kontakt').then(function (data) {
-				localStorage.setItem('contact', JSON.stringify(data.contact));
-			});
-		}).then(function () {
-			model.apiCall.getFooterContent('pages', 'footer').then(function (data) {
-				localStorage.setItem('footer', JSON.stringify(data.footer));
-			});
-		});
 	};
 	
 	exports.default = model;

@@ -11,7 +11,6 @@ import Main from './components/Main';
 // Redux & Router deps
 import { Router, Route, browserHistory } from 'react-router';
 
-
 render((
 	<Router history={ browserHistory }>
 		<Route path="/" component={Main} />

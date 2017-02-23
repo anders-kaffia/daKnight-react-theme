@@ -1,38 +1,58 @@
 // Libs
 import React from 'react';
+import scripts from '../helpers/scripts';
 
 class About extends React.Component {
+	constructor() {
+		super();
+		this.handleContentLoaded = this.handleContentLoaded.bind(this);
+		this.interval = null;
+		this.state = {
+			contentLoaded: false
+		};
+	}
+
+	handleContentLoaded() {
+		this.setState({
+			contentLoaded: true
+		});
+		this.state.contentLoaded === true ?
+			(
+				scripts.slideSwitcher()
+			) : (
+				null
+			);
+
+	}
+
+	componentDidMount() {
+		this.interval = setTimeout(this.handleContentLoaded, 500);
+	}
 
 	render() {
 		// Props
-		const { details, loading, arrow } = this.props;
+		const { details, loading, arrow, blankSlate } = this.props;
 
 		return (
 			<div className="flex-column" id="about-section-container">
-				{ loading ? (
+				{loading ? (
 					null
 				) : (
-					<div id={ details.slug }>
-						<section id="about-1" className="flex-column">
-							<div className="arrow">
-								<a href="#about-2"><img src={ arrow.source_url } alt="Down pointing arrow"/></a>
-							</div>
-							<div dangerouslySetInnerHTML={ {__html: details.acf.om_oss } } />
-						</section>
-						<section id="about-2" className="flex-column">
-							<div className="arrow">
-								<a href="#about-3"><img src={ arrow.source_url } alt="Down pointing arrow"/></a>
-							</div>
-							<div dangerouslySetInnerHTML={ {__html: details.acf.bakgrund} } />
-						</section>
-						<section id="about-3" className="flex-column">
-							<div className="arrow">
-								<a href="#tjanster"><img src={ arrow.source_url } alt="Down pointing arrow"/></a>
-							</div>
-							<div dangerouslySetInnerHTML={ {__html: details.acf.arbetssatt} } />
-						</section>
-					</div>
-				)}
+						<div id="about" className="flex-row">
+							<section id="about-1" className="flex-column about-slide">
+								<div dangerouslySetInnerHTML={{ __html: details.acf.om_oss }} />
+							</section>
+							<section id="about-3" className="flex-column about-slide">
+								<div dangerouslySetInnerHTML={{ __html: details.acf.arbetssatt }} />
+							</section>
+							<section id="about-2" className="flex-column about-slide">
+								<div dangerouslySetInnerHTML={{ __html: details.acf.bakgrund }} />
+							</section>
+						</div>
+					)}
+				<div className="bubbles flex-row"></div>
+				<div className="next-slide"><i className="fa fa-chevron-right" aria-hidden="true"></i></div>
+				<div className="prev-slide"><i className="fa fa-chevron-left" aria-hidden="true"></i></div>
 			</div>
 		);
 	}

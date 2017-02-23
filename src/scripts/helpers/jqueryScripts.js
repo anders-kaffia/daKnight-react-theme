@@ -5,7 +5,8 @@ let headerHeight;
 let marginTop;
 
 /**
- * Sets the correct media query values of the header height and top margin.
+ * @desc Sets the correct media query values of the header height and top margin.
+ * This enables correct calculation of offset for scrolling.
  * */
 if ($(window.innerWidth)[0] <= 768) {
 	headerHeight = 143.6;
@@ -61,7 +62,7 @@ jqueryScripts.handleArrowKeyScroll = () => {
  * */
 jqueryScripts.arrowScrollTopUp = () => {
 	$('html, body').stop().animate({
-		scrollTop: (window.pageYOffset - (window.innerHeight - (headerHeight - marginTop)))
+		scrollTop: (window.pageYOffset - (window.innerHeight - marginTop))
 	}, 500, 'swing');
 };
 
@@ -71,7 +72,7 @@ jqueryScripts.arrowScrollTopUp = () => {
  * */
 jqueryScripts.arrowScrollTopDown = () => {
 	$('html, body').stop().animate({
-		scrollTop: (window.pageYOffset + (window.innerHeight - (headerHeight - marginTop)))
+		scrollTop: (window.pageYOffset + (window.innerHeight - marginTop))
 	}, 500, 'swing');
 };
 

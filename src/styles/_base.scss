@@ -35,21 +35,6 @@ body {
 	ul, li {
 		list-style: none;
 	}
-	@include breakpoint(xs) { 
-		padding-top: 124.4px
-	 }
- 
-  	@include breakpoint(sm) {
-		padding-top: 144.8px;
-	 }
- 
-  	@include breakpoint(md) {
-		padding-top: 161.2px
-	}
- 
-	@include breakpoint(lg) {
-		padding-top: 184px;
-	}
 }
 
 @include placeholder-color-font($color-darkgrey, $main-font, 14px);
@@ -106,4 +91,8 @@ body {
 
 .button-close {
 	color: $color-darkgrey;
+}
+
+.ninja {
+	display: none;
 }

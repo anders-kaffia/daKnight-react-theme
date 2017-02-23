@@ -4,93 +4,94 @@
 #about-section-container {
 	@include large-spacing(margin-bottom);
 	@include large-spacing(margin-bottom);
+	@include section-height;
+	overflow: hidden;
+	position: relative;
 }
 
 #about {
-	width: 100%;
+	height: 100%;
+	position: relative;
+	left: 0;
+	transition: left 0.4s cubic-bezier(.37,.07,.63,1);
 }
-
-// Animates the down-arrow
-@keyframes arrow {
-  	0%, 50%, 70%, 100% {
-		opacity: .8;
-		transform: translateY(0);
-	}
-	20% {
-		opacity: 1;
-		transform: translateY(.5em);
-	}
-	40% {
-		opacity: .25;
-		transform: translateY(-2.2em);
-	}
-    60% {
-		opacity: .4;
-		transform: translateY(-1.1em);
-	}
-	80% {
-		opacity: .6;
-		transform: translateY(-0.5em);
-	}
-}
-
 
 
 #about-1, #about-2, #about-3 {
   	@include section-height;
-	position: relative;
-	text-align: center;
+	width: 100%;
+	flex-shrink: 0;
 	margin: 0;
 	align-items: center;
 	justify-content: center;
 	div {
+		text-align: center;
 		width: 70%;
 		margin: 8%;
-	}
-	div.arrow {
-		position: absolute;
-		max-width: 60px;
-		top: 85%;
-		left: 50%;
-		margin: .5em;
-		cursor: pointer;
-		z-index: 999;
-		animation: arrow 2s infinite;
-		img {
-			position: relative;
-			left: -50%;
-		}
-		@media only screen and ( max-width : 768px ) {
-			img {
-				width: 2em;
-				height: auto;
-			}
-				top: 92%;
-		}
 	}
 }
 
 #about-1 {
-	@include large-spacing(margin-bottom);
-	background: $color-2;
+	background: $color-3;
 	position: relative;
 	h2 {
 		@include mq-size(font-size, 3, em);
 	}
 }
 #about-2 {
-	@include large-spacing(margin-bottom);
 	background: $color-1;
 	h2 {
 		@include mq-size(font-size, 2.5, em);
 	}
 }
 #about-3 {
-	background: $color-3;
+	background: $color-2;
 	h2 {
 		@include mq-size(font-size, 2.5, em);
 	}
 	h4 {
 		@include mq-size(font-size, 1.8, em);
 	}
+}
+
+/* Slide bubbles */
+.bubbles {
+	justify-content: center;
+	position: absolute;
+	bottom: 4%;
+	left: 0;
+	right: 0;
+	margin-bottom: 5px;
+	.bubble {
+		margin: 4px;
+		background-color: white;
+		border-radius: 100000px;
+		width: 10px;
+		height: 10px;
+		display: inline-block;
+		opacity: 0.25;
+		transition: opacity 0.1s linear;
+		cursor: pointer;
+		&:hover {
+			opacity: 0.65;
+		}
+		&.active {
+			opacity: 1;
+		}
+	}
+}
+
+.next-slide, .prev-slide {
+	position: absolute;
+	top: 50%;
+	z-index: 999;
+	color: $color-white;
+	font-size: 2.8em;
+	padding: 0 .5em;
+}
+.next-slide {
+	right: 0;
+}
+.prev-slide {
+	left: 0;
 }

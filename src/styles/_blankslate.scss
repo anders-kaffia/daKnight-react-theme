@@ -2,12 +2,10 @@
 *				Blank Slate Section Styling
 ========================================================================== */
 
-.blank-slate-container {
-	perspective: 1000px;
-	perspective-origin: bottom;
-}
+
 
 #blank-slate {
+	@include large-spacing(margin-bottom);
 	@include breakpoint(xs) { 
 		height: calc(100vh - 143.6px);
 	}
@@ -25,20 +23,22 @@
 		@include small-spacing(margin-right);
 		background: $color-1;
 		flex: 1;
+		width: 100%;
 		height: 100%;
 	}
 	#blank-slate-inside-wrapper {
 		flex: 1;
 		height: 100%;
-		overflow: hidden;
+		// overflow: hidden;
 		#blank-slate2 {
-			@include small-spacing(margin-bottom);
 			background: $color-2;
 			height: 35%;
 		}
 		#blank-slate3 {
+			@include small-spacing(margin-top);
 			background: $color-3;
 			height: 65%;
+			flex: 1;
 		}
 	}
 }
@@ -46,13 +46,28 @@
 /*
 *			React CSSTransitionGroup Classes
 ----------------------------------------------------------------*/
-
-.slide-leave {
-	opacity: 1;
+#blank-slate.slide-leave {
+	#blank-slate1 {
+		width: 100%;
+	}
 }
-.slide-leave.slide-leave-active {
-	transform: rotateX(88deg);
-	transform-origin: bottom;
-	opacity: 0.5;
-	transition: .8s cubic-bezier(.7,0,.9,1);
+#blank-slate.slide-leave #blank-slate-inside-wrapper #blank-slate2 {
+	height: 35%;
+}
+#blank-slate.slide-leave #blank-slate-inside-wrapper #blank-slate3 {
+	height: 65%;
+}
+#blank-slate.slide-leave.slide-leave-active {
+	#blank-slate1 {
+		transition: all .7s ease-in-out;
+		flex: 0;
+		width: 0%;
+		margin: 0;
+	}
+}
+#blank-slate.slide-leave.slide-leave-active #blank-slate-inside-wrapper #blank-slate2 {
+	transition: all .7s ease-in-out;
+	transition-delay: .7s;
+	height: 0%;
+	margin: 0;
 }
