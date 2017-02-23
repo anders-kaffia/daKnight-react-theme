@@ -59,14 +59,14 @@
 }
 #blank-slate.slide-leave.slide-leave-active {
 	#blank-slate1 {
-		transition: all .7s ease-in-out;
+		transition: all .7s ease-in;
 		flex: 0;
 		width: 0%;
 		margin: 0;
 	}
 }
 #blank-slate.slide-leave.slide-leave-active #blank-slate-inside-wrapper #blank-slate2 {
-	transition: all .7s ease-in-out;
+	transition: all .7s ease-in;
 	transition-delay: .7s;
 	height: 0%;
 	margin: 0;

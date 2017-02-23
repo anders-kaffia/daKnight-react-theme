@@ -27,11 +27,11 @@ class Services extends React.Component {
 	 */
 	eventListeners() {
 		window.addEventListener('scroll', scripts.handleHeaderPosition);
-		// document.readyState !== 'loading' ? (
-		// 	jqueryScripts.handleArrowKeyScroll()
-		// ) : (
-		// 		document.addEventListener('DOMContentLoaded', jqueryScripts.handleArrowKeyScroll)
-		// 	);
+		document.readyState !== 'loading' ? (
+			jqueryScripts.handleArrowKeyScroll()
+		) : (
+				document.addEventListener('DOMContentLoaded', jqueryScripts.handleArrowKeyScroll)
+			);
 	}
 
 	render() {

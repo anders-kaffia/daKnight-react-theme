@@ -29282,8 +29282,8 @@
 								component: 'div',
 								className: 'blank-slate-container',
 								transitionName: 'slide',
-								transitionEnterTimeout: 1500,
-								transitionLeaveTimeout: 1500
+								transitionEnterTimeout: 1400,
+								transitionLeaveTimeout: 1400
 							},
 							this.state.renderBlankSlate ? _react2.default.createElement(_BlankSlate2.default, null) : null
 						),
@@ -31894,7 +31894,6 @@
 	
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 	
-	var headerHeight = void 0;
 	var marginTop = void 0;
 	
 	/**
@@ -31902,16 +31901,12 @@
 	 * This enables correct calculation of offset for scrolling.
 	 * */
 	if ((0, _jquery2.default)(window.innerWidth)[0] <= 768) {
-		headerHeight = 143.6;
 		marginTop = 19.2;
 	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 768 && (0, _jquery2.default)(window.innerWidth)[0] < 992) {
-		headerHeight = 167.2;
 		marginTop = 22.4;
 	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 992 && (0, _jquery2.default)(window.innerWidth)[0] < 1200) {
-		headerHeight = 186.8;
 		marginTop = 25.6;
 	} else if ((0, _jquery2.default)(window.innerWidth)[0] > 1200) {
-		headerHeight = 216;
 		marginTop = 32;
 	}
 	
@@ -31926,10 +31921,10 @@
 	
 			var target = this.hash;
 			var $target = (0, _jquery2.default)(target);
-			var absoluteTop = 200;
-	
+			var absoluteTop = 500;
+			console.log($target);
 			(0, _jquery2.default)('html, body').stop().animate({
-				'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? headerHeight : target === '#about-2' || target === '#about-3' ? headerHeight - marginTop : marginTop)
+				'scrollTop': $target[0].id === 'about' ? $target.offset().top - absoluteTop : $target.offset().top - marginTop
 			}, 700, 'swing');
 		});
 	};
@@ -31938,38 +31933,17 @@
 	 * @desc Handles page scroll on arrow keys
 	 * */
 	jqueryScripts.handleArrowKeyScroll = function () {
-		var lastAboutSection = document.getElementById('about-3').offsetTop;
 	
 		(0, _jquery2.default)('html, body').keydown(function (e) {
-			e.keyCode === 38 ? lastAboutSection + 10 > window.pageYOffset ? jqueryScripts.arrowScrollTopUp() : jqueryScripts.arrowScrollbottomUp() : e.keyCode === 40 ? lastAboutSection - 200 > window.pageYOffset ? jqueryScripts.arrowScrollTopDown() : jqueryScripts.arrowScrollbottomDown() : null;
+			e.keyCode === 38 ? jqueryScripts.arrowScrollUp() : e.keyCode === 40 ? jqueryScripts.arrowScrollDown() : null;
 		});
 	};
 	
 	/**
-	 * @desc Handles scroll amount above the services section.
-	 * Scroll direction: up.
-	 * */
-	jqueryScripts.arrowScrollTopUp = function () {
-		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset - (window.innerHeight - marginTop)
-		}, 500, 'swing');
-	};
-	
-	/**
-	 * @desc Handles scroll amount above the services section.
-	 * Scroll direction: down.
-	 * */
-	jqueryScripts.arrowScrollTopDown = function () {
-		(0, _jquery2.default)('html, body').stop().animate({
-			scrollTop: window.pageYOffset + (window.innerHeight - marginTop)
-		}, 500, 'swing');
-	};
-	
-	/**
 	 * @desc Handles scroll amount below the services section.
 	 * Scroll direction: up.
 	 * */
-	jqueryScripts.arrowScrollbottomUp = function () {
+	jqueryScripts.arrowScrollUp = function () {
 		(0, _jquery2.default)('html, body').stop().animate({
 			scrollTop: window.pageYOffset - (window.innerHeight - marginTop)
 		}, 500, 'swing');
@@ -31979,7 +31953,7 @@
 	 * @desc Handles scroll amount below the services section.
 	 * Scroll direction: down.
 	 * */
-	jqueryScripts.arrowScrollbottomDown = function () {
+	jqueryScripts.arrowScrollDown = function () {
 		(0, _jquery2.default)('html, body').stop().animate({
 			scrollTop: window.pageYOffset + (window.innerHeight - marginTop)
 		}, 500, 'swing');
@@ -42295,11 +42269,7 @@
 			key: 'eventListeners',
 			value: function eventListeners() {
 				window.addEventListener('scroll', _scripts2.default.handleHeaderPosition);
-				// document.readyState !== 'loading' ? (
-				// 	jqueryScripts.handleArrowKeyScroll()
-				// ) : (
-				// 		document.addEventListener('DOMContentLoaded', jqueryScripts.handleArrowKeyScroll)
-				// 	);
+				document.readyState !== 'loading' ? _jqueryScripts2.default.handleArrowKeyScroll() : document.addEventListener('DOMContentLoaded', _jqueryScripts2.default.handleArrowKeyScroll);
 			}
 		}, {
 			key: 'render',

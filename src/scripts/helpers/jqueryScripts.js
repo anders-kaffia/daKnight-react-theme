@@ -1,7 +1,6 @@
 import $ from 'jquery';
 import scripts from './scripts';
 
-let headerHeight;
 let marginTop;
 
 /**
@@ -9,16 +8,12 @@ let marginTop;
  * This enables correct calculation of offset for scrolling.
  * */
 if ($(window.innerWidth)[0] <= 768) {
-	headerHeight = 143.6;
 	marginTop = 19.2;
 } else if ($(window.innerWidth)[0] > 768 && $(window.innerWidth)[0] < 992) {
-	headerHeight = 167.2;
 	marginTop = 22.4;
 } else if ($(window.innerWidth)[0] > 992 && $(window.innerWidth)[0] < 1200) {
-	headerHeight = 186.8;
 	marginTop = 25.6;
 } else if ($(window.innerWidth)[0] > 1200) {
-	headerHeight = 216;
 	marginTop = 32;
 }
 
@@ -33,11 +28,10 @@ jqueryScripts.smoothScroll = () => {
 
 		let target = this.hash;
 		const $target = $(target);
-		const absoluteTop = 200;
-
+		const absoluteTop = 500;
+		console.log($target);
 		$('html, body').stop().animate({
-			'scrollTop': $target.offset().top - (target === '#about' || target === '#main-wrapper' ? headerHeight :
-				(target === '#about-2' || target === '#about-3' ? (headerHeight - marginTop) : marginTop))
+			'scrollTop': $target[0].id === 'about' ? ($target.offset().top - absoluteTop) : ($target.offset().top - marginTop)
 		}, 700, 'swing');
 	});
 };
@@ -46,41 +40,18 @@ jqueryScripts.smoothScroll = () => {
  * @desc Handles page scroll on arrow keys
  * */
 jqueryScripts.handleArrowKeyScroll = () => {
-	const lastAboutSection = document.getElementById('about-3').offsetTop;
 
 	$('html, body').keydown((e) => {
-		e.keyCode === 38 ? ((lastAboutSection + 10) > window.pageYOffset ? jqueryScripts.arrowScrollTopUp()
-			: jqueryScripts.arrowScrollbottomUp())
-			: (e.keyCode === 40 ? ((lastAboutSection - 200) > window.pageYOffset ? jqueryScripts.arrowScrollTopDown()
-				: jqueryScripts.arrowScrollbottomDown()) : null);
+		e.keyCode === 38 ? (jqueryScripts.arrowScrollUp())
+			: (e.keyCode === 40 ? (jqueryScripts.arrowScrollDown()) : null);
 	});
 };
 
 /**
- * @desc Handles scroll amount above the services section.
- * Scroll direction: up.
- * */
-jqueryScripts.arrowScrollTopUp = () => {
-	$('html, body').stop().animate({
-		scrollTop: (window.pageYOffset - (window.innerHeight - marginTop))
-	}, 500, 'swing');
-};
-
-/**
- * @desc Handles scroll amount above the services section.
- * Scroll direction: down.
- * */
-jqueryScripts.arrowScrollTopDown = () => {
-	$('html, body').stop().animate({
-		scrollTop: (window.pageYOffset + (window.innerHeight - marginTop))
-	}, 500, 'swing');
-};
-
-/**
  * @desc Handles scroll amount below the services section.
  * Scroll direction: up.
  * */
-jqueryScripts.arrowScrollbottomUp = () => {
+jqueryScripts.arrowScrollUp = () => {
 	$('html, body').stop().animate({
 		scrollTop: (window.pageYOffset - (window.innerHeight - marginTop))
 	}, 500, 'swing');
@@ -90,7 +61,7 @@ jqueryScripts.arrowScrollbottomUp = () => {
  * @desc Handles scroll amount below the services section.
  * Scroll direction: down.
  * */
-jqueryScripts.arrowScrollbottomDown = () => {
+jqueryScripts.arrowScrollDown = () => {
 	$('html, body').stop().animate({
 		scrollTop: (window.pageYOffset + (window.innerHeight - marginTop))
 	}, 500, 'swing');

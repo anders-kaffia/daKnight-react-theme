@@ -819,8 +819,8 @@ body {
   height: 65%; }
 
 #blank-slate.slide-leave.slide-leave-active #blank-slate1 {
-  -webkit-transition: all .7s ease-in-out;
-  transition: all .7s ease-in-out;
+  -webkit-transition: all .7s ease-in;
+  transition: all .7s ease-in;
   -webkit-box-flex: 0;
       -ms-flex: 0;
           flex: 0;
@@ -828,8 +828,8 @@ body {
   margin: 0; }
 
 #blank-slate.slide-leave.slide-leave-active #blank-slate-inside-wrapper #blank-slate2 {
-  -webkit-transition: all .7s ease-in-out;
-  transition: all .7s ease-in-out;
+  -webkit-transition: all .7s ease-in;
+  transition: all .7s ease-in;
   -webkit-transition-delay: .7s;
           transition-delay: .7s;
   height: 0%;
