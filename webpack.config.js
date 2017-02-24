@@ -6,10 +6,19 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 
 module.exports = {
-	entry: ['babel-polyfill', './src/scripts/index.js'],
+	entry: {
+		app: ['babel-polyfill', './src/scripts/index.js'],
+		vendor: [
+			'react',
+			'react-dom'
+		]
+	},
 	output: {
 		path: './build/scripts/',
 		filename: 'bundle.js'
+	},
+	externals: {
+		'jquery': 'jQuery'
 	},
 	resolve: {
 		alias: {
@@ -68,6 +77,7 @@ module.exports = {
 		// 		warnings: true
 		// 	}
 		// }),
+		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
 		new ExtractTextPlugin('../styles/style.css'),
 		new CompressionPlugin({
 			asset: "[path].gz[query]",

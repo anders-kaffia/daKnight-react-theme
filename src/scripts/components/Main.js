@@ -10,7 +10,7 @@ import About from './About';
 import Services from './Services';
 import Contact from './Contact';
 import Footer from './Footer';
-import FourOhFour from './404';
+import NotFound from './404';
 import Single from './Single';
 import Archive from './Archive';
 
@@ -161,8 +161,8 @@ class Main extends React.Component {
 								component="div"
 								className="blank-slate-container"
 								transitionName="slide"
-								transitionEnterTimeout={1400}
-								transitionLeaveTimeout={1400}
+								transitionEnterTimeout={1450}
+								transitionLeaveTimeout={1450}
 							>
 								{this.state.renderBlankSlate ? <BlankSlate /> : null}
 							</ReactCSSTransisionGroup>
@@ -192,7 +192,7 @@ class Main extends React.Component {
 									/>
 								)}
 							{this.state.contactIsLoading ? (
-								<Loading />
+								null
 							) : (
 									<Contact
 										loading={this.state.contactIsLoading}

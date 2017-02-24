@@ -29,7 +29,6 @@ jqueryScripts.smoothScroll = () => {
 		let target = this.hash;
 		const $target = $(target);
 		const absoluteTop = 500;
-		console.log($target);
 		$('html, body').stop().animate({
 			'scrollTop': $target[0].id === 'about' ? ($target.offset().top - absoluteTop) : ($target.offset().top - marginTop)
 		}, 700, 'swing');

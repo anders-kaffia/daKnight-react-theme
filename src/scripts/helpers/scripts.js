@@ -59,25 +59,25 @@ scripts.slideSwitcher = () => {
 			}
 		});
 	};
-	nextSlide.addEventListener('click', function () {
-		currentSlideIndex++;
+	// nextSlide.addEventListener('click', function () {
+	// 	currentSlideIndex++;
 
-		if (currentSlideIndex >= slides.length) {
-			currentSlideIndex = 0;
-		}
+	// 	if (currentSlideIndex >= slides.length) {
+	// 		currentSlideIndex = 0;
+	// 	}
 
-		switchSlide();
-	});
+	// 	switchSlide();
+	// });
 
-	prevSlide.addEventListener('click', function () {
-		currentSlideIndex--;
+	// prevSlide.addEventListener('click', function () {
+	// 	currentSlideIndex--;
 
-		if (currentSlideIndex < 0) {
-			currentSlideIndex = slides.length - 1;
-		}
+	// 	if (currentSlideIndex < 0) {
+	// 		currentSlideIndex = slides.length - 1;
+	// 	}
 
-		switchSlide();
-	});
+	// 	switchSlide();
+	// });
 
 	switchSlide();
 };

@@ -9,10 +9,15 @@ import "../styles/index.scss";
 import Main from './components/Main';
 
 // Redux & Router deps
-import { Router, Route, browserHistory } from 'react-router';
+// import { Router, Route, browserHistory } from 'react-router';
+// import { BrowserRouter, Match, Miss } from 'react-router';
+
+const Root = () => {
+	return (
+		<Main />
+	);
+};
 
 render((
-	<Router history={ browserHistory }>
-		<Route path="/" component={Main} />
-	</Router>
+	<Root />
 	), document.getElementById('app'));

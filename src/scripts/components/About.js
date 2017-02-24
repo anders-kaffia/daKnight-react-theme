@@ -51,8 +51,6 @@ class About extends React.Component {
 						</div>
 					)}
 				<div className="bubbles flex-row"></div>
-				<div className="next-slide"><i className="fa fa-chevron-right" aria-hidden="true"></i></div>
-				<div className="prev-slide"><i className="fa fa-chevron-left" aria-hidden="true"></i></div>
 			</div>
 		);
 	}
