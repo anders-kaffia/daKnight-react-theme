@@ -1,4 +1,6 @@
-.single {
+.single-content {
+	@include large-spacing(margin);
+	background: $color-1;
 	padding: 2% 26%;
 	text-align: center;
 	flex: 1;

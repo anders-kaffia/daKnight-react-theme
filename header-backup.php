@@ -16,15 +16,19 @@
         <?php wp_head(); ?>
     </head>
     <body <?php body_class() ?>>
-	<div class="flex-row">
+	<div id="wrapper-backup">
+		<div class="flex-row">
 			<div id="header-wrapper"  class="flex-row">
 				<div id="header-backup" class="flex-row">
 					<a href="#main-wrapper">
 						<img src="<?php echo get_stylesheet_directory_uri(); ?>/build/media/img/DKN_Logotyp_Svart.jpg" alt="daKnight logo" id="dk-logo" />
 					</a>
 					<nav id="top-nav">
-						
+						<?php wp_nav_menu( array(
+							'menu' => 'spare_menu'
+						) );
+						?>
 					</nav>
 				</div>
 			</div>
-	</div>
+		</div>

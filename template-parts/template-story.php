@@ -4,8 +4,8 @@
 * Template Name: Default Template
 *
 */
-get_header(); ?>
+get_header('backup'); ?>
 
 
 
-<?php get_footer(); ?>
+<?php get_footer('backup'); ?>
