@@ -3,9 +3,6 @@
 ========================================================================== */
 
 #header-wrapper {
-	// position: fixed;
-	// top: 0;
-	// left: 0;
 	flex: 1 1 100%;
 	background: $color-white;
 	width: 100%;
@@ -18,6 +15,12 @@
 	justify-content: space-between;
 	padding-right: 0 !important;
 	padding-left: 0 !important;
+}
+
+#header-backup {
+	@include large-spacing(padding);
+	flex: 1 1 100%;
+	justify-content: space-between;
 }
 
 #top-nav {

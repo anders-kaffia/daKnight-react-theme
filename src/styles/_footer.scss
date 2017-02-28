@@ -34,6 +34,12 @@
 		}
 	}
 }
+
+#footer-backup {
+	@extend #footer;
+	margin-top: auto;
+}
+
 #footer-nav {
 	align-self: center;
 	text-align: center;

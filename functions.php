@@ -15,6 +15,7 @@ add_filter( 'rest_prepare_page', 'page_fetured_image_json', 10, 3 );
 // Register WP Menu
 register_nav_menus( array(
 	'top_menu' => "Main Top Menu",
+	'spare_menu' => "Spare menu",
 ));
 
 // Enable thumbnails

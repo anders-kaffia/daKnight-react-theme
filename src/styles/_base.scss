@@ -59,6 +59,13 @@ body {
 	}
 }
 
+#wrapper-backup {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	min-height: 100%;
+}
+
 .no-padd {
 	padding: 0 !important;
 }

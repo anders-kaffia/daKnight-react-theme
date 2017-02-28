@@ -155,14 +155,13 @@ class Main extends React.Component {
 								loading={this.state.headerIsLoading}
 								details={this.state.mainPageTitles}
 								logo={this.state.logo}
-								id="header-wrapper"
 							/>
 							<ReactCSSTransisionGroup
 								component="div"
 								className="blank-slate-container"
 								transitionName="slide"
-								transitionEnterTimeout={1450}
-								transitionLeaveTimeout={1450}
+								transitionEnterTimeout={1400}
+								transitionLeaveTimeout={1400}
 							>
 								{this.state.renderBlankSlate ? <BlankSlate /> : null}
 							</ReactCSSTransisionGroup>

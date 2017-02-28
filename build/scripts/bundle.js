@@ -8423,8 +8423,7 @@ webpackJsonp([0],[
 						_react2.default.createElement(_Header2.default, {
 							loading: this.state.headerIsLoading,
 							details: this.state.mainPageTitles,
-							logo: this.state.logo,
-							id: 'header-wrapper'
+							logo: this.state.logo
 						}),
 						_react2.default.createElement(
 							_reactAddonsCssTransitionGroup2.default,
@@ -8432,8 +8431,8 @@ webpackJsonp([0],[
 								component: 'div',
 								className: 'blank-slate-container',
 								transitionName: 'slide',
-								transitionEnterTimeout: 1450,
-								transitionLeaveTimeout: 1450
+								transitionEnterTimeout: 1400,
+								transitionLeaveTimeout: 1400
 							},
 							this.state.renderBlankSlate ? _react2.default.createElement(_BlankSlate2.default, null) : null
 						),
@@ -10690,7 +10689,7 @@ webpackJsonp([0],[
 					{ className: 'flex-row' },
 					loading ? null : _react2.default.createElement(
 						'div',
-						{ id: id, className: 'flex-row' },
+						{ id: 'header-wrapper', className: 'flex-row' },
 						_react2.default.createElement(
 							'div',
 							{ id: 'header', className: 'flex-row' },

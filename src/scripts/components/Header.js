@@ -13,7 +13,7 @@ class Header extends React.Component {
 				{ loading ? (
 					null
 				) : (
-					<div id={ id }  className="flex-row">
+					<div id="header-wrapper"  className="flex-row">
 						<div id="header" className="flex-row">
 							<a href="#main-wrapper">
 								<img src={logo.source_url} alt="daKnight logo" id="dk-logo" />
