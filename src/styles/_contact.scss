@@ -51,14 +51,6 @@
 		align-items: center;
 		padding: 10%;
 	}
-	@include breakpoint(xs) {
-		@include small-spacing(margin-bottom);
-		height: 36vh;
-		flex: 1 1 60vh;
-		order: 1;
-		z-index: 2;
-		min-width: 100%;
-	}
 	@include breakpoint(sm) {
 		@include small-spacing(margin-bottom);
 		height: 36vh;
@@ -81,6 +73,15 @@
 		flex: 1 1 90vh;
 		flex-basis: 90vh;
 		height: 90vh;
+	}
+	@include breakpoint(xs) {
+		@include small-spacing(margin-bottom);
+		height: 100vh;
+		min-height: 100vh;
+		flex: 1 1 100vh;
+		order: 1;
+		z-index: 2;
+		min-width: 100%;
 	}
 	#contact-text-content {
 		flex-wrap: wrap;
@@ -135,21 +136,22 @@
 			min-width: 40%;
 		}
 		.button-close {
+			background: transparent !important;
 			border: none;
 			margin-left: auto;
 			vertical-align: middle;
 			font-size: 1.2em;
-			@include breakpoint(xs) {
-				font-size: 3em;
-				position: fixed;
-				top: 0;
-				right: 0;
-			}
 			@media (max-width: 992px) {
 				font-size: 3em;
 				position: fixed;
 				top: 10%;
 				right: 10%;
+			}
+			@include breakpoint(xs) {
+				font-size: 3em;
+				position: fixed;
+				top: 2%;
+				right: 2%;
 			}
 		}
 		h2 {

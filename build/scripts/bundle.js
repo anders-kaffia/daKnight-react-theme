@@ -8431,8 +8431,8 @@ webpackJsonp([0],[
 								component: 'div',
 								className: 'blank-slate-container',
 								transitionName: 'slide',
-								transitionEnterTimeout: 1400,
-								transitionLeaveTimeout: 1400
+								transitionEnterTimeout: 1420,
+								transitionLeaveTimeout: 1420
 							},
 							this.state.renderBlankSlate ? _react2.default.createElement(_BlankSlate2.default, null) : null
 						),
@@ -10729,8 +10729,7 @@ webpackJsonp([0],[
 	Header.propTypes = {
 		details: _react2.default.PropTypes.array.isRequired,
 		loading: _react2.default.PropTypes.bool.isRequired,
-		logo: _react2.default.PropTypes.object.isRequired,
-		id: _react2.default.PropTypes.string.isRequired
+		logo: _react2.default.PropTypes.object.isRequired
 	};
 	
 	exports.default = Header;
@@ -10975,21 +10974,35 @@ webpackJsonp([0],[
 	
 		function switchSlide() {
 			slideContainer.style.left = -width * currentSlideIndex + '%';
+			console.log(currentSlideIndex);
+			currentSlideIndex++;
 	
+			if (currentSlideIndex >= slides.length) {
+				currentSlideIndex = 0;
+			}
+			// if (currentSlideIndex < 0) {
+			// 	currentSlideIndex = slides.length;
+			// }
 			bubbles.forEach(function (bubble, index) {
 				if (index === currentSlideIndex) {
 					bubble.classList.add('active');
+					// } else if ( index === slides.length - 1 ) {
+					// 	bubble.classList.add('active');
 				} else {
 					bubble.classList.remove('active');
 				}
 			});
 		};
-		// nextSlide.addEventListener('click', function () {
-		// 	currentSlideIndex++;
+		setInterval(switchSlide, 5500);
 	
-		// 	if (currentSlideIndex >= slides.length) {
-		// 		currentSlideIndex = 0;
-		// 	}
+		switchSlide();
+	
+		// nextSlide.addEventListener('click', function () {
+		// currentSlideIndex++;
+	
+		// if (currentSlideIndex >= slides.length) {
+		// 	currentSlideIndex = 0;
+		// }
 	
 		// 	switchSlide();
 		// });
@@ -10997,14 +11010,12 @@ webpackJsonp([0],[
 		// prevSlide.addEventListener('click', function () {
 		// 	currentSlideIndex--;
 	
-		// 	if (currentSlideIndex < 0) {
-		// 		currentSlideIndex = slides.length - 1;
-		// 	}
+		// if (currentSlideIndex < 0) {
+		// 	currentSlideIndex = slides.length - 1;
+		// }
 	
 		// 	switchSlide();
 		// });
-	
-		switchSlide();
 	};
 	
 	exports.default = scripts;
@@ -11340,7 +11351,8 @@ webpackJsonp([0],[
 						'span',
 						null,
 						page.title.rendered
-					)
+					),
+					_react2.default.createElement('a', { href: page.link, className: 'finding-nemo' })
 				);
 			}
 		}]);

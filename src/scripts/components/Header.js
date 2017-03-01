@@ -39,7 +39,6 @@ Header.propTypes = {
 	details:  React.PropTypes.array.isRequired,
 	loading:  React.PropTypes.bool.isRequired,
 	logo:  React.PropTypes.object.isRequired,
-	id:  React.PropTypes.string.isRequired,
 };
 
 export default Header;

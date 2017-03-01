@@ -160,8 +160,8 @@ class Main extends React.Component {
 								component="div"
 								className="blank-slate-container"
 								transitionName="slide"
-								transitionEnterTimeout={1400}
-								transitionLeaveTimeout={1400}
+								transitionEnterTimeout={1420}
+								transitionLeaveTimeout={1420}
 							>
 								{this.state.renderBlankSlate ? <BlankSlate /> : null}
 							</ReactCSSTransisionGroup>

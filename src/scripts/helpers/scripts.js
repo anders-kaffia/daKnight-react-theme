@@ -45,26 +45,40 @@ scripts.slideSwitcher = () => {
 			currentSlideIndex = i;
 			switchSlide();
 		});
+
 	}
 
 	function switchSlide() {
 		slideContainer.style.left = -width * currentSlideIndex + '%';
+		console.log(currentSlideIndex);
+		currentSlideIndex++;
 
-
+		if (currentSlideIndex >= slides.length) {
+			currentSlideIndex = 0;
+		}
+		// if (currentSlideIndex < 0) {
+		// 	currentSlideIndex = slides.length;
+		// }
 		bubbles.forEach((bubble, index) => {
 			if (index === currentSlideIndex) {
 				bubble.classList.add('active');
+			// } else if ( index === slides.length - 1 ) {
+			// 	bubble.classList.add('active');
 			} else {
 				bubble.classList.remove('active');
 			}
 		});
 	};
-	// nextSlide.addEventListener('click', function () {
-	// 	currentSlideIndex++;
+	setInterval(switchSlide, 5500);
 
-	// 	if (currentSlideIndex >= slides.length) {
-	// 		currentSlideIndex = 0;
-	// 	}
+	switchSlide();
+
+	// nextSlide.addEventListener('click', function () {
+	// currentSlideIndex++;
+
+	// if (currentSlideIndex >= slides.length) {
+	// 	currentSlideIndex = 0;
+	// }
 
 	// 	switchSlide();
 	// });
@@ -72,14 +86,13 @@ scripts.slideSwitcher = () => {
 	// prevSlide.addEventListener('click', function () {
 	// 	currentSlideIndex--;
 
-	// 	if (currentSlideIndex < 0) {
-	// 		currentSlideIndex = slides.length - 1;
-	// 	}
+		// if (currentSlideIndex < 0) {
+		// 	currentSlideIndex = slides.length - 1;
+		// }
 
 	// 	switchSlide();
 	// });
 
-	switchSlide();
 };
 
 export default scripts;

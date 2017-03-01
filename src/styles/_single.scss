@@ -1,5 +1,6 @@
 .single-content {
 	@include large-spacing(margin);
+	min-height: 53vh;
 	background: $color-1;
 	padding: 2% 26%;
 	text-align: center;

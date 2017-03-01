@@ -21,6 +21,7 @@ class ServiceMenuItem extends React.Component {
 			<li className={ activeItem === page.id ? 'flex-column active-item service-span' : 'flex-column service-span' } onClick={ this.click } >
 				<img src={ activeItem === page.id ? (page.acf.logo_aktiv) : (page.acf.logo_passiv) } alt={ page.title.rendered } />
 				<span>{ page.title.rendered }</span>
+				<a href={ page.link } className="finding-nemo"></a>
 			</li>
 		);
 	}

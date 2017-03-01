@@ -3,23 +3,8 @@
 ========================================================================== */
 
 #footer {
-	@include large-spacing(padding);
-	@include breakpoint(xs) { 
-		padding-top: 0;
-	 }
- 
-  	@include breakpoint(sm) {
-		padding-top: 0;
-	 }
- 
-  	@include breakpoint(md) {
-		padding-top: 0;
-	}
- 
-	@include breakpoint(lg) {
-		padding-top: 0;
-	}
-	height: 9.2em;
+	@include small-spacing(padding);
+	min-height: 9.2em;
 	background: $color-2;
 	justify-content: center;
 	align-items: center;
@@ -41,7 +26,7 @@
 	left: 0;
 	right: 0;
 	.flex-column {
-		@include large-spacing(padding);
+		@include small-spacing(padding);
 		min-height: 9.2em;
 		flex: 1;
 		background: $color-2;
