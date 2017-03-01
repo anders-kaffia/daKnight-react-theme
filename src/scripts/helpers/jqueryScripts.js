@@ -66,4 +66,9 @@ jqueryScripts.arrowScrollDown = () => {
 	}, 500, 'swing');
 };
 
+jqueryScripts.loadContactForm7Script = () => {
+	$.getScript("http://daknight-react.wpdev.daknight.se/wp-content/plugins/contact-form-7/includes/js/jquery.form.min.js?ver=3.51.0-2014.06.20");
+	$.getScript("http://daknight-react.wpdev.daknight.se/wp-content/plugins/contact-form-7/includes/js/scripts.js?ver=4.6");
+};
+
 export default jqueryScripts;

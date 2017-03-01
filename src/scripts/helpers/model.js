@@ -31,7 +31,7 @@ model.apiCall = {
 		.then(arr => {
 			return {
 				mainPageTitles: arr[0].data.filter(page => page.parent === 0 && page.slug === 'about' || page.slug === 'tjanster' || page.slug === 'kontakt').sort((a, b) => (a.menu_order > b.menu_order) ? 1 : (a.menu_order < b.menu_order) ? -1 : 0),
-				logo: arr[1].data.filter(page => page.title.rendered === 'DKN_Logotyp')[0],
+				logo: arr[1].data.filter(page => page.title.rendered === 'Ny_DKN_Logga')[0],
 			};
 		}),
 

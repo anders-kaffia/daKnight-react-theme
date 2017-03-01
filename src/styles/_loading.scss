@@ -29,7 +29,7 @@
 			animation: 3s infinite linear;
 			&:nth-child(1) {
 				background: $color-2;
-				animation: left 2s infinite linear;
+				animation: left 3s infinite linear;
 				}
 			&:nth-child(2) {
 				background: $color-1;
@@ -37,30 +37,33 @@
 			}
 			&:nth-child(3) {
 				background: $color-3;
-				animation: right 2s infinite linear;
+				animation: right 3s infinite linear;
 			}
 		}
 	}
 }
 
 @keyframes right {
-    0% {transform:translateX(4em);
+    0% {transform:translateX(4.2em);
+		transform: scale(.5);
     }
    
-	50%{transform:translateX(-4em);
+	50%{transform:translateX(-4.2em);
 	}
-	
-	100%{transform:translateX(4em);
+	100%{transform:translateX(4.2em);
 		z-index:200;
+		transform: scale(1.5);
 	}
 }
 
 @keyframes left {
-    0% {transform:translateX(-4em);
+    0% {transform:translateX(-4.2em);
 		z-index:200;
+		transform: scale(1.5);
     }
-	50%{transform:translateX(4em);
+	50%{transform:translateX(4.2em);
 	}
-	100%{transform:translateX(-4em);
+	100%{transform:translateX(-4.2em);
+		transform: scale(.5);
 	}
 }

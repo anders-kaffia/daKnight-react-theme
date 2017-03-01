@@ -3,6 +3,7 @@
 ========================================================================== */
 #service-section-container {
 	@include large-spacing(margin-bottom);
+	image-rendering: -webkit-optimize-contrast;
 }
 #tjanster {
 	@include breakpoint(xs) {

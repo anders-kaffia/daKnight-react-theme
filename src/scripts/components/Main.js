@@ -10,9 +10,7 @@ import About from './About';
 import Services from './Services';
 import Contact from './Contact';
 import Footer from './Footer';
-import NotFound from './404';
-import Single from './Single';
-import Archive from './Archive';
+import ContactForm from './ContactForm';
 
 // Other
 import model from '../helpers/model';
@@ -58,7 +56,7 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		model.apiCall.getHeaderContent('pages', 47, 'media', 'DKN_Logotyp')
+		model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
 			.then(data => {
 				this.setState({
 					mainPageTitles: data.mainPageTitles,
@@ -140,6 +138,8 @@ class Main extends React.Component {
 	toggleContactForm() {
 		this.setState({ showContactForm: !this.state.showContactForm });
 
+		jqueryScripts.loadContactForm7Script();
+
 		const mainWrap = document.getElementById('main-wrapper');
 		mainWrap.classList.toggle('no-padd');
 	};
@@ -193,6 +193,7 @@ class Main extends React.Component {
 							{this.state.contactIsLoading ? (
 								null
 							) : (
+									<div>
 									<Contact
 										loading={this.state.contactIsLoading}
 										details={this.state.contact}
@@ -201,6 +202,8 @@ class Main extends React.Component {
 										footer={this.state.footer}
 										menu={this.state.mainPageTitles}
 									/>
+									
+									</div>
 								)}
 							{this.state.footerIsLoading ? (
 								null

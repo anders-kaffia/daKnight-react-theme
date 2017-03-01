@@ -1,9 +1,11 @@
 import React from 'react';
 
 class ContactForm extends React.Component {
+	
 	render() {
 		// Props
 		const { form, toggleForm } = this.props;
+
 
 		return (
 			<div id="contact-form-container" className="flex-row">

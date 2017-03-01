@@ -15,7 +15,7 @@ class Header extends React.Component {
 				) : (
 					<div id="header-wrapper"  className="flex-row">
 						<div id="header" className="flex-row">
-							<a href="#main-wrapper">
+							<a href="#app">
 								<img src={logo.source_url} alt="daKnight logo" id="dk-logo" />
 							</a>
 							<nav id="top-nav">

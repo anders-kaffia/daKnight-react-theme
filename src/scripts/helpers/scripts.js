@@ -49,21 +49,6 @@ scripts.slideSwitcher = () => {
 	}
 	function switchSlide() {
 		slideContainer.style.left = -width * currentSlideIndex + '%';
-		console.log(currentSlideIndex);
-
-		/**
-		 * currentSlideIndex skall vandra från 0 till 2
-		 * om currentSlideIndex blir mer än 2 så skall currentSlideIndex bli 0
-		 */
-		// if (currentSlideIndex >= slides.length) {
-		// 	currentSlideIndex = 0;
-		// }
-		// if (currentSlideIndex === slides.length) {
-		// 	currentSlideIndex = 0;
-		// }
-		// if (currentSlideIndex < 0) {
-		// 	currentSlideIndex = slides.length;
-		// }
 		bubbles.forEach((bubble, index) => {
 			if (index === currentSlideIndex) {
 				bubble.classList.add('active');
@@ -79,26 +64,6 @@ scripts.slideSwitcher = () => {
 	setInterval(switchSlide, 5500);
 
 	switchSlide();
-
-	// nextSlide.addEventListener('click', function () {
-	// currentSlideIndex++;
-
-	// if (currentSlideIndex >= slides.length) {
-	// 	currentSlideIndex = 0;
-	// }
-
-	// 	switchSlide();
-	// });
-
-	// prevSlide.addEventListener('click', function () {
-	// 	currentSlideIndex--;
-
-		// if (currentSlideIndex < 0) {
-		// 	currentSlideIndex = slides.length - 1;
-		// }
-
-	// 	switchSlide();
-	// });
 
 };
 

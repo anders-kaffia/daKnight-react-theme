@@ -67,16 +67,16 @@ module.exports = {
 		]
 	},
 	plugins: [
-		// new webpack.DefinePlugin({
-		// 	'process.env': {
-		// 		'NODE_ENV': JSON.stringify('production')
-		// 	}
-		// }),
-		// new webpack.optimize.UglifyJsPlugin({
-		// 	compress: {
-		// 		warnings: true
-		// 	}
-		// }),
+		new webpack.DefinePlugin({
+			'process.env': {
+				'NODE_ENV': JSON.stringify('production')
+			}
+		}),
+		new webpack.optimize.UglifyJsPlugin({
+			compress: {
+				warnings: false
+			}
+		}),
 		new webpack.optimize.CommonsChunkPlugin('vendor', 'vendor.bundle.js'),
 		new ExtractTextPlugin('../styles/style.css'),
 		new CompressionPlugin({
