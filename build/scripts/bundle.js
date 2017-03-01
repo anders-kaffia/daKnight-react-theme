@@ -10971,27 +10971,34 @@ webpackJsonp([0],[
 		for (var i = 0; i < slides.length; i++) {
 			_loop(i);
 		}
-	
 		function switchSlide() {
 			slideContainer.style.left = -width * currentSlideIndex + '%';
 			console.log(currentSlideIndex);
-			currentSlideIndex++;
 	
-			if (currentSlideIndex >= slides.length) {
-				currentSlideIndex = 0;
-			}
+			/**
+	   * currentSlideIndex skall vandra från 0 till 2
+	   * om currentSlideIndex blir mer än 2 så skall currentSlideIndex bli 0
+	   */
+			// if (currentSlideIndex >= slides.length) {
+			// 	currentSlideIndex = 0;
+			// }
+			// if (currentSlideIndex === slides.length) {
+			// 	currentSlideIndex = 0;
+			// }
 			// if (currentSlideIndex < 0) {
 			// 	currentSlideIndex = slides.length;
 			// }
 			bubbles.forEach(function (bubble, index) {
 				if (index === currentSlideIndex) {
 					bubble.classList.add('active');
-					// } else if ( index === slides.length - 1 ) {
-					// 	bubble.classList.add('active');
 				} else {
 					bubble.classList.remove('active');
 				}
 			});
+			currentSlideIndex++;
+			if (currentSlideIndex > slides.length - 1) {
+				currentSlideIndex = 0;
+			}
 		};
 		setInterval(switchSlide, 5500);
 	
