@@ -56,7 +56,7 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		model.testForLocalStorage() ? console.log('Se på fan, det funkar!') : console.log('Oh no!');
+		model.isLocalStorageSupported() ? model.checkLocalStorageAge() : console.log('Oh no!');
 		model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
 			.then(data => {
 				this.setState({

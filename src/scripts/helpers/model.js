@@ -8,7 +8,7 @@ const model = {};
  * 
  * @return Boolean
  */
-model.testForLocalStorage = (localstorage) => {
+model.isLocalStorageSupported = () => {
 	const test = `hey ho let's go`;
 	try {
 		localStorage.setItem(test, test);
@@ -19,6 +19,99 @@ model.testForLocalStorage = (localstorage) => {
 		console.log('Local Storage is NOT supported');
 		return false;
 	}
+};
+
+/**
+ * @desc Checks if the stored timestamp is older than 7 days.
+ * If so, sets a new timestamp.
+ */
+model.compareTimestamp = (currentTimestamp, storedTimestamp) => {
+	if ((currentTimestamp - 7) < storedTimestamp) {
+		localStorage.setItem('timestamp', JSON.stringify(currentTimestamp));
+	}
+};
+
+/**
+ * @desc Check if age of local storage > 7 days.
+ * If so, run model.setLocalStorage
+ */
+model.checkLocalStorageAge = () => {
+	const timestamp = Math.floor((((new Date() / 1000) / 60) / 60) / 24);
+	let storedTimestamp;
+
+	const checkAge = () => {
+		console.log('inside check');
+		localStorage.getItem('timestamp') ? (
+			storedTimestamp = JSON.parse(localStorage.getItem('timestamp')),
+			model.compareTimestamp(timestamp, storedTimestamp)
+		) : (
+				localStorage.setItem('timestamp', JSON.stringify(timestamp)),
+				model.setLocalStorage(),
+				console.log('inside setting')
+			);
+	};
+	checkAge();
+};
+
+/**
+ * @desc Set local storage from API response
+ * Sets the data that will be the apps state.
+ * A timestamp is set to enable max life of local storage files.
+ */
+model.setLocalStorage = () => {
+	model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
+		.then(data => {
+			const header = {
+				mainPageTitles: data.mainPageTitles,
+				logo: data.logo,
+				headerIsLoading: false
+			};
+			localStorage.setItem('headerContent', JSON.stringify(header));
+		})
+		.then(() => {
+			model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+				.then(data => {
+					const about = {
+						arrow: data.arrow,
+						about: data.about,
+						aboutIsLoading: false
+					};
+					localStorage.setItem('aboutContent', JSON.stringify(about));
+				});
+		})
+		.then(() => {
+			model.apiCall.getServicesContent('pages', 47)
+				.then(data => {
+					const services = {
+						services: data.services,
+						serviceChildPages: data.serviceChildPages,
+						serviceChildPageTitles: data.serviceChildPageTitles,
+						activeItem: data.activeItem,
+						servicesIsLoading: false
+					};
+					localStorage.setItem('serviceContent', JSON.stringify(services));
+				});
+		})
+		.then(() => {
+			model.apiCall.getContactContent('pages', 'kontakt')
+				.then(data => {
+					const contact = {
+						contact: data.contact,
+						contactIsLoading: false
+					};
+					localStorage.setItem('contactContent', JSON.stringify(contact));
+				});
+		})
+		.then(() => {
+			model.apiCall.getFooterContent('pages', 'footer')
+				.then(data => {
+					const footer = {
+						footer: data.footer,
+						footerIsLoading: false
+					};
+					localStorage.setItem('footerContent', JSON.stringify(footer));
+				});
+		});
 };
 
 /**
