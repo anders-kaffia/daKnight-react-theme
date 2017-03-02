@@ -4,6 +4,24 @@ import axios from 'axios';
 const model = {};
 
 /**
+ * @desc Check if local storage is supported
+ * 
+ * @return Boolean
+ */
+model.testForLocalStorage = (localstorage) => {
+	const test = `hey ho let's go`;
+	try {
+		localStorage.setItem(test, test);
+		localStorage.removeItem(test);
+		console.log('Local Storage is supported');
+		return true;
+	} catch (e) {
+		console.log('Local Storage is NOT supported');
+		return false;
+	}
+};
+
+/**
  * @desc Get type specific content from WP REST API
  *
  * @param {string, number} type of content, posts, pages, or media
