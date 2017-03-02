@@ -61,7 +61,7 @@ scripts.slideSwitcher = () => {
 			currentSlideIndex = 0;
 		}
 	};
-	setInterval(switchSlide, 5500);
+	setInterval(switchSlide, 7000);
 
 	switchSlide();
 
