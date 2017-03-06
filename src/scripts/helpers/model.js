@@ -3,6 +3,8 @@ import axios from 'axios';
 
 const model = {};
 
+model.tempData = {};
+
 /**
  * @desc Check if local storage is supported
  * 
@@ -22,12 +24,30 @@ model.isLocalStorageSupported = () => {
 };
 
 /**
+ * @desc Check if there is a key called 'timestamp' in local storage
+ * 
+ * @return {Boolean}
+ */
+model.checkForLsTimestamp = () => {
+	if (localStorage.getItem('timestamp')) {
+		return true;
+	} else {
+		return false;
+	}
+};
+
+/**
  * @desc Checks if the stored timestamp is older than 7 days.
  * If so, sets a new timestamp.
+ * 
+ * @param {number, number} compares two different dates.
  */
-model.compareTimestamp = (currentTimestamp, storedTimestamp) => {
-	if ((currentTimestamp - 7) < storedTimestamp) {
-		localStorage.setItem('timestamp', JSON.stringify(currentTimestamp));
+model.compareTimestamp = (days, currentTimestamp) => {
+	const storedTimestamp = JSON.parse(localStorage.getItem('timestamp'));
+	if ((storedTimestamp + days) < currentTimestamp) {
+		return true;
+	} else {
+		return false;
 	}
 };
 
@@ -36,18 +56,14 @@ model.compareTimestamp = (currentTimestamp, storedTimestamp) => {
  * If so, run model.setLocalStorage
  */
 model.checkLocalStorageAge = () => {
-	const timestamp = Math.floor((((new Date() / 1000) / 60) / 60) / 24);
 	let storedTimestamp;
-
 	const checkAge = () => {
-		console.log('inside check');
 		localStorage.getItem('timestamp') ? (
 			storedTimestamp = JSON.parse(localStorage.getItem('timestamp')),
-			model.compareTimestamp(timestamp, storedTimestamp)
+			model.compareTimestamp(storedTimestamp)
 		) : (
-				localStorage.setItem('timestamp', JSON.stringify(timestamp)),
-				model.setLocalStorage(),
-				console.log('inside setting')
+				localStorage.setItem('timestamp', JSON.stringify(currentTimestamp)),
+				model.setLocalStorage()
 			);
 	};
 	checkAge();
@@ -59,59 +75,102 @@ model.checkLocalStorageAge = () => {
  * A timestamp is set to enable max life of local storage files.
  */
 model.setLocalStorage = () => {
-	model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
-		.then(data => {
-			const header = {
-				mainPageTitles: data.mainPageTitles,
-				logo: data.logo,
-				headerIsLoading: false
-			};
-			localStorage.setItem('headerContent', JSON.stringify(header));
-		})
-		.then(() => {
-			model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+	return new Promise((resolve, reject) => {
+		resolve(
+			model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
 				.then(data => {
-					const about = {
-						arrow: data.arrow,
-						about: data.about,
-						aboutIsLoading: false
+					const header = {
+						mainPageTitles: data.mainPageTitles,
+						logo: data.logo,
+						headerIsLoading: false
 					};
-					localStorage.setItem('aboutContent', JSON.stringify(about));
-				});
-		})
-		.then(() => {
-			model.apiCall.getServicesContent('pages', 47)
-				.then(data => {
-					const services = {
-						services: data.services,
-						serviceChildPages: data.serviceChildPages,
-						serviceChildPageTitles: data.serviceChildPageTitles,
-						activeItem: data.activeItem,
-						servicesIsLoading: false
+					model.tempData = {
+						mainPageTitles: data.mainPageTitles,
+						logo: data.logo,
+						headerIsLoading: false
 					};
-					localStorage.setItem('serviceContent', JSON.stringify(services));
-				});
-		})
-		.then(() => {
-			model.apiCall.getContactContent('pages', 'kontakt')
-				.then(data => {
-					const contact = {
-						contact: data.contact,
-						contactIsLoading: false
-					};
-					localStorage.setItem('contactContent', JSON.stringify(contact));
-				});
-		})
-		.then(() => {
-			model.apiCall.getFooterContent('pages', 'footer')
-				.then(data => {
-					const footer = {
-						footer: data.footer,
-						footerIsLoading: false
-					};
-					localStorage.setItem('footerContent', JSON.stringify(footer));
-				});
-		});
+					localStorage.setItem('headerContent', JSON.stringify(header));
+				})
+				.then(() => {
+					model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+						.then(data => {
+							const about = {
+								about: data.about,
+								aboutIsLoading: false
+							};
+							model.tempData.about = data.about;
+							model.tempData.aboutIsLoading = false;
+							localStorage.setItem('aboutContent', JSON.stringify(about));
+						});
+				})
+				.then(() => {
+					model.apiCall.getServicesContent('pages', 47)
+						.then(data => {
+							const services = {
+								services: data.services,
+								serviceChildPages: data.serviceChildPages,
+								serviceChildPageTitles: data.serviceChildPageTitles,
+								activeItem: data.activeItem,
+								servicesIsLoading: false
+							};
+							model.tempData.services = data.services;
+							model.tempData.serviceChildPages = data.serviceChildPages;
+							model.tempData.serviceChildPageTitles = data.serviceChildPageTitles;
+							model.tempData.activeItem = data.activeItem;
+							model.tempData.servicesIsLoading = false;
+							localStorage.setItem('serviceContent', JSON.stringify(services));
+						});
+				})
+				.then(() => {
+					model.apiCall.getContactContent('pages', 'kontakt')
+						.then(data => {
+							const contact = {
+								contact: data.contact,
+								contactIsLoading: false
+							};
+							model.tempData.contact = data.contact;
+							model.tempData.contactIsLoading = false;
+							localStorage.setItem('contactContent', JSON.stringify(contact));
+						});
+				})
+				.then(() => {
+					model.apiCall.getFooterContent('pages', 'footer')
+						.then(data => {
+							const footer = {
+								footer: data.footer,
+								footerIsLoading: false
+							};
+							model.tempData.footer = data.footer;
+							model.tempData.footerIsLoading = false;
+							localStorage.setItem('footerContent', JSON.stringify(footer));
+						});
+				})
+		);
+		reject(false);
+	});
+
+};
+
+/**
+ * @desc Get data from local storage
+ * 
+ * @return {object} Object containing local storage data.
+ */
+model.getLocalStorage = () => {
+	return new Promise((resolve, reject) => {
+		const lsData = {
+			headerContent: JSON.parse(localStorage.getItem('headerContent')),
+			aboutContent: JSON.parse(localStorage.getItem('aboutContent')),
+			serviceContent: JSON.parse(localStorage.getItem('serviceContent')),
+			contactContent: JSON.parse(localStorage.getItem('contactContent')),
+			footerContent: JSON.parse(localStorage.getItem('footerContent'))
+		};
+		if (lsData) {
+			resolve(lsData);
+		} else {
+			reject(Error('Ingen data hittades i local storage.'));
+		}
+	});
 };
 
 /**
@@ -119,6 +178,8 @@ model.setLocalStorage = () => {
  *
  * @param {string, number} type of content, posts, pages, or media
  * and the number of results.
+ * 
+ * @return {object} Data from the API
  */
 model.getContent = (type, number) =>
 	axios.get(`/wp-json/wp/v2/${type}/?per_page=${number}`);
@@ -128,6 +189,8 @@ model.getContent = (type, number) =>
  *
  * @param {string, string} type of content, posts, page, or media
  * based on the slug.
+ * 
+ * @return {object} Data from the API, based on slug.
  */
 model.getSingleContent = (type, slug) =>
 	axios.get(`/wp-json/wp/v2/${type}/?slug=${slug}`);

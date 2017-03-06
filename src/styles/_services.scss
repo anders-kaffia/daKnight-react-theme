@@ -3,7 +3,6 @@
 ========================================================================== */
 #service-section-container {
 	@include large-spacing(margin-bottom);
-	image-rendering: -webkit-optimize-contrast;
 }
 #tjanster {
 	@include breakpoint(xs) {
@@ -142,6 +141,7 @@
 		min-height: 67vh;
 	}
 	#service-feat-img-container {
+		image-rendering: -webkit-optimize-contrast;
 		flex: 1;
 		background: $color-2;
 		@include breakpoint(xs) { 

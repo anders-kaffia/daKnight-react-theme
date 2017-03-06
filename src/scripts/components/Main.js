@@ -17,6 +17,9 @@ import model from '../helpers/model';
 import scripts from '../helpers/scripts';
 import jqueryScripts from '../helpers/jqueryScripts';
 
+// A current timestamp for comparing local storage age.
+const currentTimestamp = Math.floor((((new Date() / 1000) / 60) / 60) / 24);
+
 class Main extends React.Component {
 
 	constructor() {
@@ -56,56 +59,188 @@ class Main extends React.Component {
 	};
 
 	componentDidMount() {
-		model.isLocalStorageSupported() ? model.checkLocalStorageAge() : console.log('Oh no!');
-		model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
-			.then(data => {
-				this.setState({
-					mainPageTitles: data.mainPageTitles,
-					logo: data.logo,
-					headerIsLoading: false
-				});
-			})
-			.then(() => {
-				model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+		model.isLocalStorageSupported() ? (
+			model.checkForLsTimestamp() ? (
+				model.compareTimestamp(7, currentTimestamp) ? (
+					localStorage.setItem('timestamp', JSON.stringify(currentTimestamp)),
+					model.setLocalStorage(),
+					model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
 					.then(data => {
 						this.setState({
-							arrow: data.arrow,
-							about: data.about,
-							aboutIsLoading: false
+							mainPageTitles: data.mainPageTitles,
+							logo: data.logo,
+							headerIsLoading: false
 						});
-					});
-			})
-			.then(() => {
-				model.apiCall.getServicesContent('pages', 47)
+					})
+					.then(() => {
+						model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+							.then(data => {
+								this.setState({
+									arrow: data.arrow,
+									about: data.about,
+									aboutIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getServicesContent('pages', 47)
+							.then(data => {
+								this.setState({
+									services: data.services,
+									serviceChildPages: data.serviceChildPages,
+									serviceChildPageTitles: data.serviceChildPageTitles,
+									activeItem: data.activeItem,
+									servicesIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getContactContent('pages', 'kontakt')
+							.then(data => {
+								this.setState({
+									contact: data.contact,
+									contactIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getFooterContent('pages', 'footer')
+							.then(data => {
+								this.setState({
+									footer: data.footer,
+									footerIsLoading: false
+								});
+							});
+						this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
+					})
+				) : (
+						model.getLocalStorage()
+							.then(lsData => {
+								this.setState({
+									headerIsLoading: false,
+									logo: lsData.headerContent.logo,
+									mainPageTitles: lsData.headerContent.mainPageTitles,
+									about: lsData.aboutContent.about,
+									aboutIsLoading: false,
+									services: lsData.serviceContent.services,
+									serviceChildPages: lsData.serviceContent.serviceChildPages,
+									serviceChildPageTitles: lsData.serviceContent.serviceChildPageTitles,
+									activeItem: lsData.serviceContent.activeItem,
+									servicesIsLoading: false,
+									contact: lsData.contactContent.contact,
+									contactIsLoading: false,
+									footer: lsData.footerContent.footer,
+									footerIsLoading: false
+								});
+							})
+					)
+			) : (
+					localStorage.setItem('timestamp', JSON.stringify(currentTimestamp)),
+					model.setLocalStorage(),
+					model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
 					.then(data => {
 						this.setState({
-							services: data.services,
-							serviceChildPages: data.serviceChildPages,
-							serviceChildPageTitles: data.serviceChildPageTitles,
-							activeItem: data.activeItem,
-							servicesIsLoading: false
+							mainPageTitles: data.mainPageTitles,
+							logo: data.logo,
+							headerIsLoading: false
 						});
-					});
-			})
-			.then(() => {
-				model.apiCall.getContactContent('pages', 'kontakt')
+					})
+					.then(() => {
+						model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+							.then(data => {
+								this.setState({
+									arrow: data.arrow,
+									about: data.about,
+									aboutIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getServicesContent('pages', 47)
+							.then(data => {
+								this.setState({
+									services: data.services,
+									serviceChildPages: data.serviceChildPages,
+									serviceChildPageTitles: data.serviceChildPageTitles,
+									activeItem: data.activeItem,
+									servicesIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getContactContent('pages', 'kontakt')
+							.then(data => {
+								this.setState({
+									contact: data.contact,
+									contactIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getFooterContent('pages', 'footer')
+							.then(data => {
+								this.setState({
+									footer: data.footer,
+									footerIsLoading: false
+								});
+							});
+						this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
+					})
+				),
+
+			this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000)
+		) : (
+				model.apiCall.getHeaderContent('pages', 47, 'media', 'Ny_DKN_Logga')
 					.then(data => {
 						this.setState({
-							contact: data.contact,
-							contactIsLoading: false
+							mainPageTitles: data.mainPageTitles,
+							logo: data.logo,
+							headerIsLoading: false
 						});
-					});
-			})
-			.then(() => {
-				model.apiCall.getFooterContent('pages', 'footer')
-					.then(data => {
-						this.setState({
-							footer: data.footer,
-							footerIsLoading: false
-						});
-					});
-				this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
-			});
+					})
+					.then(() => {
+						model.apiCall.getAboutContent('pages', 'about', 'media', 'arrow')
+							.then(data => {
+								this.setState({
+									arrow: data.arrow,
+									about: data.about,
+									aboutIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getServicesContent('pages', 47)
+							.then(data => {
+								this.setState({
+									services: data.services,
+									serviceChildPages: data.serviceChildPages,
+									serviceChildPageTitles: data.serviceChildPageTitles,
+									activeItem: data.activeItem,
+									servicesIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getContactContent('pages', 'kontakt')
+							.then(data => {
+								this.setState({
+									contact: data.contact,
+									contactIsLoading: false
+								});
+							});
+					})
+					.then(() => {
+						model.apiCall.getFooterContent('pages', 'footer')
+							.then(data => {
+								this.setState({
+									footer: data.footer,
+									footerIsLoading: false
+								});
+							});
+						this.interval = setTimeout(() => this.setState({ renderBlankSlate: false }), 3000);
+					})
+			);
+
 	};
 
 	/**
@@ -195,15 +330,15 @@ class Main extends React.Component {
 								null
 							) : (
 									<div>
-									<Contact
-										loading={this.state.contactIsLoading}
-										details={this.state.contact}
-										showForm={this.state.showContactForm}
-										toggleForm={this.toggleContactForm}
-										footer={this.state.footer}
-										menu={this.state.mainPageTitles}
-									/>
-									
+										<Contact
+											loading={this.state.contactIsLoading}
+											details={this.state.contact}
+											showForm={this.state.showContactForm}
+											toggleForm={this.toggleContactForm}
+											footer={this.state.footer}
+											menu={this.state.mainPageTitles}
+										/>
+
 									</div>
 								)}
 							{this.state.footerIsLoading ? (
