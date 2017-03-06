@@ -42,10 +42,10 @@ map.handleFallback = () => {
  * */
 map.createMap = () => {
 	!mapboxgl.supported() ? fallBack()
-		: mapboxgl.accessToken = 'pk.eyJ1IjoiZGFrbmlnaHQiLCJhIjoiazkwSjJqSSJ9.ght0Fub2UHczFlkQ0eHzZA';
+		: mapboxgl.accessToken = ''; // Mapbox token here!
 	const map = new mapboxgl.Map({
 		container: 'map',
-		style: 'mapbox://styles/daknight/citmr9xdx004h2hp2svgnxq30',
+		style: '', // Mapbox style here!
 	});
 	map.on('load', function () {
 		window.onresize = function (event) {
