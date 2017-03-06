@@ -2,8 +2,6 @@
 *				Blank Slate Section Styling
 ========================================================================== */
 
-
-
 #blank-slate {
 	@include large-spacing(margin-bottom);
 	@include breakpoint(xs) { 
@@ -29,7 +27,7 @@
 	#blank-slate-inside-wrapper {
 		flex: 1;
 		height: 100%;
-		// overflow: hidden;
+		overflow: hidden;
 		#blank-slate2 {
 			background: $color-2;
 			height: 35%;

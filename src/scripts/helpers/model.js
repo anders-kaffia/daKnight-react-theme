@@ -3,17 +3,15 @@ import axios from 'axios';
 
 const model = {};
 
-model.tempData = {};
-
 /**
  * @desc Check if local storage is supported
  * 
  * @return Boolean
  */
 model.isLocalStorageSupported = () => {
-	const test = `hey ho let's go`;
+	const test = `let's go`;
 	try {
-		localStorage.setItem(test, test);
+		localStorage.setItem('hey ho', test);
 		localStorage.removeItem(test);
 		console.log('Local Storage is supported');
 		return true;
@@ -52,24 +50,6 @@ model.compareTimestamp = (days, currentTimestamp) => {
 };
 
 /**
- * @desc Check if age of local storage > 7 days.
- * If so, run model.setLocalStorage
- */
-model.checkLocalStorageAge = () => {
-	let storedTimestamp;
-	const checkAge = () => {
-		localStorage.getItem('timestamp') ? (
-			storedTimestamp = JSON.parse(localStorage.getItem('timestamp')),
-			model.compareTimestamp(storedTimestamp)
-		) : (
-				localStorage.setItem('timestamp', JSON.stringify(currentTimestamp)),
-				model.setLocalStorage()
-			);
-	};
-	checkAge();
-};
-
-/**
  * @desc Set local storage from API response
  * Sets the data that will be the apps state.
  * A timestamp is set to enable max life of local storage files.
@@ -84,11 +64,6 @@ model.setLocalStorage = () => {
 						logo: data.logo,
 						headerIsLoading: false
 					};
-					model.tempData = {
-						mainPageTitles: data.mainPageTitles,
-						logo: data.logo,
-						headerIsLoading: false
-					};
 					localStorage.setItem('headerContent', JSON.stringify(header));
 				})
 				.then(() => {
@@ -98,8 +73,6 @@ model.setLocalStorage = () => {
 								about: data.about,
 								aboutIsLoading: false
 							};
-							model.tempData.about = data.about;
-							model.tempData.aboutIsLoading = false;
 							localStorage.setItem('aboutContent', JSON.stringify(about));
 						});
 				})
@@ -113,11 +86,6 @@ model.setLocalStorage = () => {
 								activeItem: data.activeItem,
 								servicesIsLoading: false
 							};
-							model.tempData.services = data.services;
-							model.tempData.serviceChildPages = data.serviceChildPages;
-							model.tempData.serviceChildPageTitles = data.serviceChildPageTitles;
-							model.tempData.activeItem = data.activeItem;
-							model.tempData.servicesIsLoading = false;
 							localStorage.setItem('serviceContent', JSON.stringify(services));
 						});
 				})
@@ -128,8 +96,6 @@ model.setLocalStorage = () => {
 								contact: data.contact,
 								contactIsLoading: false
 							};
-							model.tempData.contact = data.contact;
-							model.tempData.contactIsLoading = false;
 							localStorage.setItem('contactContent', JSON.stringify(contact));
 						});
 				})
@@ -140,8 +106,6 @@ model.setLocalStorage = () => {
 								footer: data.footer,
 								footerIsLoading: false
 							};
-							model.tempData.footer = data.footer;
-							model.tempData.footerIsLoading = false;
 							localStorage.setItem('footerContent', JSON.stringify(footer));
 						});
 				})
