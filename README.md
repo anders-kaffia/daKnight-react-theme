@@ -9,6 +9,7 @@ A Wordpress theme developed for daKnight Productions. The theme is based on Reac
   - React Router
   - ESLint
   - Axios
+  - Mapbox
   - jQuery
   - Webpack, to bundle it all together
 
@@ -38,7 +39,7 @@ $ yarn run build
 This theme does not use Bootstrap. It uses flex box. Major React components have their own Sass files. Some minor components, like ContactForm.js, share Sass file with their parent component. Autoprefixer is applied with Webpack, so prefixing is not needed. 
 
 ### Wordpress REST API
-All content is fetched from the Wordpress REST API through the React plugin Axios in model.js. 
+All content is fetched from the Wordpress REST API through the React plugin Axios in model.js. On first load, all data is stored in local storage (if supported, otherwise it loads from the API) together with a timestamp. If there already is a timestamp in localstorage that is older than 7 days (easily changed) all content updated and stored again. Gzip, caching and local storage enables much faster page load.
 
 ### Tech
 
@@ -65,7 +66,7 @@ Plugins used with this theme:
 
 #### Todos
 
-* Add custom API endpoint to get the parent page slug
+* Add and implement Redux.
 * Add Service Worker
 
 
